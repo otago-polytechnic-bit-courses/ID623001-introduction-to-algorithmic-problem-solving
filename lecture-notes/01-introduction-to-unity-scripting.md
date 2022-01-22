@@ -8,13 +8,23 @@ Unity scripts are written in **C#**, an object-oriented programming language dev
 
 **Resource:** <https://docs.unity3d.com/Manual/ScriptingSection.html>
 
-## Declarations
+## Starter project
 
-In **JavaScript**, there are three declarations you can use.
+Download the **starter project**, unzip it, and open it inside Unity.
 
-### var
+### Assets
 
-`var` is used to declare a **global** or **function-scoped** variable.
+The Assets folder contains all the resources for the project, including the models, textures, and music. This is also where we will store our game scripts.
+
+- **Materials** - these are applied to models to give them their appearance. Materials are a combination of **textures** (bitmap images) and **shaders** (graphical scripts that contain calculations and algorithms for determining how to render the texture, based on lighting and other configurations).
+- **Models** - the individual base models of the game objects.
+- **Music** - the music in the game.
+- **Prefabs** - these are complete Game Objects with models, child objects, starting values... you combine multiple elements into a reusable object and save it as a Prefab.
+- **Scenes** - the entire environment of this part of the game. Unity works on the premise of **scenes**, which house all of the Game Objects for a logical sequence of the game (could be the entire game). For example, the title screen is likely a separate scene from the main game.
+- **Scripts** - where we will store our C# scripts.
+- **Sounds** - sound effect files.
+- **Sprites** - 2D image files. In 3D games, typically reserved for UI graphical elements.
+- **Textures** - a bitmap image that can be applied to models via **materials**.
 
 ```javascript
 var x // Not initialised
