@@ -1,14 +1,12 @@
-# 01: JavaScript Basics 1
+# 01: Introduction to Unity Scripting
 
-## Refresher activity
+## Scripts
 
-For the next five-10 minutes, write down everything you know about **JavaScript**. Feel free to use any online resources.
+A **script** is a small collection of code that can be attached to a Game Object inside Unity to perform some functionality. Scripts can hold variables that can be changed in the editor, detect player input and react to it, use physics, change values over time, and much more.
 
-## Block
+Unity scripts are written in **C#**, an object-oriented programming language developed by Microsoft.
 
-A **block** is used to group statements and is delimited by a pair of **curly braces**. I will talk more about this soon.
-
-**Resource:** <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/block>
+**Resource:** <https://docs.unity3d.com/Manual/ScriptingSection.html>
 
 ## Declarations
 
