@@ -26,6 +26,18 @@ The Assets folder contains all the resources for the project, including the mode
 - **Sprites** - 2D image files. In 3D games, typically reserved for UI graphical elements.
 - **Textures** - a bitmap image that can be applied to models via **materials**.
 
+### Scene view
+
+Open the **Game** scene. You can see all the Game Objects currently in the scene.
+
+In the **hierarchy tab** you can see all the same Game Objects (and a few others), organised into a tree-like hierarchy.
+
+- **Music** - an audio source playing the background music loop.
+- **Main Camera** - the camera that points down at the scene to render everything to the player. To see anything upon running the game, you must have a camera.
+- **Directional Light** - a single light source that illuminates the scene. Scenes in Unity need some sort of light source to 
+Scenery: This GameObjects hold the ground and the windmills.
+Hay Machine: This is the blue machine sitting on the rails. It’s made out of a few GameObjects to make it easy to customize later on.
+
 ```javascript
 var x // Not initialised
 x = 5
