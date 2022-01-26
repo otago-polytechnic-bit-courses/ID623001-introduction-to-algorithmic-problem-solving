@@ -34,9 +34,9 @@ In the **hierarchy tab** you can see all the same Game Objects (and a few others
 
 - **Music** - an audio source playing the background music loop.
 - **Main Camera** - the camera that points down at the scene to render everything to the player. To see anything upon running the game, you must have a camera.
-- **Directional Light** - a single light source that illuminates the scene. Scenes in Unity need some sort of light source to 
-Scenery: This GameObjects hold the ground and the windmills.
-Hay Machine: This is the blue machine sitting on the rails. It’s made out of a few GameObjects to make it easy to customize later on.
+- **Directional Light** - a single light source that illuminates the scene. Scenes in Unity need some sort of light source to be able to see anything when playing the game.
+- **Scenery** - an empty Game Object to hold the ground and the windmills. Acts like a 'folder'.
+- **Hay Machine** - this is the blue machine sitting on the rails. It is comprised of a few Game Objects to make it easy to customise later on.
 
 ```javascript
 var x // Not initialised
