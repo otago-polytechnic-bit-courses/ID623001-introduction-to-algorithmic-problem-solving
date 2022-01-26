@@ -4,19 +4,33 @@
 
 We are going to **listen** for input events from the player and respond with some actions in the game - in the first instance, listening for the movement keys being pressed and moving the hay machine accordingly.
 
-### Assets
+### Movement
 
-The Assets folder contains all the resources for the project, including the models, textures, and music. This is also where we will store our game scripts.
+Create a new C# script like before, and name it **HayMachine**. Open it in Visual Studio. Add this variable right above the `Start` method:
 
-- **Materials** - these are applied to models to give them their appearance. Materials are a combination of **textures** (bitmap images) and **shaders** (graphical scripts that contain calculations and algorithms for determining how to render the texture, based on lighting and other configurations).
-- **Models** - the individual base models of the game objects.
-- **Music** - the music in the game.
-- **Prefabs** - these are complete Game Objects with models, child objects, starting values... you combine multiple elements into a reusable object and save it as a Prefab.
-- **Scenes** - the entire environment of this part of the game. Unity works on the premise of **scenes**, which house all of the Game Objects for a logical sequence of the game (could be the entire game). For example, the title screen is likely a separate scene from the main game.
-- **Scripts** - where we will store our C# scripts.
-- **Sounds** - sound effect files.
-- **Sprites** - 2D image files. In 3D games, typically reserved for UI graphical elements.
-- **Textures** - a bitmap image that can be applied to models via **materials**.
+```csharp
+public float movementSpeed;
+```
+
+Like the `rotationSpeed` varialbe we used earlier, this will control the movement speed of the hay machine.
+
+Add this method below `Update`:
+
+```csharp
+private void UpdateMovement()
+{
+    float horizontalInput = Input.GetAxisRaw("Horizontal"); // 1
+
+    if (horizontalInput < 0) // 2
+    {
+        transform.Translate(transform.right * -movementSpeed * Time.deltaTime);
+    }
+    else if (horizontalInput > 0) // 3
+    {
+        transform.Translate(transform.right * movementSpeed * Time.deltaTime);
+    }
+}
+```
 
 ### Scene view
 
