@@ -69,6 +69,8 @@ public class Rotate : MonoBehaviour
 }
 ```
 
+This script is a **class** that derives from **MonoBehaviour**, Unity's base class for components. By default, Unity components have a `Start` and `Update` method.
+
 :question: **Interview Question:** What is **hoisting**?
 
 ### let
