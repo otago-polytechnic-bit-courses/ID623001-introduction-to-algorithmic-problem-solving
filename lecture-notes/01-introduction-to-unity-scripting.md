@@ -42,7 +42,9 @@ Press the **play button** to run the game. Press the button again to stop the ga
 
 ### Creating a script
 
-Right-click the **scripts** folder and select **Create > C# Script**. Name the script **Rotate**.
+We will now create a script to rotate the windmill blades. Right-click the **scripts** folder and select **Create > C# Script**. Name the script **Rotate**.
+
+In the **hierarchy tab**, expand Scenery and double-click the Windmill Game Object to open the Prefab editor. We are now editing the **Windmill prefab** which is a collection of Game Objects. Click on the **Wheel** Game Object. In the **inspector tab** click the **Add Component** button and start typing "Rotate"... when the script appears in the list, select it.
 
 ```javascript
 var x // Not initialised
