@@ -38,6 +38,12 @@ In the **hierarchy tab** you can see all the same Game Objects (and a few others
 - **Scenery** - an empty Game Object to hold the ground and the windmills. Acts like a 'folder'.
 - **Hay Machine** - this is the blue machine sitting on the rails. It is comprised of a few Game Objects to make it easy to customise later on.
 
+Press the **play button** to run the game. Press the button again to stop the game and return to the scene view.
+
+### Creating a script
+
+Right-click the **scripts** folder and select **Create > C# Script**. Name the script **Rotate**.
+
 ```javascript
 var x // Not initialised
 x = 5
