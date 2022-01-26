@@ -32,6 +32,10 @@ private void UpdateMovement()
 }
 ```
 
+The first line of this method captures any player input that is changing along the **horizontal** axis, or the **left and right** input buttons. You can go into the settings of this game and define the buttons that consistute the horizontal axis, but for now we'll just leave them as the defaults: the **right and left** arrow buttons, and also **A and D** as alternate inputs.
+
+The input is 0 by default - no key is pressed. If the **left** arrow is pressed, the input will register as **less than zero**. If the **right** arrow is pressed, the input will register as **greater than zero**. That is what the **if condition** is checking for - less than or greater than zero on the horizontal input.
+
 ### Scene view
 
 Open the **Game** scene. You can see all the Game Objects currently in the scene.
