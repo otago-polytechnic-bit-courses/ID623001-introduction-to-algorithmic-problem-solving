@@ -46,7 +46,9 @@ We will now create a script to rotate the windmill blades. Right-click the **scr
 
 In the **hierarchy tab**, expand Scenery and double-click the Windmill Game Object to open the Prefab editor. We are now editing the **Windmill prefab** which is a collection of Game Objects. Click on the **Wheel** Game Object. In the **inspector tab** click the **Add Component** button and start typing "Rotate"... when the script appears in the list, select it.
 
-```javascript
+To edit the script, you can double-click the script field of the Wheel component (where it now says Rotate). The script should open in Visual Studio. It should look like this:
+
+```csharp
 var x // Not initialised
 x = 5
 
