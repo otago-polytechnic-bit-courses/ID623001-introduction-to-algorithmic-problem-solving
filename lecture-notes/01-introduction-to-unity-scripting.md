@@ -48,16 +48,25 @@ In the **hierarchy tab**, expand Scenery and double-click the Windmill Game Obje
 
 To edit the script, you can double-click the script field of the Wheel component (where it now says Rotate). The script should open in Visual Studio. It should look like this:
 
-```cs
-var x // Not initialised
-x = 5
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-if (typeof x === 'number') { // Note: === is the strict equality operator
-    var x = 10
-    console.log(x) // 10
+public class Rotate : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+    
+    }
+    
+    //Update is called once per frame
+    void Update()
+    {
+    
+    }
 }
-
-console.log(x) // 10
 ```
 
 :question: **Interview Question:** What is **hoisting**?
