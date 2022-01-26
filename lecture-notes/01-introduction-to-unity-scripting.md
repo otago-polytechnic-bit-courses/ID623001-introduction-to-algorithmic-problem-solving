@@ -69,9 +69,13 @@ public class Rotate : MonoBehaviour
 }
 ```
 
-This script is a **class** that derives from **MonoBehaviour**, Unity's base class for components. By default, Unity components have a `Start` and `Update` method.
+This script is a **class** that derives from **MonoBehaviour**, Unity's base class for components. By default, Unity components have a `Start` and `Update` method. The `Start` method is called the first time the component is initialised, and you would use it to set initial values, initial state, etc... The `Update` method is called **every frame** of the game, and is used to perform actions or update values as the game is running.
 
-:question: **Interview Question:** What is **hoisting**?
+Add the following code inside of the `Update` method:
+
+```csharp
+transform.Rotate(0, 50 * Time.deltaTime, 0);
+```
 
 ### let
 
