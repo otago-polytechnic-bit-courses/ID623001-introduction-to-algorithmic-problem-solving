@@ -77,6 +77,12 @@ Add the following code inside of the `Update` method:
 transform.Rotate(0, 50 * Time.deltaTime, 0);
 ```
 
+Let's break this line of code down.
+
+- `transform` refers to a Game Object's **position**, **rotation** and **scale** - the different ways we can transform the object. We manipulate it's properties to move objects, rotate them and make them bigger and smaller. Usually the transform is a property coming off a Game Object; since we didn't specify anything in front of it (and just went straight in with `transform`, we are referring to **this** component (i.e. the transform of whatever Game Object this script happens to be attached to; in this case, the **Wheel**).
+- `Rotate` is a public method of the Transform class, and takes 3 values - the **x-axis**, **y-axis** and **z-axis** rotations. Since we only want to rotate the wheel in one direction, we pass 0 to the x and z axes, and only change the y-axis.
+- The value passed to the y-axis is `50 * Time.deltaTime`. If we had just 50, this would say increase the rotation by 50 degrees every frame. But, as we well know when playing games, framerate is a variable thing, based on the processing power of the machine. So, to make sure our rotation is stable, we are using `Time.deltaTime` in the calculation, which is the time in seconds between the last and the current frame. This will be calculated each frame, and provide a smoother, stable amount to rotate by based on how fast the machine is rendering the frames. Essentially, in the end, we are saying increase the rotation by 50 degrees per second.
+
 ### let
 
 `let` is used to declare a **block-scoped** **local** variable.
