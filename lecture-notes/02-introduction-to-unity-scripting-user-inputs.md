@@ -71,17 +71,11 @@ Now, not only are we checking for **horizontal input** in either direction, but 
 
 Save the script again, return to the editor, and play the scene. The **Hay machine** should now stop at the edges of the map.
 
-### Scene view
+### Creating and shooting projectiles
 
-Open the **Game** scene. You can see all the Game Objects currently in the scene.
+We are going to make our **Hay machine** launch bales of hay when the player presses the 'fire' button.
 
-In the **hierarchy tab** you can see all the same Game Objects (and a few others), organised into a tree-like hierarchy.
-
-- **Music** - an audio source playing the background music loop.
-- **Main Camera** - the camera that points down at the scene to render everything to the player. To see anything upon running the game, you must have a camera.
-- **Directional Light** - a single light source that illuminates the scene. Scenes in Unity need some sort of light source to be able to see anything when playing the game.
-- **Scenery** - an empty Game Object to hold the ground and the windmills. Acts like a 'folder'.
-- **Hay Machine** - this is the blue machine sitting on the rails. It is comprised of a few Game Objects to make it easy to customise later on.
+We need to create a new Game Object to hold the bale of hay. Right-click in the **hierarchy tab** and select **Create Empty** to create a new, empty Game Object. Change its name to **Hay bale** in the inspector, and right-click on its Transform and select **Reset**.
 
 Press the **play button** to run the game. Press the button again to stop the game and return to the scene view.
 
