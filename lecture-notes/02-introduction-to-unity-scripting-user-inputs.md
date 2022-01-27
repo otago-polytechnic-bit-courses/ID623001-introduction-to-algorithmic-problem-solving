@@ -36,6 +36,16 @@ The first line of this method captures any player input that is changing along t
 
 The input is 0 by default - no key is pressed. If the **left** arrow is pressed, the input will register as **less than zero**. If the **right** arrow is pressed, the input will register as **greater than zero**. That is what the **if condition** is checking for - less than or greater than zero on the horizontal input.
 
+`transform.Translate` is used to manipulate the Game Object's position. `transform.right` is shorthand for accessing a Vector3 on the horizontal (x) axis only. Again, we multiply this vector by our speed variable (positive or negative, to move right or left respectively) and `Time.deltaTime` (for smoothing).
+
+To call the function, add this code to the `Update` method:
+
+```csharp
+UpdateMovement();
+```
+
+Save the script and add it to the **HayMachine** prefab. Set the initial **Movement Speed** to 14 and play the scene. Use the arrow keys to move the machine left and right.
+
 ### Scene view
 
 Open the **Game** scene. You can see all the Game Objects currently in the scene.
