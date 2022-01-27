@@ -69,6 +69,8 @@ else if (horizontalInput > 0 && transform.position.x < horizontalBoundary) // 2
 
 Now, not only are we checking for **horizontal input** in either direction, but the **Hay machine** must **also** be within the boundary limits for the machine to move.
 
+Save the script again, return to the editor, and play the scene. The **Hay machine** should now stop at the edges of the map.
+
 ### Scene view
 
 Open the **Game** scene. You can see all the Game Objects currently in the scene.
