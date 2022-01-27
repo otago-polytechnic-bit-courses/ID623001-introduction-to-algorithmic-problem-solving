@@ -77,7 +77,15 @@ We are going to make our **Hay machine** launch bales of hay when the player pre
 
 We need to create a new Game Object to hold the bale of hay. Right-click in the **hierarchy tab** and select **Create Empty** to create a new, empty Game Object. Change its name to **Hay bale** in the inspector, and right-click on its Transform and select **Reset**.
 
-Press the **play button** to run the game. Press the button again to stop the game and return to the scene view.
+Drag the **hay bale** model from the models folder onto the **Hay Bale** Game Object in the **hierarchy tab**. With the model still selected, name it **Hay Bale Model** and reset its Transform.
+
+Select the **Hay Bale** Game Object and add these components:
+
+- Box collider
+- Rigidbody
+- Rotate
+
+
 
 ### Creating a script
 
