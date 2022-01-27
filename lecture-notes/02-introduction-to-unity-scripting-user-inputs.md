@@ -46,6 +46,29 @@ UpdateMovement();
 
 Save the script and add it to the **HayMachine** prefab. Set the initial **Movement Speed** to 14 and play the scene. Use the arrow keys to move the machine left and right.
 
+### Boundaries
+
+If you move the **Hay machine** in one direction long enough, it will go off the edge of the world... this is because we haven't told it where it should stop moving. In the **HayMachine** script, add this variable below **movementSpeed**:
+
+```csharp
+public float horizontalBoundary = 22;
+```
+
+In this case, 22 happens to be the distance limit for the machine to move either direction. Now, let's tweak the `UpdateMovement` method to include the boundary checking:
+
+```csharp
+if (horizontalInput < 0 && transform.position.x > -horizontalBoundary) // 1
+{
+    transform.Translate(transform.right * -movementSpeed * Time.deltaTime);
+}
+else if (horizontalInput > 0 && transform.position.x < horizontalBoundary) // 2
+{
+    transform.Translate(transform.right * movementSpeed * Time.deltaTime);
+}
+```
+
+Now, not only are we checking for **horizontal input** in either direction, but the **Hay machine** must **also** be within the boundary limits for the machine to move.
+
 ### Scene view
 
 Open the **Game** scene. You can see all the Game Objects currently in the scene.
