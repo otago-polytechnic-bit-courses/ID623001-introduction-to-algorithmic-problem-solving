@@ -81,11 +81,19 @@ Drag the **hay bale** model from the models folder onto the **Hay Bale** Game Ob
 
 Select the **Hay Bale** Game Object and add these components:
 
-- Box collider
-- Rigidbody
-- Rotate
+- **Box collider** - creates an invisible box around the object that can detect collisions with other objects.
+- **Rigidbody** - makes the object respond to the Unity physics engine (gravity, drag, force, etc...).
+- **Rotate** - our rotate script from earlier.
 
+Check the **Is Trigger** checkbox on the **Box collider** - this will stop it from 'pushing' other objects around, and indicates it is only for registering a collision event (for us to write some code).
 
+Check the **Is Kinematic** checkbox on the **Rigidbody** - this will actually prevent the physics from dictating the hay bale's movement (e.g. gravity, causing it to fall and stick to the ground), and rather let us control its movement through our script.
+
+Set the **Rotation speed** to **(X:300, Y:50, Z:0)** - which will rotate it around the x axis, and give it a slight roll about the y axis (like it's bouncing).
+
+To check that the hay is rolling, press the play button.
+
+To make the hay bale move forward, we will create a new script called **Move**.
 
 ### Creating a script
 
