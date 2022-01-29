@@ -95,6 +95,27 @@ To check that the hay is rolling, press the play button.
 
 To make the hay bale move forward, we will create a new script called **Move**.
 
+Add the following variables to the top of the class above the `Start` method:
+
+```csharp
+public Vector3 movementSpeed;
+public Space space;
+```
+
+The `movementSpeed` variable holds a Vector3 again, so we can say how much the hay bale should move along the x, y and z axes.
+
+The `Space` variable is a Unity-specific thing: we can set the 'space' of the movement to either **World** or **Self** - if we choose **Self**, then the rotation of the Game Object will be taken into consideration, otherwise with **World** the movement will only happen along the axes of the world space (ignoring the rotation of the object).
+
+Add the following code to the `Update` method:
+
+```csharp
+transform.Translate(movementSpeed * Time.deltaTime, space);
+```
+
+The `Translate` method, like before with the **Hay machine** tells the hay bale to move along a particular set of axes by a particular amount (and in this case, also takes a second argument for the 'space' variable).
+
+Save the script and return to the editor. Add the **Move** component to **Hay Bale**, set the **Movement Speed** to **(X:0, Y:0, Z:20)** and leave **Space** set to **World**.
+
 ### Creating a script
 
 We will now create a script to rotate the windmill blades. Right-click the **scripts** folder and select **Create > C# Script**. Name the script **Rotate**.
