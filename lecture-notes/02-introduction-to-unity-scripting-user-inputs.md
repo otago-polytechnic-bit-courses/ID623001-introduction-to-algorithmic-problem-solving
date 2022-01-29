@@ -143,6 +143,23 @@ private void ShootHay()
 }
 ```
 
+**Instantiate** creates an instance of a prefab and places it in the scene at the position, and rotation specified. The first argument is the **Hay Bale** prefab, the second is the spawn point, and the third is a sort of 'default' rotation (similar to setting a Vector3 to **(X:0, Y:0, Z:0)**.
+
+To call the method, we will poll for input; add the following method above `ShootHay`:
+
+```csharp
+private void UpdateShooting()
+{
+    shootTimer -= Time.deltaTime; 
+
+    if (shootTimer <= 0 && Input.GetKey(KeyCode.Space)) 
+    {
+        shootTimer = shootInterval; 
+        ShootHay(); 
+    }
+}
+```
+
 ### Creating a script
 
 We will now create a script to rotate the windmill blades. Right-click the **scripts** folder and select **Create > C# Script**. Name the script **Rotate**.
