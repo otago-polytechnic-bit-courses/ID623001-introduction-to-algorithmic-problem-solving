@@ -19,13 +19,13 @@ Add this method below `Update`:
 ```csharp
 private void UpdateMovement()
 {
-    float horizontalInput = Input.GetAxisRaw("Horizontal"); // 1
+    float horizontalInput = Input.GetAxisRaw("Horizontal"); 
 
-    if (horizontalInput < 0) // 2
+    if (horizontalInput < 0) 
     {
         transform.Translate(transform.right * -movementSpeed * Time.deltaTime);
     }
-    else if (horizontalInput > 0) // 3
+    else if (horizontalInput > 0) 
     {
         transform.Translate(transform.right * movementSpeed * Time.deltaTime);
     }
@@ -57,11 +57,11 @@ public float horizontalBoundary = 22;
 In this case, 22 happens to be the distance limit for the machine to move either direction. Now, let's tweak the `UpdateMovement` method to include the boundary checking:
 
 ```csharp
-if (horizontalInput < 0 && transform.position.x > -horizontalBoundary) // 1
+if (horizontalInput < 0 && transform.position.x > -horizontalBoundary) 
 {
     transform.Translate(transform.right * -movementSpeed * Time.deltaTime);
 }
-else if (horizontalInput > 0 && transform.position.x < horizontalBoundary) // 2
+else if (horizontalInput > 0 && transform.position.x < horizontalBoundary) 
 {
     transform.Translate(transform.right * movementSpeed * Time.deltaTime);
 }
@@ -115,6 +115,19 @@ transform.Translate(movementSpeed * Time.deltaTime, space);
 The `Translate` method, like before with the **Hay machine** tells the hay bale to move along a particular set of axes by a particular amount (and in this case, also takes a second argument for the 'space' variable).
 
 Save the script and return to the editor. Add the **Move** component to **Hay Bale**, set the **Movement Speed** to **(X:0, Y:0, Z:20)** and leave **Space** set to **World**.
+
+Play the scene and you should see the hay bale flying across the screen!
+
+Drag the **Hay Bale** Game Object from the **hierarchy** to the **Prefabs** folder - this will make it a prefab we can reference later. Then delete the original Object from the **hierarchy**.
+
+To make the hay machine shoot out bales, open the **Hay Machine** script and add these variables above `Start`:
+
+```csharp
+public GameObject hayBalePrefab; 
+public Transform haySpawnpoint; 
+public float shootInterval; 
+private float shootTimer; 
+```
 
 ### Creating a script
 
