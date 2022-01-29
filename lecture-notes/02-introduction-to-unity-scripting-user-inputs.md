@@ -129,6 +129,20 @@ public float shootInterval;
 private float shootTimer; 
 ```
 
+- The first is a reference to the **Hay Bale** prefab.
+- Next is the point at which the bale will spawn when shot.
+- The next is a variable to limit 'spamming' the shoot button - it is the smallest time allowable between shots.
+- Finally, a timer that decreases steadily to determine whether the machine can shoot again or not.
+
+Now add a `ShootHay` method below `UpdateMovement`:
+
+```csharp
+private void ShootHay()
+{
+    Instantiate(hayBalePrefab, haySpawnpoint.position, Quaternion.identity);
+}
+```
+
 ### Creating a script
 
 We will now create a script to rotate the windmill blades. Right-click the **scripts** folder and select **Create > C# Script**. Name the script **Rotate**.
