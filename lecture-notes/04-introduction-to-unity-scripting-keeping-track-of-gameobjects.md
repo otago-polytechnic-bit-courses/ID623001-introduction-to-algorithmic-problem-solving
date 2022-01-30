@@ -76,3 +76,27 @@ public void SetSpawner(SheepSpawner spawner)
 }
 ```
 
+Save the **Sheep** script and switch back to the **SheepSpawner** script. We are going to add a **coroutine** to this script to handle the spawning. **Coroutines**, in Unity, are a way of implementing asynchronous behaviour (note: it isn't *true* asynchronous behaviour, but close enough for us to think of it that way now).
+
+Add this code below the `SpawnSheep` method:
+
+```csharp
+private IEnumerator SpawnRoutine() 
+{
+    while (canSpawn) 
+    {
+        SpawnSheep(); 
+        yield return new WaitForSeconds(timeBetweenSpawns); 
+    }
+}
+```
+
+The first line lets this code run as long as **canSpawn** is true. Next we call the `SpawnSheep();` method to spawn a single sheep at a random point. Then we wait (or yield the execution) for **timeBetweenSpawns**. This line will pause the execution for however many seconds we want before running again - otherwise, our only option for repeatedly running this code would be to put it in the `Update` method and run it **every frame**, which is too fast.
+
+To start the coroutine, we add this code inside `Start`:
+
+```csharp
+StartCoroutine(SpawnRoutine());
+```
+
+We don't call `SpawnRoutine()` directly, but use this `StartCoroutine()` 
