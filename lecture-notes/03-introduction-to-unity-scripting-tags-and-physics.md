@@ -45,3 +45,97 @@ The object of this game is to stop the sheep from running off the edge of the fi
 First, create a new empty GameObject in the **hierarchy** and name it **Sheep**. Reset its Transform, set its **Y rotation** to 180 and add both a **Box collider** and a **Rigidbody**. Check the **Is Trigger** checkbox of the **Box collider** and change its **Center** to **(X:0, Y:1.4, Z:-0.3)** and its **Size** to **(X:2.5, Y:2, Z:4)**. Finally, check the **Is Kinematic** checkbox on the **Rigidbody**.
 
 Now, drag the Sheep model from the models folder onto **Sheep**, name the GameObject you just added **Sheep Model**, reset its Transform, and set its **X rotation** to -90 so its head comes out of the ground.
+
+Create a new C# script named **Sheep**, and add the following variable declarations right above `Start`:
+
+```csharp
+public float runSpeed; 
+public float gotHayDestroyDelay; 
+private bool hitByHay; 
+```
+
+**runSpeed** is the speed in meters per second that the sheep will run. The second variable is the delay in seconds before the sheep gets destroyed after it is hit by hay. The last is a boolean that is set to true once the sheep is hit by hay.
+
+Add this code to `Update`:
+
+```csharp
+transform.Translate(Vector3.forward * runSpeed * Time.deltaTime);
+```
+
+This makes the sheep run towards its forward vector at the speed set in the **runSpeed** variable.
+
+Next add this method below `Update`:
+
+```csharp
+private void HitByHay()
+{
+    hitByHay = true; 
+    runSpeed = 0;
+
+    Destroy(gameObject, gotHayDestroyDelay);
+}
+```
+
+When this method is called, the **hitByHay** boolean is set to true, the **runSpeed** is set to 0 (to stop the sheep from moving anymore) and the **gotHayDestroyDelay** is used in the `Destroy` method to delay the destruction of the sheep slightly. (`gameObject` here is the sheep in question)
+
+Add the following method:
+
+```csharp
+private void OnTriggerEnter(Collider other) 
+{
+    if (other.CompareTag("Hay") && !hitByHay) 
+    {
+        Destroy(other.gameObject); 
+        HitByHay(); 
+    }
+}
+```
+
+Similar to the last time we used this method, the sheep will compare the tag of anything that collides with it, and if it matches "Hay" it will go into the destroy functionality. Here, there is a second condition in the **if statement** which is checking that the **hitByHay** boolean is not yet set to true (which it will be as soon as we call the `HitByHay` method) - this stops the method from being repeatedly called during the 'delay' period.
+
+If both conditions are met, we first destroy the hay bale ('other' in this case) and then call `HitByHay();` to start the sheep self-destruct sequence.
+
+Save the script and return to the editor. Select **Sheep* in the **hierarchy** and add a **Sheep** component. Set its **Run Speed** to 10 and **Got Hay Destroy Delay** to 1. Play the scene and try it out - shooting sheep should now destroy them.
+
+But we still need to set up a zone at the back of the machine for any sheep that manage to get through without being shot with hay. Create a new empty GameObject as a child of **Triggers**, anme it **Sheep Dropper** and reset its Transform. Set its position to **(X:0, Y:4, Z:-54)** and add a **Box collider** with **Is Trigger** checked and a **Size** of **(X:60, Y:8, Z:12)**. Change its **Tag** to **DropSheep** and we have a trigger area set up behind the hay machine.
+
+When a sheep hit this trigger zone, it will fall and eventually be destroyed off screen. Open the **Sheep** script again and add these variables below the existing ones:
+
+```csharp
+public float dropDestroyDelay; 
+private Collider myCollider; 
+private Rigidbody myRigidbody; 
+```
+
+The first is the delay when the sheep starts dropping before it is destroyed. The second is a reference to the sheep's **Collider** and the third is a reference to the sheep's **Rigidbody**. We can assign these in the `Start` method by adding these lines:
+
+```csharp
+myCollider = GetComponent<Collider>();
+myRigidbody = GetComponent<Rigidbody>();
+```
+
+This finds and caches the sheep's collider and rigidbody for later use. Next, we want to add a method that will 'turn on' gravity for the sheep once they hit the trigger zone:
+
+```csharp
+private void Drop()
+{
+    myRigidbody.isKinematic = false; 
+    myCollider.isTrigger = false; 
+    Destroy(gameObject, dropDestroyDelay); 
+}
+```
+
+By turning **Is Kinematic** off, the sheep will start to fall, affected by Unity's gravity. We also turn the **Is Trigger** off to stop it being affected by the trigger zone. Finally, we start the self-destruct sequence with the **dropDestroyDelay**.
+
+Now, we need to tweak the `OnTriggerEnter` method by adding this as an **else condition** below the existing **if condition**:
+
+```csharp
+else if (other.CompareTag("DropSheep"))
+{
+    Drop();
+}
+```
+
+Here, if the sheep was hit by something other than a hay bale, this checks if it was something with the **DropSheep** tag, and if so, calls `Drop();`. Save the script and return to the editor. Select **Sheep** and change **Drop Destroy Delay** to 4. Play the scene and watch the sheep run past the machine and fall off the edge of the world!
+
+Now that we're done setting up the sheep, drag it from the **hierarchy** into the Prefabs folder and delete the original from the **hierarchy**. Now we can instantiate many sheep to run at the machine!
