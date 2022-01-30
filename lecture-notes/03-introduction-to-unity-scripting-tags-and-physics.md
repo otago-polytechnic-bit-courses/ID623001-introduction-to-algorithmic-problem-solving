@@ -37,3 +37,9 @@ The argument for `OnTriggerEnter` is the GameObject that has entered the area; t
 Save the script and return to the editor. Select **Hay Bale** in the prefabs folder, add **Destroy On Trigger** as a component and change **Tag Filter** to **DestroyHay**.
 
 Press the play button and shoot some hay bales - they should get destroyed when they reach the trigger area at the end of the field.
+
+## Sheep
+
+The object of this game is to stop the sheep from running off the edge of the field by launching hay bales at them. So, it's time to instantiate some sheep.
+
+First, create a new empty GameObject in the **hierarchy** and name it **Sheep**. Reset its Transform, set its **Y rotation** to 180 and add both a **Box collider** and a **Rigidbody**.
