@@ -42,4 +42,4 @@ Press the play button and shoot some hay bales - they should get destroyed when 
 
 The object of this game is to stop the sheep from running off the edge of the field by launching hay bales at them. So, it's time to instantiate some sheep.
 
-First, create a new empty GameObject in the **hierarchy** and name it **Sheep**. Reset its Transform, set its **Y rotation** to 180 and add both a **Box collider** and a **Rigidbody**.
+First, create a new empty GameObject in the **hierarchy** and name it **Sheep**. Reset its Transform, set its **Y rotation** to 180 and add both a **Box collider** and a **Rigidbody**. Check the **Is Trigger** checkbox of the **Box collider** and change its **Center** to **(X:0, Y:1.4, Z:-0.3)** and its **Size** to **(X:2.5, Y:2, Z:4)**. Finally, check the **Is Kinematic** checkbox on the **Rigidbody**.
