@@ -29,3 +29,11 @@ private void OnTriggerEnter(Collider other)
     }
 }
 ```
+
+`OnTriggerEnter` is a special Unity method that gets called when a GameObject with a **Rigidbody** and **Collider** (like our hay bales!) enters the trigger area.
+
+The argument for `OnTriggerEnter` is the GameObject that has entered the area; the **if statement** here is checking if that object has the tag name specified in our **tagFilter** variable. If the tag of the object matches the one we are looking for, destroy the object.
+
+Save the script and return to the editor. Select **Hay Bale** in the prefabs folder, add **Destroy On Trigger** as a component and change **Tag Filter** to **DestroyHay**.
+
+Press the play button and shoot some hay bales - they should get destroyed when they reach the trigger area at the end of the field.
