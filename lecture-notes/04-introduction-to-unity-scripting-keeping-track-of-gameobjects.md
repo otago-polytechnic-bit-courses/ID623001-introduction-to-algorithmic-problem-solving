@@ -134,4 +134,8 @@ Save the script, and reopen the **Sheep** script. Add this line to the top of th
 sheepSpawner.RemoveSheepFromList(gameObject);
 ```
 
-This removes the sheep from the spawner's list when it either drops off the edge of the world, or gets hit by hay.
+This removes the sheep from the spawner's list when it either drops off the edge of the world, or gets hit by hay. Now save the script and return to the editor.
+
+Add a new empty Game Object to the **hierarchy**, name it **SheepSpawner** and add a **Sheep Spawner** component.
+
+To configure the spawner, start by dragging a **Sheep** from the prefabs folder onto the Sheep Prefab slot on the **Sheep Spawner**. Next, expand **Sheep Spawn Points** and drag the spawn points one-by-one to the **Sheep Spawn Positions** List.
