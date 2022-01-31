@@ -33,4 +33,10 @@ private float percentScaled;
 
 This script will 'tween' (or animate) between two sizes, essentially scaling down the heart over time. The first varialbe, **targetScale** is the size we want the heart to be at the end of the tween. The second variable is the time it will take to reach the target scale. The **startScale** is how big the Object is when the script is activated. And **percentScaled** is a percentage (between 0.0 and 1.0) that will change over time, and is used in the calculations as we move from the start scale to the end scale.
 
+Add this to `Start`:
+
+```csharp
+startScale = transform.localScale.x;
+```
+
 ### Sound Effects
