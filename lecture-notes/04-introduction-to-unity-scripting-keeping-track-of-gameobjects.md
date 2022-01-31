@@ -99,4 +99,39 @@ To start the coroutine, we add this code inside `Start`:
 StartCoroutine(SpawnRoutine());
 ```
 
-We don't call `SpawnRoutine()` directly, but use this `StartCoroutine()` 
+We don't call `SpawnRoutine()` directly, but use this `StartCoroutine()` instead to launch the coroutine.
+
+Next, we want to be able to remove an individual sheep from the list of active sheep when it gets hit. Add this method below `SpawnRoutine`:
+
+```csharp
+public void RemoveSheepFromList(GameObject sheep)
+{
+    sheepList.Remove(sheep);
+}
+```
+
+This method takes a sheep as its parameter and removes the entry from the sheep list.
+
+Now add this method:
+
+```csharp
+public void DestroyAllSheep()
+{
+    foreach (GameObject sheep in sheepList)
+    {
+        Destroy(sheep);
+    }
+
+    sheepList.Clear();
+}
+```
+
+This method iterates through the sheepList, destroys each sheep instance, and clears the list of references.
+
+Save the script, and reopen the **Sheep** script. Add this line to the top of the `Drop` and `HitByHay` methods:
+
+```csharp
+sheepSpawner.RemoveSheepFromList(gameObject);
+```
+
+This removes the sheep from the spawner's list when it either drops off the edge of the world, or gets hit by hay.
