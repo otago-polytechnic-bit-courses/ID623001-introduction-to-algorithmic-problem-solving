@@ -18,7 +18,7 @@ You should now see a big heart floating above the ground in the scene.
 
 Add a **Move** component to **Heart** and set its **Movement Speed** to **(X:0, Y:10, Z:0)** to make it move up.
 
-Add a **Rotate** component and set its **Rotation Speed* to **(X:0, Y:180, Z:0)**.
+Add a **Rotate** component and set its **Rotation Speed** to **(X:0, Y:180, Z:0)**.
 
 Press play and the heart should float up and rotate.
 
