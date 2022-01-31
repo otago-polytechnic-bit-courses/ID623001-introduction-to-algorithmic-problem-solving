@@ -138,4 +138,4 @@ This removes the sheep from the spawner's list when it either drops off the edge
 
 Add a new empty Game Object to the **hierarchy**, name it **SheepSpawner** and add a **Sheep Spawner** component.
 
-To configure the spawner, start by dragging a **Sheep** from the prefabs folder onto the Sheep Prefab slot on the **Sheep Spawner**. Next, expand **Sheep Spawn Points** and drag the spawn points one-by-one to the **Sheep Spawn Positions** List.
+To configure the spawner, start by dragging a **Sheep** from the prefabs folder onto the Sheep Prefab slot on the **Sheep Spawner**. Next, expand **Sheep Spawn Points** and drag the spawn points one-by-one to the **Sheep Spawn Positions** List. Finally, set the **Time Between Spawns** to 2 and play the scene - you should now have a fully functional game! Stop the sheep from reaching the edge of the world and falling to their doom!
