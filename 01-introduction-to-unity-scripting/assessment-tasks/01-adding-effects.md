@@ -91,4 +91,16 @@ Instantiate(heartPrefab, transform.position + new Vector3(0, heartOffset, 0), Qu
 
 This line instantiates a new heart and positions it above the sheep, offset by **heartOffset** on the y-axis.
 
+We can also add some visuals to the sheep when it gets hit, and we can do this dynamically in the code. Add the following lines below the last one you just added:
+
+```csharp
+TweenScale tweenScale = gameObject.AddComponent<TweenScale>();
+tweenScale.targetScale = 0; 
+tweenScale.timeToReachTarget = gotHayDestroyDelay;
+```
+
+This adds a **Tween Scale** component dynamically to the sheep (rather than us adding one in the editor). We set the **targetScale** to 0 so the sheep completely shrinks away. Set the **timeToReachTarget** variable to the same time that the sheep takes to get destroyed (**gotHayDestroyDelay**).
+
+Save the script and return to the editor. Select **Sheep** in the prefabs folder, set **Heart Offset** to 4 and drag **Heart** from the folder to the **Heart Prefab** slot.
+
 ### Sound Effects
