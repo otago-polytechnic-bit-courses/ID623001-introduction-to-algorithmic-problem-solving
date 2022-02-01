@@ -39,4 +39,17 @@ Add this to `Start`:
 startScale = transform.localScale.x;
 ```
 
+This simply sets the **startScale** variable to the current scale of the heart when the script is activated.
+
+Now, add this code to `Update`:
+
+```csharp
+if (percentScaled < 1f) 
+{
+    percentScaled += Time.deltaTime / timeToReachTarget; 
+    float scale = Mathf.Lerp(startScale, targetScale, percentScaled); 
+    transform.localScale = new Vector3(scale, scale, scale); 
+}
+```
+
 ### Sound Effects
