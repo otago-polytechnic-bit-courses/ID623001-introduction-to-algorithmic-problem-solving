@@ -56,4 +56,12 @@ The **if statement** says while the percent is less than 1 (100%) - i.e. the sca
 
 Now save the script and return to the editor. Select **Heart** and add a **Tween Scale** component. Set its **Target Scale** to 0.5 and change **Time To Reach Target** to 1.5. Play the scene and the heart should now shrink as it moves up.
 
+Now we just need to add a little code to make the heart disappear after a little while.
+
+Create a new C# script named **DestroyTimer** and add this line above `Start`:
+
+```csharp
+public float timeToDestroy;
+```
+
 ### Sound Effects
