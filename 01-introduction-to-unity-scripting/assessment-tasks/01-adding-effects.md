@@ -64,4 +64,31 @@ Create a new C# script named **DestroyTimer** and add this line above `Start`:
 public float timeToDestroy;
 ```
 
+And add this to `Start`:
+
+```csharp
+Destroy(gameObject, timeToDestroy);
+```
+
+This simply delays a `Destroy` call for the specified amount of time. Save the script and return to the editor. Add a **Destroy Timer** component to **Heart** and set its **Time To Destroy** to 1.5.
+
+Now drag the **Heart** to the prefabs folder to turn it into a prefab. Finally, delete **Heart** from the **hierarchy** and open the **Sheep** script again.
+
+Add the following variables below the others:
+
+```csharp
+public float heartOffset; 
+public GameObject heartPrefab; 
+```
+
+The first variable is an offset on the y-axis where the heart will spawn, and the second is a reference to the **Heart** prefab you just made.
+
+Next add this line to `HitByHay`:
+
+```csharp
+Instantiate(heartPrefab, transform.position + new Vector3(0, heartOffset, 0), Quaternion.identity);
+```
+
+This line instantiates a new heart and positions it above the sheep, offset by **heartOffset** on the y-axis.
+
 ### Sound Effects
