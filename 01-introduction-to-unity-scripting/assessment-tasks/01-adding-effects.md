@@ -163,3 +163,23 @@ public void PlaySheepDroppedClip()
     PlaySound(sheepDroppedClip);
 }
 ```
+
+Now, that the audio manager is ready, you'll need to add some code to other scripts to make use of its audio playing capabilities. Save this script, open the **HayMachine** script and add this line to `ShootHay`:
+
+```csharp
+SoundManager.Instance.PlayShootClip();
+```
+
+Now, save the **HayMachine** script and open up the **Sheep** script. Add this line to `HitByHay`:
+
+```csharp
+SoundManager.Instance.PlaySheepHitClip();
+```
+
+Next, add this line to `Drop`:
+
+```csharp
+SoundManager.Instance.PlaySheepDroppedClip();
+```
+
+Save this script and return to the editor. The sound manager needs to be added to a Game Object in order to work correctly, so create a new empty **GameObject** in the root of the **hierarchy** and name it **Managers**. Now create another empty **GameObject**, name it **Sound Manager** and make it a child of **Managers**.
