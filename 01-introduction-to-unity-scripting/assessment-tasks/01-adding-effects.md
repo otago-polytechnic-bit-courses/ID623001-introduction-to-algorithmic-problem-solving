@@ -183,3 +183,7 @@ SoundManager.Instance.PlaySheepDroppedClip();
 ```
 
 Save this script and return to the editor. The sound manager needs to be added to a Game Object in order to work correctly, so create a new empty **GameObject** in the root of the **hierarchy** and name it **Managers**. Now create another empty **GameObject**, name it **Sound Manager** and make it a child of **Managers**.
+
+Select **Sound Manager** and add a **Sound Manager** component to it. Now drag the audio clip from the sounds folder to their corresponding slots on **Sound Manager**.
+
+Now play the scene and shoot some sheep, and you'll hear the sound effects playing!
