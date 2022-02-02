@@ -103,4 +103,20 @@ This adds a **Tween Scale** component dynamically to the sheep (rather than us a
 
 Save the script and return to the editor. Select **Sheep** in the prefabs folder, set **Heart Offset** to 4 and drag **Heart** from the folder to the **Heart Prefab** slot.
 
+Now play the scene and try shooting a sheep!
+
 ### Sound Effects
+
+We're going to create a script that uses the **singleton** pattern, so it can be called from other scripts without needing a reference.
+
+Create a new folder in the scripts folder called **Managers**. Create a new C# script in that folder and name it **SoundManager**. Add the following variables above `Start`:
+
+```csharp
+public static SoundManager Instance; 
+
+public AudioClip shootClip; 
+public AudioClip sheepHitClip; 
+public AudioClip sheepDroppedClip; 
+
+private Vector3 cameraPosition; 
+```
