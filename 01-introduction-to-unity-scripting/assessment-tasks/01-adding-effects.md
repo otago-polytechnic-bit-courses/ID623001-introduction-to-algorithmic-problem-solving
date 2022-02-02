@@ -120,3 +120,46 @@ public AudioClip sheepDroppedClip;
 
 private Vector3 cameraPosition; 
 ```
+
+The **SoundManager** instance is a `public static` variable, so it can be accessed from any other script. It stores a reference to a **SoundManager** component. The next three variables are references to various sound effect clips. The final variable holds a cached position of the camera.
+
+Now, replace `Start` with `Awake` and add this code to the method:
+
+```csharp
+Instance = this; 
+cameraPosition = Camera.main.transform.position; 
+```
+
+We changed the `Start` method to an `Awake` method because in Unity, in the order of code execution, `Awake` fires before `Start`... this means, if you try to reference the **SoundManager** from another script in *its* `Start` method, you know it was already initialised.
+
+The two lines of code above: (a) cache this script in the variable called **Instance**; and (b) cache the position of the main camera in **cameraPosition**.
+
+Next add this method:
+
+```csharp
+private void PlaySound(AudioClip clip)
+{
+    AudioSource.PlayClipAtPoint(clip, cameraPosition);
+}
+```
+
+This method takes an audio clip and plays it at the position of the camera.
+
+Finally, add these three methods to actually trigger the sound effects.
+
+```csharp
+public void PlayShootClip()
+{
+    PlaySound(shootClip);
+}
+
+public void PlaySheepHitClip()
+{
+    PlaySound(sheepHitClip);
+}
+
+public void PlaySheepDroppedClip()
+{
+    PlaySound(sheepDroppedClip);
+}
+```
