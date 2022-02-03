@@ -91,7 +91,23 @@ if (Input.GetKeyDown(KeyCode.Escape))
 
 If the **Escape** key is pressed, **SceneManager** will load the title screen.
 
-Save this script and open the **Sheep** script.
+Save this script and open the **Sheep** script. Add this line to `HitByHay`:
+
+```csharp
+GameStateManager.Instance.SavedSheep();
+```
+
+This tells the manager that a sheep was saved. Next, add this code to `Drop`, right above `sheepSpawner.RemoveSheepFromList(gameObject);`:
+
+```csharp
+GameStateManager.Instance.DroppedSheep();
+```
+
+This tells the manager that a sheep was dropped.
+
+Now, save the script and return to the editor. Create a new empty Game Object as a child of **Managers**, name it **Game State Manager** and add a **Game State Manager** component. Set **Sheep Dropped Before Game Over** to 3 and drag **Sheep Spawner** from the **hierarchy** to the slot with same name.
+
+Now, play the scene and let a few sheep run off the edge. After three sheep have hit the invisible trigger behind the hay machine, the game will end.
 
 ### Updating the User Interface
 
