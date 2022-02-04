@@ -1,4 +1,4 @@
-# 02: Introduction to Unity Scripting Assessment Tasks
+# 03: Introduction to Unity Scripting Assessment Tasks
 
 ## Dealing with multiple scenes
 
