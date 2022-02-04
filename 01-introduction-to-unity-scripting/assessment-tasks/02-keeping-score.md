@@ -111,3 +111,23 @@ Now, play the scene and let a few sheep run off the edge. After three sheep have
 
 ### Updating the User Interface
 
+Now that we're keeping track of score and 'lives' we need to relay that information to the player.
+
+Drag **Game UI** from the prefabs folder into the root of the **hierarchy**. This is a pre-made Canvas with some text, a few images and a very simple game over window that is currently disabled. Unfold the Game UI to see all the child elements inside.
+
+Create a new C# script in **Scripts/Managers** and name it **UIManager**. Add this `using` statement below the others:
+
+```csharp
+using UnityEngine.UI;
+```
+
+With this added, you can start adding references to UI components. Add the following variables above `Start`:
+
+```csharp
+public static UIManager Instance; 
+
+public Text sheepSavedText; 
+public Text sheepDroppedText; 
+public GameObject gameOverWindow; 
+```
+
