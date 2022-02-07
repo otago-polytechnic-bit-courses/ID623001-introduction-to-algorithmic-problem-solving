@@ -72,4 +72,60 @@ And replace it with:
 Application.Quit();
 ```
 
-Save the script and return to the editor. Select **Quit Button**, add a **Quit Button** component to it and run the scene. Try clicking the **Quit** button and you'll notice nothing happens. This is because `Application.Quit` only works in an actual build of the game, not inside the Unity software.
+Save the script and return to the editor. Select **Quit Button**, add a **Quit Button** component to it and run the scene. Try clicking the **Quit** button and you'll notice nothing happens. This is because `Application.Quit` only works in an actual build of the game, not inside the Unity software. Try building the game to an executable by pressing **CTRL + B** and selecting a folder to deploy to. After the game has launched, try clicking the **Quit** button again, it will close the game as expected now.
+
+There's one final adjustment to the buttons that will make it more clear to the player that they can be clicked, and that's by changing their colour when the mouse cursor hovers over them. Create a new C# script in the **Scripts/Title** folder and name it **ChangeColorOnMouseOver**. Add this `using` statement below the others:
+
+```csharp
+using UnityEngine.EventSystems;
+```
+
+And replace this line:
+
+```csharp
+public class ChangeColorOnMouseOver : MonoBehaviour
+```
+
+With this:
+
+```csharp
+public class ChangeColorOnMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+```
+
+These pointer event interfaces are used to react to events triggered by the event system. In this case, they supply methods for when the pointer enters and exits the GameObject. You will get some errors again about not implementing the interface members, but ignore those for now, they'll disappear once you add the methods.
+
+Add these variables above `Start`:
+
+```csharp
+public MeshRenderer model; 
+public Color normalColor; 
+public Color hoverColor; 
+```
+
+Here's what these are used for:
+
+- a reference to the mesh renderer that needs its colour changed.
+- the default colour of the model.
+- the colour that should be applied on the model when the pointer is hovering over it.
+
+Now add this to `Start`:
+
+```csharp
+model.material.color = normalColor;
+```
+
+This changes the model's colour to the normal one.
+
+Now, remove `Update` and add these methods in its place:
+
+```csharp
+public void OnPointerEnter(PointerEventData eventData) 
+{
+    model.material.color = hoverColor;
+}
+
+public void OnPointerExit(PointerEventData eventData) 
+{
+    model.material.color = normalColor;
+}
+```
