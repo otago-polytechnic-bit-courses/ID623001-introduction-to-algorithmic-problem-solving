@@ -129,3 +129,9 @@ public void OnPointerExit(PointerEventData eventData)
     model.material.color = normalColor;
 }
 ```
+
+These methods will be called when a pointer enters and exits the attached Game Object. Save the script and return to the editor. Select both buttons and add a **Change Color On Mouse Over** component to each.
+
+Set the alpha value of **Normal Color** to 100 and change its hexadecimal value to **CCCCCC** (a light grey) on both buttons.
+
+Now, do the same for **Hover Color**, but set its hexadecimal colour value to pure white, **FFFFFF**. Next, select just the **Start Button** and drag its child onto the **Model** slot. Do the same for **Quit Button** and play the scene. Hover over the buttons with your cursor and you'll notice they change colour.
