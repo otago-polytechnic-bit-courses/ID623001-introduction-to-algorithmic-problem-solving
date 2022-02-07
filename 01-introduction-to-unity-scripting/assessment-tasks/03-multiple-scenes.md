@@ -138,4 +138,138 @@ Now, do the same for **Hover Color**, but set its hexadecimal colour value to pu
 
 ### Passing data between scenes
 
-The ability to pass data between scenes can be useful for passing things like game settings from an options menu to the game. For this game, you'll implement the option to change the color of the hay machine from the title screen.
+The ability to pass data between scenes can be useful for passing things like game settings from an options menu to the game. For this game, you'll implement the option to change the colour of the hay machine from the title screen.
+
+To start, you need something to click on to make the colour change happen. Create an empty Game Object in the root of the **hierarchy**, name it **Hay Machines** and set its position to **(X:16.5, Y:-0.5, Z:-20)**. This will act as a container for the differently coloured hay machines.
+
+Select all of the hay machines in the **Prefabs/Hay Machine Models** folder and drag them to **Hay Machines**.
+
+Next, with the three hay machines selected in the **hierarchy**, set their **Rotation** to **(X:-90, Y:0, Z:0)**. The hay machines are now upright.
+
+Right now, all of the machines are overlapping so a random gets visibly rendered. The default machine color is blue, so disable the other two by clicking the little checkbox next to their names.
+
+To make the hay machines clickable, they need a collider. Add a **Box collider** to **Hay Machines**, set its **Center** to **(X:0, Y:3.5, Z:0)** and its **Size** to **(X:5, Y:6, Z:8)**.
+
+Create a new folder in the scripts folder, name it **Shared** and create a new C# script inside of it named **HayMachineColor**. Strip out all the `using` statement and both methods. Replace this line:
+
+```csharp
+public class HayMachineColor : MonoBehaviour
+```
+
+With this:
+
+```csharp
+public enum HayMachineColor
+```
+
+This script isn't meant to be used as a component, it's actually a simple **enum** that will be used by other scripts. **Enums** are actually just constant integers under the hood (like 0, 1, 2, etc.) but using them makes for a much more approachable and readable way of accessing variables.
+
+Add this inside the `{ }` of the enum:
+
+```csharp
+Blue, Yellow, Red
+```
+
+Save this file and return to the edtior. Create another C# script inside the **Shared** folder and name it **GameSettings**. Strip out the `using` statements and the methods again. Replace this line:
+
+```csharp
+public class GameSettings : MonoBehaviour
+```
+
+With this:
+
+```csharp
+public static class GameSettings
+```
+
+This turns this script into a static class that can hold data for other scripts to use, even across scenes. Any static variables added to this class can be set from the title screen and then read by the game screen for example.
+
+Add this variable declaration to the body of the class:
+
+```csharp
+public static HayMachineColor hayMachineColor = HayMachineColor.Blue;
+```
+
+This variable will be used to set and get the colour of the hay machine. It uses the **enum** you just created for readability.
+
+Save the script and return to the editor. Create *another* C# script in shared and name it **HayMachineSwitcher**.
+
+Add these `using` statements below the others:
+
+```csharp
+using UnityEngine.EventSystems;
+using System;
+```
+
+And replace this line:
+
+```csharp
+public class HayMachineSwitcher : MonoBehaviour
+```
+
+With this:
+
+```csharp
+public class HayMachineSwitcher : MonoBehaviour, IPointerClickHandler
+```
+
+Now add these variables:
+
+```csharp
+public GameObject blueHayMachine;
+public GameObject yellowHayMachine;
+public GameObject redHayMachine;
+
+private int selectedIndex;
+```
+
+The Game Objects are each of the hay machines you added earlier. The next is an index that will be incremented every time the hay machine selector is clicked.
+
+Remove the `Start` and `Update` methods and add this to the script:
+
+```csharp
+public void OnPointerClick(PointerEventData eventData) 
+{
+    selectedIndex++; 
+    selectedIndex %= Enum.GetValues(typeof(HayMachineColor)).Length; 
+
+    GameSettings.hayMachineColor = (HayMachineColor)selectedIndex; 
+
+    // 5
+    switch (GameSettings.hayMachineColor)
+    {
+        case HayMachineColor.Blue:
+            blueHayMachine.SetActive(true);
+            yellowHayMachine.SetActive(false);
+            redHayMachine.SetActive(false);
+        break;
+
+        case HayMachineColor.Yellow:
+            blueHayMachine.SetActive(false);
+            yellowHayMachine.SetActive(true);
+            redHayMachine.SetActive(false);
+        break;
+
+        case HayMachineColor.Red:
+            blueHayMachine.SetActive(false);
+            yellowHayMachine.SetActive(false);
+            redHayMachine.SetActive(true);
+        break;
+    }
+}
+```
+
+This method first increments **selectedIndex**, and then performs a calculation using the `%` (or **modulo**) operator. This is like a **division** (`/`), but instead of returning the **quotient**, the modulo returns the **remainder** of the operation. It is used all the time in programming to create a 'loop' of numbers. Think about a really simply division pattern using 2. 
+
+```
+1 / 2 = 0 (remainder of 1)
+2 / 2 = 1 (remainder of 0)
+3 / 2 = 1 (remainder of 1)
+4 / 2 = 2 (remainder of 0)
+5 / 2 = 2 (remainder of 1)
+6 / 2 = 3 (remainder of 0)
+```
+
+Notice how the remainder ping-pongs between 1 and 0? We can infinitely increment the number on the left and always return either a 1 or 0 by focussing on the remainder (modulo).
+
+This is a very common practice for accessing items sequentially in a List, and returning to the start of the List once you've overshot the end.
