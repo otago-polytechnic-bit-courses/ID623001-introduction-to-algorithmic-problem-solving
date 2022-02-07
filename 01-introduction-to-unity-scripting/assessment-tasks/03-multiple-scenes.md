@@ -135,3 +135,7 @@ These methods will be called when a pointer enters and exits the attached Game O
 Set the alpha value of **Normal Color** to 100 and change its hexadecimal value to **CCCCCC** (a light grey) on both buttons.
 
 Now, do the same for **Hover Color**, but set its hexadecimal colour value to pure white, **FFFFFF**. Next, select just the **Start Button** and drag its child onto the **Model** slot. Do the same for **Quit Button** and play the scene. Hover over the buttons with your cursor and you'll notice they change colour.
+
+### Passing data between scenes
+
+The ability to pass data between scenes can be useful for passing things like game settings from an options menu to the game. For this game, you'll implement the option to change the color of the hay machine from the title screen.
