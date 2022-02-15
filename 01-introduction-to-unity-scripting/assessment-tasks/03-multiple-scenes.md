@@ -273,3 +273,9 @@ This method first increments **selectedIndex**, and then performs a calculation 
 Notice how the remainder ping-pongs between 1 and 0? We can infinitely increment the number on the left and always return either a 1 or 0 by focussing on the remainder (modulo).
 
 This is a very common practice for accessing items sequentially in a List, and returning to the start of the List once you've overshot the end.
+
+Once we have this value (our index) we can evaluate it in a switch statement against our enum values "Blue", "Yellow" and "Red". Remember, enums are just 'labels' for numbers... so each colour name (e.g. "Blue") is actually a number (0, 1 or 2). Using enums means we don't need to try to remember which colour relates to which number. Depending on the enum value, we will enable the appropriately coloured hay machine, and disable the other two!
+
+Save the script and return to the editor. Select **Hay Machines**, add a **Hay Machine Switcher** component and drag the hay machine children onto their matching slots.
+
+Play the scene and click the hay machine a few times - it should switch colours!
