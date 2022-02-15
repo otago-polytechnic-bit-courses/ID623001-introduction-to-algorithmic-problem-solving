@@ -289,3 +289,27 @@ public GameObject blueModelPrefab;
 public GameObject yellowModelPrefab;
 public GameObject redModelPrefab;
 ```
+
+And add the following method below `Start`:
+
+```csharp
+private void LoadModel()
+{
+    Destroy(modelParent.GetChild(0).gameObject); 
+
+    switch (GameSettings.hayMachineColor) 
+    {
+        case HayMachineColor.Blue:
+            Instantiate(blueModelPrefab, modelParent);
+        break;
+
+        case HayMachineColor.Yellow:
+            Instantiate(yellowModelPrefab, modelParent);
+        break;
+
+        case HayMachineColor.Red:
+            Instantiate(redModelPrefab, modelParent);
+        break;
+    }
+}
+```
