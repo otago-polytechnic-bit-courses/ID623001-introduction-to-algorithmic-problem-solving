@@ -279,3 +279,13 @@ Once we have this value (our index) we can evaluate it in a switch statement aga
 Save the script and return to the editor. Select **Hay Machines**, add a **Hay Machine Switcher** component and drag the hay machine children onto their matching slots.
 
 Play the scene and click the hay machine a few times - it should switch colours!
+
+We still need to edit the **HayMachine** script to remember which colour we select at the title screen to use in-game. Open the **HayMachine** script and add the following variables below the others:
+
+```csharp
+public Transform modelParent; 
+
+public GameObject blueModelPrefab;
+public GameObject yellowModelPrefab;
+public GameObject redModelPrefab;
+```
