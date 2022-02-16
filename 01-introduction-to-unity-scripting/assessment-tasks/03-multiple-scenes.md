@@ -313,3 +313,11 @@ private void LoadModel()
     }
 }
 ```
+
+This replaces the default model with a new one depending on the machine colour saved in the game settings. First, the current model is destroyed, and then a new hay machine is instantiated. 
+
+Finally, add this line to `Start`:
+
+```csharp
+LoadModel();
+```
