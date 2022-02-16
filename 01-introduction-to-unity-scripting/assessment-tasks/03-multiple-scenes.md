@@ -321,3 +321,7 @@ Finally, add this line to `Start`:
 ```csharp
 LoadModel();
 ```
+
+Now, save the script and return to the editor. Make sure the **Title** scene is saved. Open the **Game** scene, select **Hay Machine** and expand it in the **hierarchy**. The **Hay Machine** component has some extra fields to fill in now: drag **Model Parent** to the **Model Parent** slot and drag the prefabs found in **Prefabs/Hay Machine Models** to their corresponding slots.
+
+Save the **Game** scene. Open the **Title** scene and press play. Switch the colour of the hay machine and press the **Start** button - the hay machine should be a different colour in-game!
