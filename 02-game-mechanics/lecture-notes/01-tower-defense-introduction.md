@@ -87,3 +87,5 @@ Finally, we are assigning the instantiated object into the `monster` variable...
 The last two lines of the method are just getting the **AudioSource** of the **Openspot** and playing the placement sound effect.
 
 Save the script and switch back to the editor. Select **Openspot** in the prefabs folder, and in the Inspector click the circle to the right of the **PlaceMonster** script's **Monster Prefab** field - select **Monster** from the dialog box that appears.
+
+Run the scene and you should be able to place monsters on the **X** spots.
