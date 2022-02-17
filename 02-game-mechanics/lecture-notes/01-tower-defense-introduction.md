@@ -10,7 +10,7 @@ We are going to build a 2D tower defense game, and implement functionality such 
 
 Open the **GameScene** from the scenes folder and set the Game view aspect ratio to **4:3** - this will ensure the labels and background line up correctly. The object is to place monsters in defensive positions around the path to stop the bugs from reaching the cookie at the end. You will earn gold as you play and use it to ugrade the monsters, defeating multiple waves of enemy bugs!
 
-### Placing units
+### Unit placement
 
 The first step is to set up the functionality to place your defensive monsters. Monsters can only be places on the spots marked with an **X**. Drag and drop **Images\Objects\Openspot** into the Scene view. Select **Openspot** in the **hierarchy tab** and add a **Box Collider 2D** component to it. Next add an **Audio\Audio Source** component to **Openspot** and set the Audio Source's **AudioClip** to **Audio\tower_place**. Deactivate **Play On Awake**.
 
@@ -32,3 +32,43 @@ Now we will set the positions of each of the spots... the 12 position values are
 - **(X:3.8, Y:-3.0, Z:0)**
 
 You should now see 12 **Xs** spaced around the path on the map, 3 rows of 4.
+
+### Placing monsters
+
+Select **Openspoot** in the prefabs folder, and in the inspector click **Add Component**. Choose **New script** and name it **PlaceMonster**. Open the script in Visual Studio. Add these two variables above `Start`:
+
+```csharp
+public GameObject monsterPrefab;
+private GameObject monster;
+```
+
+The first is a reference to the monster prefab, and the second is a variable that holds a monster on this spot, when you have created one. 
+
+And add the following method:
+
+```csharp
+private bool CanPlaceMonster()
+{
+  return monster == null;
+}
+```
+
+This method checks if the `monster` variable is **null**. **Null** means no monster has been created here yet, so it is ok to create one. If `monster` is NOT null, then it means we have already created one, so this method will help us prevent duplicate placement on one spot.
+
+Add the following method to create a monster on this spot:
+
+```csharp
+void OnMouseUp()
+{
+  if (CanPlaceMonster())
+  {
+    monster = (GameObject) 
+      Instantiate(monsterPrefab, transform.position, Quaternion.identity);
+
+    AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+    audioSource.PlayOneShot(audioSource.clip);
+
+    // TODO: Deduct gold
+  }
+}
+```
