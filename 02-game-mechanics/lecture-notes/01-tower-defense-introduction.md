@@ -35,7 +35,7 @@ You should now see 12 **Xs** spaced around the path on the map, 3 rows of 4.
 
 ### Placing monsters
 
-Select **Openspoot** in the prefabs folder, and in the inspector click **Add Component**. Choose **New script** and name it **PlaceMonster**. Open the script in Visual Studio. Add these two variables above `Start`:
+Select **Openspot** in the prefabs folder, and in the inspector click **Add Component**. Choose **New script** and name it **PlaceMonster**. Open the script in Visual Studio. Add these two variables above `Start`:
 
 ```csharp
 public GameObject monsterPrefab;
