@@ -10,7 +10,7 @@ Unity scripts are written in **C#**, an object-oriented programming language dev
 
 ## Starter project
 
-Download the **starter project** code and open it inside Unity.
+Download the **starter code** and open it as a project in Unity.
 
 ### Assets
 
