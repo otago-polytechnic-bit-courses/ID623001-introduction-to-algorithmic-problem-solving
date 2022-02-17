@@ -15,3 +15,20 @@ Open the **GameScene** from the scenes folder and set the Game view aspect ratio
 The first step is to set up the functionality to place your defensive monsters. Monsters can only be places on the spots marked with an **X**. Drag and drop **Images\Objects\Openspot** into the Scene view. Select **Openspot** in the **hierarchy tab** and add a **Box Collider 2D** component to it. Next add an **Audio\Audio Source** component to **Openspot** and set the Audio Source's **AudioClip** to **Audio\tower_place**. Deactivate **Play On Awake**.
 
 Create a prefab from what you just created: drag and drop **Openspot** from the **hierarchy** to the **prefabs** folder. You can now create more placement spots using the prefab. Drag 11 more spots into the scene (don't worry about their position now, we'll adjust those in a minute). You should have a total of 12 placement spots in the **hierarchy**.
+
+Now we will set the positions of each of the spots... the 12 position values are as follows:
+
+- **(X:-5.2, Y:3.5, Z:0)**
+- **(X:-2.2, Y:3.5, Z:0)**
+- **(X:0.8, Y:3.5, Z:0)**
+- **(X:3.8, Y:3.5, Z:0)**
+- **(X:-3.8, Y:0.4, Z:0)**
+- **(X:-0.8, Y:0.4, Z:0)**
+- **(X:2.2, Y:0.4, Z:0)**
+- **(X:5.2, Y:0.4, Z:0)**
+- **(X:-5.2, Y:-3.0, Z:0)**
+- **(X:-2.2, Y:-3.0, Z:0)**
+- **(X:0.8, Y:-3.0, Z:0)**
+- **(X:3.8, Y:-3.0, Z:0)**
+
+You should now see 12 **Xs** spaced around the path on the map, 3 rows of 4.
