@@ -62,8 +62,7 @@ void OnMouseUp()
 {
   if (CanPlaceMonster())
   {
-    monster = (GameObject) 
-      Instantiate(monsterPrefab, transform.position, Quaternion.identity);
+    monster = (GameObject)Instantiate(monsterPrefab, transform.position, Quaternion.identity);
 
     AudioSource audioSource = gameObject.GetComponent<AudioSource>();
     audioSource.PlayOneShot(audioSource.clip);
@@ -72,3 +71,17 @@ void OnMouseUp()
   }
 }
 ```
+
+This is a built-in Unity method called `OnMouseUp` which listens for a **mouseUp** event on the **Openspot** - basically that means the player clicked the spot. The method then calls `CanPlaceMonster()` to check if a monster has already been placed here or not. If the spot is clear, then a new monster is instantiated from the prefab. Let's take a look at this line more closely:
+
+```csharp
+monster = (GameObject)Instantiate(monsterPrefab, transform.position, Quaternion.identity);
+```
+
+First we have the `Instantiate` method that we've used before... this takes the `monsterPrefab` as its reference, the `transform.position` of the **Openspot** as its position (that is, place the monster at the same location), and no rotation (the default `Quarternion.identity`). 
+
+The `(GameObject)` at the start is called a **cast**... If you remember your inheritance lessons from Programming 2, you'll know instances of classes can be cast as different types of that class based on inheritance rules: in this case, `Instantiate` creates an instance of the base class `Object`, but we want to access methods of the descendant class `GameObject`, so we cast it and store it *as* a `GameObject`. It's like how *dogs* are *animals*, and so you can think of *Snoopy* as either a *dog* OR an *animal* - it doesn't change what *Snoopy* is, just how you think of him.
+
+Finally, we are assigning the instantiated object into the `monster` variable... now, if we try to click here again, `CanPlaceMonster()` would return NOT null, and thus this placement code would not run a second time.
+
+The last two lines of the method are just getting the **AudioSource** of the **Openspot** and playing the placement sound effect.
