@@ -89,3 +89,20 @@ The last two lines of the method are just getting the **AudioSource** of the **O
 Save the script and switch back to the editor. Select **Openspot** in the prefabs folder, and in the Inspector click the circle to the right of the **PlaceMonster** script's **Monster Prefab** field - select **Monster** from the dialog box that appears.
 
 Run the scene and you should be able to place monsters on the **X** spots.
+
+### Upgrading monsters
+
+A script acts as the basis for implementing a leveling system for the monsters. It tracks how powerful the monster should be on each level, and of course, the current level of a monster.
+
+Create a new C# script called **MonsterData** and add it as a component to the **Monster** prefab in the prefabs folder.
+
+Add the following code *above* the `MonsterData` class:
+
+```csharp
+[System.Serializable]
+public class MonsterLevel
+{
+  public int cost;
+  public GameObject visualization;
+}
+```
