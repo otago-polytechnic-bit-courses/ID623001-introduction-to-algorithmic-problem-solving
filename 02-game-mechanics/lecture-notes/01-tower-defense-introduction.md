@@ -106,3 +106,7 @@ public class MonsterLevel
   public GameObject visualization;
 }
 ```
+
+This creates the `MonsterLevel` class, that will be used to group the cost (in gold, which you’ll support later) and the visual representation for a specific monster level.
+
+You add `[System.Serializable]` at the top to make instances of the class editable from the inspector. This allows you to quickly change all values in the Level class — even while the game is running. It’s incredibly useful for balancing your game.
