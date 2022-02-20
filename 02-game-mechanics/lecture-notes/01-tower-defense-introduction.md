@@ -117,7 +117,7 @@ At the very top of the script add this `using` statement:
 using System.Collections.Generic;
 ```
 
-Then add the following variable to `MonsterLevel`, above the `Start` method:
+Then add the following variable to the `MonsterLevel` class below the other variables:
 
 ```csharp
 public List<MonsterLevel> levels;
