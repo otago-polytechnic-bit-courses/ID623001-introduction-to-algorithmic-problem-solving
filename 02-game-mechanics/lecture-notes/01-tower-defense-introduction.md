@@ -130,3 +130,39 @@ Select the **Monster** prefab and in the **inspector** set its **Size** to 3. Se
 - **Element 0: 200**
 - **Element 1: 110**
 - **Element 2: 120**
+
+Expand **Prefabs\Monster** in the prefabs folder and drag and drop the children to the corresponding **visualization** fields: **Monster0** to **Element 0**, **Monster1** to **Element 1**, and **Monster2** to **Element 2**.
+
+Switch back to the **MonsterData** script and add this variable to `MonsterData`:
+
+```csharp
+private MonsterLevel currentLevel;
+```
+
+Now add the following to `MonsterData`:
+
+```csharp
+public MonsterLevel CurrentLevel
+{
+
+  get { return currentLevel; }
+
+  set
+  {
+    currentLevel = value;
+    int currentLevelIndex = levels.IndexOf(currentLevel);
+
+    GameObject levelVisualization = levels[currentLevelIndex].visualization;
+    
+    for (int i = 0; i < levels.Count; i++)
+    {
+      if (levelVisualization != null) 
+        if (i == currentLevelIndex)         
+          levels[i].visualization.SetActive(true);        
+        else        
+          levels[i].visualization.SetActive(false);           
+    }
+  }
+  
+}
+```
