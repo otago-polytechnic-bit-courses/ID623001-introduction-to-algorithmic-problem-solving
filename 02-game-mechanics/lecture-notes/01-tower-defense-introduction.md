@@ -125,4 +125,8 @@ public List<MonsterLevel> levels;
 
 Save the script and return to the editor.
 
-Select the **Monster** prefab and in the **inspector** set its **Size** to 3.
+Select the **Monster** prefab and in the **inspector** set its **Size** to 3. Set the **Cost** for each level to the following values:
+
+- **Element 0: 200**
+- **Element 1: 110**
+- **Element 2: 120**
