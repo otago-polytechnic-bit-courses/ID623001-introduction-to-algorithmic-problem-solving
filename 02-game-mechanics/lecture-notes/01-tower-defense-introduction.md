@@ -182,3 +182,25 @@ void OnEnable()
   CurrentLevel = levels[0];
 }
 ```
+
+This starts the monsters at level 1 when they are first placed.
+
+Add the following method to `MonsterData`:
+
+```csharp
+public MonsterLevel GetNextLevel()
+{
+  int currentLevelIndex = levels.IndexOf(currentLevel);
+  int maxLevelIndex = levels.Count - 1;
+  if (currentLevelIndex < maxLevelIndex)
+  {
+    return levels[currentLevelIndex+1];
+  } 
+  else
+  {
+    return null;
+  }
+}
+```
+
+This gets the current level and compares it to the last index possible in the list (notice the `levels.Count - 1` - this is because Lists are zero-based, so the last index is one less than the length of the List). If it is possible to upgrade the monster (i.e. it is not at its highest level yet) then return the level data, otherwise return `null`.
