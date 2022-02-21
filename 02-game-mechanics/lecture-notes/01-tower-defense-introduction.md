@@ -171,3 +171,14 @@ So, what's going on here? Well, we had a `private` variable called `currentLevel
 
 - first, we could control the read/write access of a variable - add only a **getter** and the variable is *read-only*; add only a **setter** and the variable is *write-only*.
 - we can also add custom behaviour into the **getter** and **setter** methods - instead of just returning the variable, or setting it, we can say "everytime we get the variable do this stuff first", or "everytime we set the variable, run this code".
+
+Here, the **getter** just returns the variable - when we access `CurrentLevel` we will get whatever is in `currentLevel`. But in the **setter** method we say, whenever someone *sets* `currentLevel`, we will automatically get the correct visualization and activate it as well.
+
+Next, add the following code to the class:
+
+```csharp
+void OnEnable()
+{
+  CurrentLevel = levels[0];
+}
+```
