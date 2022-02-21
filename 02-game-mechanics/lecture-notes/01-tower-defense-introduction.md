@@ -174,7 +174,7 @@ So, what's going on here? Well, we had a `private` variable called `currentLevel
 
 Here, the **getter** just returns the variable - when we access `CurrentLevel` we will get whatever is in `currentLevel`. But in the **setter** method we say, whenever someone *sets* `currentLevel`, we will automatically get the correct visualization and activate it as well.
 
-Next, add the following code to the class:
+Next, add the following code to the `MonsterData` class:
 
 ```csharp
 void OnEnable()
@@ -204,3 +204,36 @@ public MonsterLevel GetNextLevel()
 ```
 
 This gets the current level and compares it to the last index possible in the list (notice the `levels.Count - 1` - this is because Lists are zero-based, so the last index is one less than the length of the List). If it is possible to upgrade the monster (i.e. it is not at its highest level yet) then return the level data, otherwise return `null`.
+
+Add the following method to increase a monster's level:
+
+```csharp
+public void IncreaseLevel()
+{
+  int currentLevelIndex = levels.IndexOf(currentLevel);
+  if (currentLevelIndex < levels.Count - 1)
+  {
+    CurrentLevel = levels[currentLevelIndex + 1];
+  }
+}
+```
+
+This *sets* the `currentLevel` to whatever it currently is **plus 1** (i.e. the next level).
+
+Save the script and open the **PlaceMonster** script. Add this method:
+
+```csharp
+private bool CanUpgradeMonster()
+{
+  if (monster != null)
+  {
+    MonsterData monsterData = monster.GetComponent<MonsterData>();
+    MonsterLevel nextLevel = monsterData.GetNextLevel();
+    if (nextLevel != null)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+```
