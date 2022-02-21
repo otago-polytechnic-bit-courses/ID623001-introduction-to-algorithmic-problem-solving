@@ -166,3 +166,8 @@ public MonsterLevel CurrentLevel
   
 }
 ```
+
+So, what's going on here? Well, we had a `private` variable called `currentLevel`, and have now made a `public` variable called `CurrentLevel` (notice the capitalisation of the first letter?) By doing this, we can create a **getter** and **setter** method for reading and writing the private `currentLevel` - why? A couple reasons:
+
+- first, we could control the read/write access of a variable - add only a **getter** and the variable is *read-only*; add only a **setter** and the variable is *write-only*.
+- we can also add custom behaviour into the **getter** and **setter** methods - instead of just returning the variable, or setting it, we can say "everytime we get the variable do this stuff first", or "everytime we set the variable, run this code".
