@@ -131,7 +131,7 @@ Select the **Monster** prefab and in the **inspector** set its **Size** to 3. Se
 - **Element 1: 110**
 - **Element 2: 120**
 
-Expand **Prefabs\Monster** in the prefabs folder and drag and drop the children to the corresponding **visualization** fields: **Monster0** to **Element 0**, **Monster1** to **Element 1**, and **Monster2** to **Element 2**.
+Double-click on **Prefabs\Monster** in the prefabs folder and drag and drop the children to the corresponding **visualization** fields of **Monster Data**: **Monster0** to **Element 0**, **Monster1** to **Element 1**, and **Monster2** to **Element 2**.
 
 Switch back to the **MonsterData** script and add this variable to `MonsterData`:
 
