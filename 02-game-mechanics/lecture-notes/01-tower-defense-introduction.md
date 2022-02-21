@@ -220,7 +220,7 @@ public void IncreaseLevel()
 
 This *sets* the `currentLevel` to whatever it currently is **plus 1** (i.e. the next level).
 
-Save the script and open the **PlaceMonster** script. Add this method:
+Save the script and open the **PlaceMonster** script. Add this method below `CanPlaceMonster`:
 
 ```csharp
 private bool CanUpgradeMonster()
@@ -237,3 +237,10 @@ private bool CanUpgradeMonster()
   return false;
 }
 ```
+
+This checks that:
+
+- first there is a monster to upgrade (there should be, but it's good to check),
+- then we get the **next level** from the `MonsterData`,
+- and finally, if we *have* a next level (i.e. can upgrade) return `true`.
+
