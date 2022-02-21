@@ -111,7 +111,7 @@ This creates the `MonsterLevel` class, that will be used to group the cost (in g
 
 You add `[System.Serializable]` at the top to make instances of the class editable from the inspector. This allows you to quickly change all values in the Level class — even while the game is running. It’s incredibly useful for balancing your game.
 
-At the very top of the script add this `using` statement:
+At the very top of the script make sure this `using` statement is present:
 
 ```csharp
 using System.Collections.Generic;
