@@ -35,7 +35,7 @@ You should now see 12 **Xs** spaced around the path on the map, 3 rows of 4.
 
 ### Placing monsters
 
-Select **Openspot** in the prefabs folder, and in the inspector click **Add Component**. Choose **New script** and name it **PlaceMonster**. Open the script in Visual Studio. Add these two variables above `Start`:
+Create a new C# script in the scripts folder and name it **PlaceMonster**. Open the script in Visual Studio. Add these two variables above `Start`:
 
 ```csharp
 public GameObject monsterPrefab;
@@ -86,7 +86,7 @@ Finally, we are assigning the instantiated object into the `monster` variable...
 
 The last two lines of the method are just getting the **AudioSource** of the **Openspot** and playing the placement sound effect. At this point you can remove the `Start` and `Update` methods - we won't be using them.
 
-Save the script and switch back to the editor. Select **Openspot** in the prefabs folder, and in the Inspector click the circle to the right of the **PlaceMonster** script's **Monster Prefab** field - select **Monster** from the dialog box that appears.
+Save the script and switch back to the editor. Select **Openspot** in the prefabs folder, add the **PlaceMonster** script as a component, and then click the circle to the right of the **PlaceMonster** script's **Monster Prefab** field - select **Monster** from the dialog box that appears.
 
 Run the scene and you should be able to place monsters on the **X** spots.
 
