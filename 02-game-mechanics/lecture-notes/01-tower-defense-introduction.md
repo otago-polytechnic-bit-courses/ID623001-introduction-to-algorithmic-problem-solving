@@ -259,3 +259,5 @@ else if (CanUpgradeMonster())
   // TODO: Deduct gold
 }
 ```
+
+So now your code checks if you can place a monster (the spot is empty), or (if the spot is not empty) are you able to upgrade a monster (it is not at its highest level). The next step will be to add a condition to check if the player has enough gold to place or upgrade a monster.
