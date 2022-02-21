@@ -244,3 +244,18 @@ This checks that:
 - then we get the **next level** from the `MonsterData`,
 - and finally, if we *have* a next level (i.e. can upgrade) return `true`.
 
+To actually upgrade the monsters, add this `else if` condition to the statement in `OnMouseUp`:
+
+```csharp
+if (CanPlaceMonster())
+{
+  // Your code here stays the same as before
+}
+else if (CanUpgradeMonster())
+{
+  monster.GetComponent<MonsterData>().IncreaseLevel();
+  AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+  audioSource.PlayOneShot(audioSource.clip);
+  // TODO: Deduct gold
+}
+```
