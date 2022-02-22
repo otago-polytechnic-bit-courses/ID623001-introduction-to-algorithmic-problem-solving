@@ -51,3 +51,21 @@ Save the script and return to the editor.
 In the **hierarchy tab** select **GameManager**. In the **Inspector** click the circle to the right of **Gold Label** and in the **Select Text** dialog select the **Scene** tab and choose **GoldLabel**.
 
 Run the scene, and the label should display **Gold: 1000**.
+
+### Using gold
+
+We need to access the **GameManagerBehaviour** from the **PlaceMonsters** script - we've already seen how to access things by dragging them into the **Inspector**, but here we will use a different approach.
+
+Add the following variable to the **PlaceMonster** script:
+
+```csharp
+private GameManagerBehavior gameManager;
+```
+
+You'll notice that the gameManager is `private`, which means we can't just drag it in from the editor. Instead, we will 'find' it in the code. Add the following line to the `Start` method:
+
+```csharp
+gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
+```
+
+You get the GameObject named **GameManager** using `GameObject.Find()`, which returns the first game object it finds with the given name. Then, retrieve its `GameManagerBehavior` component and store it for later. 
