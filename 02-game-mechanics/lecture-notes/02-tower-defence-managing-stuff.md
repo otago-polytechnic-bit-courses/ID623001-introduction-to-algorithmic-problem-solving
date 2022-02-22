@@ -135,3 +135,6 @@ Create five more waypoints as children of **Road** with the following names and 
 - **Waypoint3: (X:-7.3, Y:-1, Z:0)**
 - **Waypoint4: (X:-7.3, Y:-4.5, Z:0)**
 - **Waypoint5: (X:7, Y:-4.5, Z:0)**
+
+### Spawning enemies
+
