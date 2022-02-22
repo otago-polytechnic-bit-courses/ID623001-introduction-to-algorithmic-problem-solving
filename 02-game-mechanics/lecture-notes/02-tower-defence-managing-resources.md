@@ -47,3 +47,7 @@ Gold = 1000;
 ```
 
 Save the script and return to the editor.
+
+In the **hierarchy tab** select **GameManager**. In the **Inspector** click the circle to the right of **Gold Label** and in the **Select Text** dialog select the **Scene** tab and choose **GoldLabel**.
+
+Run the scene, and the label should display **Gold: 1000**.
