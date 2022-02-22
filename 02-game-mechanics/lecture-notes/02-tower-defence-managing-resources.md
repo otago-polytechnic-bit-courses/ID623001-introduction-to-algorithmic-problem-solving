@@ -103,3 +103,17 @@ This code first gets the cost of a **first level** monster from the `MonsterData
 - the amount of gold in the game manager is more than or equal to the current placement cost
 
 If those conditions are true (i.e. the player has enough gold to place a new monster) then the method returns true; otherwise it will return false.
+
+Tweak the `CanUpgradeMonster()` method by replacing this line:
+
+```csharp
+return true; 
+```
+
+With this:
+
+```csharp
+return gameManager.Gold >= nextLevel.cost;
+```
+
+Save the script and return to the editor. Run the scene and try placing and upgrading monsters. You should only be able to do so as long as you have enough gold!
