@@ -138,3 +138,14 @@ Create five more waypoints as children of **Road** with the following names and 
 
 ### Spawning enemies
 
+The Prefabs folder contains an Enemy prefab - it's set up much like the Monster prefab, with an `AudioSource` and a child `Sprite`. Set the position of the **Enemy prefab** to **(X:-20, Y:0, Z:0)**, so new instances will spawn off screen.
+
+Create a new C# script named **MoveEnemy** and add it to the **Enemy** prefab as a component. Add the following variables to the script:
+
+```csharp
+[HideInInspector]
+public GameObject[] waypoints;
+private int currentWaypoint = 0;
+private float lastWaypointSwitchTime;
+public float speed = 1.0f;
+```
