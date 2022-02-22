@@ -1,4 +1,4 @@
-# 02: Game Mechanics - Managing resources
+# 02: Game Mechanics - Managing stuff (resources, enemies)
 
 ## Game manager
 
@@ -52,7 +52,7 @@ In the **hierarchy tab** select **GameManager**. In the **Inspector** click the 
 
 Run the scene, and the label should display **Gold: 1000**.
 
-### Using gold
+### Managing gold
 
 We need to access the **GameManagerBehaviour** from the **PlaceMonsters** script - we've already seen how to access things by dragging them into the **Inspector**, but here we will use a different approach.
 
@@ -117,3 +117,5 @@ return gameManager.Gold >= nextLevel.cost;
 ```
 
 Save the script and return to the editor. Run the scene and try placing and upgrading monsters. You should only be able to do so as long as you have enough gold!
+
+### Managing enemies
