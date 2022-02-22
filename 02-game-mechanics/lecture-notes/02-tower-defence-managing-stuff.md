@@ -126,4 +126,4 @@ In a tower defence game, enemies continually march towards the objective while y
 
 We are going to implement the most rudimentary system for an enemy 'AI' to follow - **waypoints** that map out a course for them to follow.
 
-Right-click in the **hierarchy** and create a new empty Game Object. Name it **Road** and reset its transform so its position is at **(0, 0, 0)**.
+Right-click in the **hierarchy** and create a new empty Game Object. Name it **Road** and reset its transform so its position is at **(0, 0, 0)**. Then create a new empty Game Object as a child of **Road** and name it **Waypoint0** - set its position to **(-12, 2, 0)** - this is where the enemies will start coming from.
