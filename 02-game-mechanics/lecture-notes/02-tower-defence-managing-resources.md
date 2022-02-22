@@ -77,3 +77,22 @@ gameManager.Gold -= monster.GetComponent<MonsterData>().CurrentLevel.cost;
 ```
 
 Save the file and switch back to the editor. Now when you upgrade monsters, the **Gold** readout should update.
+
+Now we need to fix our `CanPlaceMonster()` code to actually check if the player has enough money or not. Replace this code:
+
+```csharp
+private bool CanPlaceMonster()
+{
+  return monster == null;
+}
+```
+
+With this:
+
+```csharp
+private bool CanPlaceMonster()
+{
+  int cost = monsterPrefab.GetComponent<MonsterData>().levels[0].cost;
+  return monster == null && gameManager.Gold >= cost;
+}
+```
