@@ -69,3 +69,11 @@ gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehavior>()
 ```
 
 You get the GameObject named **GameManager** using `GameObject.Find()`, which returns the first game object it finds with the given name. Then, retrieve its `GameManagerBehavior` component and store it for later. 
+
+Now add this line inside `OnMouseUp()`, replacing each of the comments that read `// TODO: Deduct gold` (note: there are **two** places to add this line):
+
+```csharp
+gameManager.Gold -= monster.GetComponent<MonsterData>().CurrentLevel.cost;
+```
+
+Save the file and switch back to the editor. Now when you upgrade monsters, the **Gold** readout should update.
