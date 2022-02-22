@@ -118,4 +118,12 @@ return gameManager.Gold >= nextLevel.cost;
 
 Save the script and return to the editor. Run the scene and try placing and upgrading monsters. You should only be able to do so as long as you have enough gold!
 
-### Managing enemies
+## Managing enemies
+
+In a tower defence game, enemies continually march towards the objective while you set up defences to try and stop them. The time has come to set up those enemies.
+
+### Waypoints
+
+We are going to implement the most rudimentary system for an enemy 'AI' to follow - **waypoints** that map out a course for them to follow.
+
+Right-click in the **hierarchy** and create a new empty Game Object. Name it **Road** and reset its transform so its position is at **(0, 0, 0)**.
