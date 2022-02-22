@@ -27,15 +27,23 @@ Add the following code to the `GameManagerBehaviour` class:
 ```csharp
 private int gold;
 public int Gold {
-  get
-  { 
-    return gold;
-  }
+
+  get { return gold; }
   set
   {
     gold = value;
     goldLabel.GetComponent<Text>().text = "GOLD: " + gold;
   }
+  
 }
 ```
 
+This code is similar to the **getter** and **setter** methods we defined in `CurrentLevel`. This **getter** simply returns the private `gold` variable. In the **setter**, though, not only do we set the gold value, but we also automatically update the `goldLabel` to display the new amount of gold.
+
+Add the following line to `Start`:
+
+```csharp
+Gold = 1000;
+```
+
+Save the script and return to the editor.
