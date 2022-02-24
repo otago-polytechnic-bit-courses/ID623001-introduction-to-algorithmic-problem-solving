@@ -193,3 +193,8 @@ if (gameObject.transform.position.Equals(endPosition))
 ```
 
 This code does the following:
+
+1. First, we get the **start position** and the **end position** for the current segment of the path - e.g. the first and second waypoints; then next time the second and third waypoints.
+2. Then we figure out the length of that segment, how long it will take the enemy to walk it (at its speed), and how long it has been currently walking it (`Time.time - lastWaypointSwitchTime`).
+3. With `Vector2.Lerp` we are saying: move the enemy along the vector (the line) created between `startPosition` and `endPosition` according to its time on the path - e.g. if it should take 2 seconds to walk it, and it's been 1 second, then the enemy should be halfway along.
+4. Check whether the enemy has reached the endPosition. If yes, handle these two possible scenarios:
