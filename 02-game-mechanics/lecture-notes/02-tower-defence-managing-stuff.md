@@ -149,3 +149,7 @@ private int currentWaypoint = 0;
 private float lastWaypointSwitchTime;
 public float speed = 1.0f;
 ```
+
+`waypoints` stores a copy of the waypoints in an array, while `[HideIninspector]` above waypoints ensures you cannot accidentally change the field in the inspector, but you can still access it from other scripts.
+
+`currentWaypoint` tracks which waypoint the enemy is currently walking away from, and `lastWaypointSwitchTime` stores the time when the enemy passed over it. Finally, you store the enemy's `speed`.
