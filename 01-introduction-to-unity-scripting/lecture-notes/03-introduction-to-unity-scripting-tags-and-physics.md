@@ -95,7 +95,7 @@ Similar to the last time we used this method, the sheep will compare the tag of 
 
 If both conditions are met, we first destroy the hay bale ('other' in this case) and then call `HitByHay();` to start the sheep self-destruct sequence.
 
-Save the script and return to the editor. Select **Sheep* in the **hierarchy** and add a **Sheep** component. Set its **Run Speed** to 10 and **Got Hay Destroy Delay** to 1. Play the scene and try it out - shooting sheep should now destroy them.
+Save the script and return to the editor. Select **Sheep** in the **hierarchy** and add a **Sheep** component. Set its **Run Speed** to 10 and **Got Hay Destroy Delay** to 1. Play the scene and try it out - shooting sheep should now destroy them.
 
 But we still need to set up a zone at the back of the machine for any sheep that manage to get through without being shot with hay. Create a new empty GameObject as a child of **Triggers**, anme it **Sheep Dropper** and reset its Transform. Set its position to **(X:0, Y:4, Z:-54)** and add a **Box collider** with **Is Trigger** checked and a **Size** of **(X:60, Y:8, Z:12)**. Change its **Tag** to **DropSheep** and we have a trigger area set up behind the hay machine.
 
