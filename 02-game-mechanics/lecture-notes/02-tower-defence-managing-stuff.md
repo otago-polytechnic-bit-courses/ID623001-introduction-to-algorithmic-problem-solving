@@ -199,4 +199,7 @@ This code does the following:
 3. With `Vector2.Lerp` we are saying: move the enemy along the vector (the line) created between `startPosition` and `endPosition` according to its time on the path - e.g. if it should take 2 seconds to walk it, and it's been 1 second, then the enemy should be halfway along.
 4. Check whether the enemy has reached the endPosition. If yes, handle these two possible scenarios:
 
-  - The enemy is not yet at the last waypoint, so increase currentWaypoint and update lastWaypointSwitchTime. Later, you'll add code to rotate the enemy so it points in the direction it's moving, too.
+  - The enemy is not yet at the last waypoint, so increase `currentWaypoint` and update `lastWaypointSwitchTime`. Later, you'll add code to rotate the enemy so it points in the direction it's moving, too.
+  - The enemy reached the last waypoint, so this destroys it and triggers a sound effect. Later you'll add code to decrease the player's `health`, too.
+
+Save the script and return to the editor.
