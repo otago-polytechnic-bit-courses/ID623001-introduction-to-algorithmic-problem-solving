@@ -153,3 +153,41 @@ public float speed = 1.0f;
 `waypoints` stores a copy of the waypoints in an array, while `[HideIninspector]` above waypoints ensures you cannot accidentally change the field in the inspector, but you can still access it from other scripts.
 
 `currentWaypoint` tracks which waypoint the enemy is currently walking away from, and `lastWaypointSwitchTime` stores the time when the enemy passed over it. Finally, you store the enemy's `speed`.
+
+Add this line to `Start`:
+
+```csharp
+lastWaypointSwitchTime = Time.time;
+```
+
+This initializes `lastWaypointSwitchTime` to the current time.
+
+To make the enemy move along the path, add the following code to `Update`:
+
+```csharp
+Vector3 startPosition = waypoints [currentWaypoint].transform.position;
+Vector3 endPosition = waypoints [currentWaypoint + 1].transform.position;
+
+float pathLength = Vector3.Distance (startPosition, endPosition);
+float totalTimeForPath = pathLength / speed;
+float currentTimeOnPath = Time.time - lastWaypointSwitchTime;
+gameObject.transform.position = Vector2.Lerp (startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
+
+if (gameObject.transform.position.Equals(endPosition)) 
+{
+  if (currentWaypoint < waypoints.Length - 2)
+  {
+    currentWaypoint++;
+    lastWaypointSwitchTime = Time.time;
+    // TODO: Rotate into move direction
+  }
+  else
+  {
+    Destroy(gameObject);
+
+    AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+    AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
+    // TODO: deduct health
+  }
+}
+```
