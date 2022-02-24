@@ -59,16 +59,16 @@ We need to access the **GameManagerBehaviour** from the **PlaceMonsters** script
 Add the following variable to the **PlaceMonster** script:
 
 ```csharp
-private GameManagerBehavior gameManager;
+private GameManagerBehaviour gameManager;
 ```
 
 You'll notice that the gameManager is `private`, which means we can't just drag it in from the editor. Instead, we will 'find' it in the code. Add the following line to the `Start` method:
 
 ```csharp
-gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
+gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehaviour>();
 ```
 
-You get the GameObject named **GameManager** using `GameObject.Find()`, which returns the first game object it finds with the given name. Then, retrieve its `GameManagerBehavior` component and store it for later. 
+You get the GameObject named **GameManager** using `GameObject.Find()`, which returns the first game object it finds with the given name. Then, retrieve its `GameManagerBehaviour` component and store it for later. 
 
 Now add this line inside `OnMouseUp()`, replacing each of the comments that read `// TODO: Deduct gold` (note: there are **two** places to add this line):
 
