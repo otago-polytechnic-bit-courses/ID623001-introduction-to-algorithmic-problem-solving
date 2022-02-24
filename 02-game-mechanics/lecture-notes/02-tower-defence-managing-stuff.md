@@ -203,3 +203,29 @@ This code does the following:
   - The enemy reached the last waypoint, so this destroys it and triggers a sound effect. Later you'll add code to decrease the player's `health`, too.
 
 Save the script and return to the editor.
+
+Create a new C# script called **SpawnEnemy** and add it as a component to **Road**. Add the following variable:
+
+```csharp
+public GameObject[] waypoints;
+```
+
+Save the script and return to the editor. Set the **Size** of the **waypoints** array to 6, and then drag each waypoint into the slots in turn - **Waypoint0** to **Element 0**, and so on...
+
+Add this variable to **SpawnEnemy**:
+
+```csahrp
+public GameObject testEnemyPrefab;
+```
+
+And add the following code to `Start`:
+
+```csharp
+Instantiate(testEnemyPrefab).GetComponent<MoveEnemy>().waypoints = waypoints;
+```
+
+This instantiates a new copy of the prefab stored in `testEnemy` and assigns it waypoints to follow.
+
+Save the script and return to the editor. Select **Road** in the **hierarchy** and set the **Test Enemy** to the **Enemy** prefab.
+
+Run the project and the enemy should follow the road!
