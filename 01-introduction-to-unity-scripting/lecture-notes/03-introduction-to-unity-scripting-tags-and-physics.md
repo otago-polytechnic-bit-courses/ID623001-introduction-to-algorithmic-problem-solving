@@ -52,6 +52,7 @@ Create a new C# script named **Sheep**, and add the following variable declarati
 public float runSpeed; 
 public float gotHayDestroyDelay; 
 private bool hitByHay; 
+private bool dropped; 
 ```
 
 **runSpeed** is the speed in meters per second that the sheep will run. The second variable is the delay in seconds before the sheep gets destroyed after it is hit by hay. The last is a boolean that is set to true once the sheep is hit by hay.
@@ -130,8 +131,9 @@ By turning **Is Kinematic** off, the sheep will start to fall, affected by Unity
 Now, we need to tweak the `OnTriggerEnter` method by adding this as an **else condition** below the existing **if condition**:
 
 ```csharp
-else if (other.CompareTag("DropSheep"))
+else if (other.CompareTag("DropSheep") && !dropped)
 {
+    dropped = true;
     Drop();
 }
 ```
