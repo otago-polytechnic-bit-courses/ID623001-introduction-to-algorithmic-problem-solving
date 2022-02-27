@@ -120,6 +120,7 @@ This finds and caches the sheep's collider and rigidbody for later use. Next, we
 ```csharp
 private void Drop()
 {
+    dropped = true;
     myRigidbody.isKinematic = false; 
     myCollider.isTrigger = false; 
     Destroy(gameObject, dropDestroyDelay); 
@@ -133,7 +134,6 @@ Now, we need to tweak the `OnTriggerEnter` method by adding this as an **else co
 ```csharp
 else if (other.CompareTag("DropSheep") && !dropped)
 {
-    dropped = true;
     Drop();
 }
 ```
