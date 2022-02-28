@@ -164,7 +164,7 @@ if (currentWave < waves.Length)
 else
 {
     gameManager.gameOver = true;
-    GameObject gameOverText = GameObject.FindGameObjectWithTag ("GameWon");
+    GameObject gameOverText = GameObject.FindGameObjectWithTag("GameWon");
     gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
 }
 ```
