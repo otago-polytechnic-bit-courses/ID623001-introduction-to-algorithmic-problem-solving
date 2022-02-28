@@ -106,3 +106,19 @@ public class Wave
   public int maxEnemies = 20;
 }
 ```
+
+`Wave` holds a reference to `enemyPrefab`, the basis for instantiating all enemies in that wave, a `spawnInterval` which is the time between enemies in the wave in seconds, and the `maxEnemies`, which is the quantity of enemies spawning in that wave.
+
+This class is also marked `[System.Serializable]`, which means you can change the values in the Inspector.
+
+Add the following variables to the `SpawnEnemy` class:
+
+```csharp
+public Wave[] waves;
+public int timeBetweenWaves = 5;
+
+private GameManagerBehaviour gameManager;
+
+private float lastSpawnTime;
+private int enemiesSpawned = 0;
+```
