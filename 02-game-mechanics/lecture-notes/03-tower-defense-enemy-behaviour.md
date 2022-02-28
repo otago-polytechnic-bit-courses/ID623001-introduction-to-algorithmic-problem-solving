@@ -230,3 +230,5 @@ public int Health
   }
 }
 ```
+
+Here the **setter** contains the interesting code. First we are checking that the new value is less than the current health (i.e. this code is for **damanging the player**) - in this case, implement a little 'camera shake' (an included effect script, not covered in this tutorial). Then update the player's health UI readout. If the current health is reduced to 0 and the game is not yet over, end the game.
