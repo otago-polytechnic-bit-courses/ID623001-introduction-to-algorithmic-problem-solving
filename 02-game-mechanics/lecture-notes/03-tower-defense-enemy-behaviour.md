@@ -122,3 +122,15 @@ private GameManagerBehaviour gameManager;
 private float lastSpawnTime;
 private int enemiesSpawned = 0;
 ```
+
+- `waves` is an array of multiple `Wave` instances.
+- `timeBetweenWaves` is the time in seconds before the next wave spawns.
+- `lastSpawnTime` will be used to track when the last wave spawned, so we can count down to the next wave.
+- `enemiesSpawned` will be used to track how many enemies spawned in this wave.
+
+Replace the contents of `Start` with:
+
+```csharp
+lastSpawnTime = Time.time;
+gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehaviour>();
+```
