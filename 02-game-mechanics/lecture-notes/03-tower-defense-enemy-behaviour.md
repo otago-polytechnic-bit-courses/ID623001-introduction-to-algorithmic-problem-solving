@@ -251,3 +251,9 @@ With this:
 GameManagerBehaviour gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehaviour>();
 gameManager.Health -= 1;
 ```
+
+Save the script and return to the editor. Select **GameManager** in the **hierarchy** and set its **Health Label** to **HealthLabel**. Set the **Size** of **Health Indicator** to 5.
+
+Expand **Cookie** in the **hierarchy** and drag in each of the **HealthIndicator** children to the **Health Indicator** array slots in the **GameManager**. Play the scene and watch as the enemies reach the cookie!
+
+In the next part, we start to fight back!
