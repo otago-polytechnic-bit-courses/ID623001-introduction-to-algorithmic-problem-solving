@@ -238,3 +238,16 @@ Add this to `Start`:
 ```csharp
 Health = 5;
 ```
+
+Switch to the **MoveEnemy** script. Replace this line in `Update`:
+
+```csharp
+// TODO: deduct health
+```
+
+With this:
+
+```csharp
+GameManagerBehaviour gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehaviour>();
+gameManager.Health -= 1;
+```
