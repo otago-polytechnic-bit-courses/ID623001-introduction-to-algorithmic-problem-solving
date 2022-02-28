@@ -88,3 +88,9 @@ In `Start` set the value:
 ```csharp
 Wave = 0;
 ```
+
+Save the file and return to the editor. If you play the scene now, you should see the player UI update with wave information.
+
+### Spawning multiple enemies in a wave
+
+Select the **Enemy** prefab and at the top of the Inspector click on the **Tag** dropdown and select **Add Tag**. Create a new tag called **Enemy**. Select the **Enemy** prefab again and set its **Tag** to **Enemy**.
