@@ -178,3 +178,11 @@ else
 - If this is the case, increment the `Wave` count, increase the player's `Gold` (here, by multiplying their current total by 1.1), reset the `enemiesSpawned` count, and set the `lastSpawnTime` for the next 'countdown'.
 - The final `else` here is from the first condition: that the current wave **is not less than** (i.e. equals) the final wave count... in this case, the game is over. Set the `gameOver` flag to `true`, show the Game Over text to the player, and set a flag on the animator.
 
+Save the script and return to the editor. Select **Road** in the **hierarchy** and set the **Size** of **Waves** to 4. Set **Enemy Prefab** to **Enemy** for all four element. Set the **Spawn Interval** and **Max Enemies** as follows:
+
+- **Element 0**: Spawn Interval: 2.5, Max Enemies: 5
+- **Element 1**: Spawn Interval: 2, Max Enemies: 10
+- **Element 2**: Spawn Interval: 2, Max Enemies: 15
+- **Element 3**: Spawn Interval: 1, Max Enemies: 5
+
+Run the game and you should see a wave of enemies rushing to the cookie... after they all disappear, the next wave should start.
