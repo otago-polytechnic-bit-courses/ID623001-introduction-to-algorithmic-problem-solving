@@ -168,3 +168,13 @@ else
     gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
 }
 ```
+
+- The first two lines get the current wave and check if it is the last wave or not - if not, the next code block will fire.
+- Next, we calculate the time passed from the `lastSpawnTime` and now - we then use that to determine if it is time to spawn a new enemy or not.
+- The first half of the `if` statement is: If `enemiesSpawned == 0` **AND** the time passed is greater than the `timeBetweenWaves`, that means it's time for a new wave! **OR** if the time passed is greater than the `spawnInterval` (here, because the first condition failed, it is implied the `enemiesSpawned != 0`) that means it is time to spawn a new enemy in this wave.
+- The second half says you **must also** have fewer than the `maxEnemies` spawned for this wave. So, basically, if we haven't spawned all the enemies, and the right time has passed between spawns (or waves, for a new wave), spawn an enemy!
+- We first update `lastSpawnTime` to the current time (so the countdown can start for the next spawn)... Then `Instantiate` a new enemy from this wave's info, set its waypoints dynamically, and increment the `enemiesSpawned` count.
+- The next `if` statement will check if the wave is 'over' - for this to happen, two conditions need to be met: first, that the number of `enemiesSpawned` matches the `maxEnemies` for this wave (i.e. we've spawned all our enemies) **AND** all the enemies in the game have been destroyed (that all **Enemy** GameObjects `== null`).
+- If this is the case, increment the `Wave` count, increase the player's `Gold` (here, by multiplying their current total by 1.1), reset the `enemiesSpawned` count, and set the `lastSpawnTime` for the next 'countdown'.
+- The final `else` here is from the first condition: that the current wave **is not less than** (i.e. equals) the final wave count... in this case, the game is over. Set the `gameOver` flag to `true`, show the Game Over text to the player, and set a flag on the animator.
+
