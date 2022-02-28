@@ -37,3 +37,6 @@ RotateIntoMoveDirection();
 ```
 
 Save the file and return to the editor. Play the scene and the bug should face the correct direction as it makes its way around the map.
+
+## Enemy waves
+
