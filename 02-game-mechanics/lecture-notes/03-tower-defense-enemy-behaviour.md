@@ -40,3 +40,51 @@ Save the file and return to the editor. Play the scene and the bug should face t
 
 ## Enemy waves
 
+Before launching a wave of enemies at the player, we are going to provide a heads up that a wave is coming. Open the **GameManagerBehaviour** script and add these two variables:
+
+```csharp
+public Text waveLabel;
+public GameObject[] nextWaveLabels;
+```
+
+The `waveLabel` stores a reference to the wave readout at the top right corner of the screen. 
+
+`nextWaveLabels` stores two halves of an animated message to the player - they will slide in from opposite sides of the screen and form a message in the middle.
+
+Save the file and return to the editor. Select **GameManager** in the **hierarchy**. Click on the small circle to the right of **Wave Label** and in the **Select Text** dialog select **WaveLabel**. Now set the **Size** of **Next Wave Labels** to 2 and assign **Element 0** to **NextWaveBottomLabel** and **Element 1** to **NextWaveTopLabel** in the same way as you just did for **Wave Label**.
+
+Switch back to the **GameManagerBehaviour** script and add another variable:
+
+```csharp
+public bool gameOver = false;
+```
+
+This variable stores whether the player has lost the game. Add the following code to keep track of the waves:
+
+```csharp
+private int wave;
+public int Wave
+{
+  get { return wave; }
+  set
+  {
+    wave = value;
+    if (!gameOver)
+    {
+      for (int i = 0; i < nextWaveLabels.Length; i++)
+      {
+          nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
+      }
+    }
+    waveLabel.text = "WAVE: " + (wave + 1);
+  }
+}
+```
+
+This is similar to the **getters** and **setters** we've written before. Here, when we set the wave to a new value, we also check if the game is over: if not, we trigger the "Next Wave" animation, and update the player's UI. The `(wave + 1)` is because we start at 0 in our code, but the player should think of the first wave as wave 1, not 0.
+
+In `Start` set the value:
+
+```csharp
+Wave = 0;
+```
