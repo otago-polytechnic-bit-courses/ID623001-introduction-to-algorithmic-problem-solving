@@ -94,3 +94,15 @@ Save the file and return to the editor. If you play the scene now, you should se
 ### Spawning multiple enemies in a wave
 
 Select the **Enemy** prefab and at the top of the Inspector click on the **Tag** dropdown and select **Add Tag**. Create a new tag called **Enemy**. Select the **Enemy** prefab again and set its **Tag** to **Enemy**.
+
+To define a wave of enemies, open the **SpawnEnemy** script and add the following class before `SpawnEnemy`:
+
+```csharp
+[System.Serializable]
+public class Wave
+{
+  public GameObject enemyPrefab;
+  public float spawnInterval = 2;
+  public int maxEnemies = 20;
+}
+```
