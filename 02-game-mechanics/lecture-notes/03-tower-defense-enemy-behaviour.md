@@ -186,3 +186,47 @@ Save the script and return to the editor. Select **Road** in the **hierarchy** a
 - **Element 3**: Spawn Interval: 1, Max Enemies: 5
 
 Run the game and you should see a wave of enemies rushing to the cookie... after they all disappear, the next wave should start.
+
+### Decreasing player health
+
+Open the **GameManagerBehaviour** script and add the following variables:
+
+```csharp
+public Text healthLabel;
+public GameObject[] healthIndicator;
+```
+
+`healthLabel` is a reference to the player’s health readout on the UI, and `healthIndicator` is a reference to the five little green cookie-crunching monsters (they simply represent player health in a more fun way than a standard health label).
+
+Add a property to maintain the player's health:
+
+```csharp
+private int health;
+public int Health
+{
+  get { return health; }
+  set
+  {
+    if (value < health)    
+      Camera.main.GetComponent<CameraShake>().Shake();
+    
+    health = value;
+    healthLabel.text = "HEALTH: " + health;
+
+    if (health <= 0 && !gameOver)
+    {
+      gameOver = true;
+      GameObject gameOverText = GameObject.FindGameObjectWithTag("GameOver");
+      gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
+    }
+
+    for (int i = 0; i < healthIndicator.Length; i++)
+    {
+      if (i < Health)
+        healthIndicator[i].SetActive(true);
+      else
+        healthIndicator[i].SetActive(false);
+    }
+  }
+}
+```
