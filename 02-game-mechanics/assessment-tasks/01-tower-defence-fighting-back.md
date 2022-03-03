@@ -93,3 +93,28 @@ public float DistanceToGoal()
 ```
 
 This code calculates the length of road not yet traveled by the enemy. It does so using `Vector2.Distance`, which calculates the difference between two vectors.
+
+## Bullets
+
+Drag and drop **Images\Objects\Bullet1** onto the scene. Set the **Z** position to -2; the **X** and **Y** don't matter, so leave them at whatever.
+
+Create a new C# script named **BulletBehaviour** and add it to the **Bullet1** Game Object. Add these variables to the script:
+
+```csharp
+public float speed = 10;
+public int damage;
+public GameObject target;
+public Vector3 startPosition;
+public Vector3 targetPosition;
+
+private float distance;
+private float startTime;
+
+private GameManagerBehavior gameManager;
+```
+
+- `speed` determines how quickly the bullets fly.
+- `damage` is how much health the bullet will take off an enemy.
+- `target`, `startPosition`, and `targetPosition` determine the bullet's direction - we'll refer to an enemy as `target` and then use its position to determine the direction vector from the monster.
+- `distance` and `startTime` track the bullet's current position. 
+- `gameManager` will be used to increase the player's **Gold** when an enemy is destroyed.
