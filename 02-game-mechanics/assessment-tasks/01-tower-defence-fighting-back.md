@@ -98,6 +98,8 @@ This code calculates the length of road not yet traveled by the enemy. It does s
 
 Drag and drop **Images\Objects\Bullet1** onto the scene. Set the **Z** position to -2; the **X** and **Y** don't matter, so leave them at whatever.
 
+Add a **Circle collider 2D** and check **Is Trigger**.
+
 Create a new C# script named **BulletBehaviour** and add it to the **Bullet1** Game Object. Add these variables to the script:
 
 ```csharp
@@ -106,54 +108,62 @@ public int damage;
 public GameObject target;
 public Vector3 startPosition;
 public Vector3 targetPosition;
-
-private float distance;
-private float startTime;
-
+private Vector3 normalizeDirection;
 private GameManagerBehavior gameManager;
 ```
 
 - `speed` determines how quickly the bullets fly.
 - `damage` is how much health the bullet will take off an enemy.
 - `target`, `startPosition`, and `targetPosition` determine the bullet's direction - we'll refer to an enemy as `target` and then use its position to determine the direction vector from the monster.
-- `distance` and `startTime` track the bullet's current position. 
+- `normalizeDirection` is used to standardise the vectors - if we didn't do this, than a bullet shot at a closer enemy would move faster than one further away. 
 - `gameManager` will be used to increase the player's **Gold** when an enemy is destroyed.
 
 Assign start values to these variables in `Start`:
 
 ```csharp
-startTime = Time.time;
-distance = Vector2.Distance(startPosition, targetPosition);
+normalizeDirection = (targetPosition - startPosition).normalized;
 GameObject gm = GameObject.Find("GameManager");
 gameManager = gm.GetComponent<GameManagerBehaviour>();
 ```
 
-When a new **bullet** is instantiated, we grab the `startTime`, calculate the `distance` to the target, and grab a reference to the `GameManagerBehaviour`.
+When a new **bullet** is instantiated, normalize the difference between `targetPosition` and `startPosition` to get a standard 'direction' vector. Also, grab a reference to the `GameManagerBehaviour`.
 
 Add this code to `Update`:
 
 ```csharp
-float timeInterval = Time.time - startTime;
-gameObject.transform.position = Vector3.Lerp(startPosition, targetPosition, timeInterval * speed / distance);
+transform.position += normalizeDirection * speed * Time.deltaTime; 
+```
 
-if (gameObject.transform.position.Equals(targetPosition))
+This updates the bullet's position along the normalized vector, according to the `speed` variable.
+
+Now add this method to the script:
+
+```csharp
+void OnTriggerEnter2D(Collider2D other)
 {
-    if (target != null)
+    target = other.gameObject;
+    if(target.tag.Equals("Enemy"))
     {
         Transform healthBarTransform = target.transform.Find("HealthBar");
         HealthBar healthBar = healthBarTransform.gameObject.GetComponent<HealthBar>();
-        healthBar.currentHealth -= Mathf.Max(damage, 0);
-    
+        healthBar.currentHealth -= damage;
+
         if (healthBar.currentHealth <= 0)
         {
             Destroy(target);
             AudioSource audioSource = target.GetComponent<AudioSource>();
             AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
             gameManager.Gold += 50;
-        }
+        }  
+        Destroy(gameObject);
     }
-    Destroy(gameObject);
 }
 ```
 
-The first two lines are moving the bullet toward the target's position. 
+This checks for a collision with an enemy (note, with the way this code is currently set up, the enemy hit by the bullet does not have to be the same as was fired at initially - this code will hit any enemy - you may or may not want this behaviour in an actual game, and you would adapt the code accordingly).
+
+Find the health bar in the hit enemy, and reduce the health by the damage amount. 
+
+If the health is less than or equal to 0, destroy the enemy. Also play a sound effect and increase the player's gold by 50.
+
+Finally, destroy the bullet.
