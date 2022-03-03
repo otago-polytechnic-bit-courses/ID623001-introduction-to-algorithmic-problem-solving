@@ -38,4 +38,4 @@ This calculates the scale that the health bar should be based on the `currentHea
 
 ## Targeting enemies
 
-Select **Monster** in the prefabs folder and add a **Circle collider 2D** component to it. Set the collider's **Radius** to 2.5 - this is the monsters' firing range.
+Select **Monster** in the prefabs folder and add a **Circle collider 2D** component to it. Check **Is Trigger** and set the collider's **Radius** to 2.5 - this is the monsters' firing range.
