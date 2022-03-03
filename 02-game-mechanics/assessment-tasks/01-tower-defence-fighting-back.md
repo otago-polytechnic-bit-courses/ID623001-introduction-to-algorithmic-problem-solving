@@ -12,3 +12,16 @@ Create a new C# script called **HealthBar** and add it as a component to the **H
 
 Run the scene - you should see all the enemy bugs now with health bars above them.
 
+Open the **HealthBar** script and add the following variables:
+
+```csharp
+public float maxHealth = 100;
+public float currentHealth = 100;
+private float originalScale;
+```
+
+`maxHealth` stores the enemy's maximal health points, and `currentHealth` tracks how much health remains. Lastly, `originalScale` remembers the health bar's original size. In `Start` add this line to remember the health bar's initial size:
+
+```csharp
+originalScale = gameObject.transform.localScale.x;
+```
