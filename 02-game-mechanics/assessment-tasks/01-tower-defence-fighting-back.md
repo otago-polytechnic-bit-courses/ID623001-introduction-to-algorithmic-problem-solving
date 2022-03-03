@@ -118,3 +118,14 @@ private GameManagerBehavior gameManager;
 - `target`, `startPosition`, and `targetPosition` determine the bullet's direction - we'll refer to an enemy as `target` and then use its position to determine the direction vector from the monster.
 - `distance` and `startTime` track the bullet's current position. 
 - `gameManager` will be used to increase the player's **Gold** when an enemy is destroyed.
+
+Assign start values to these variables in `Start`:
+
+```csharp
+startTime = Time.time;
+distance = Vector2.Distance(startPosition, targetPosition);
+GameObject gm = GameObject.Find("GameManager");
+gameManager = gm.GetComponent<GameManagerBehaviour>();
+```
+
+When a new **bullet** is instantiated, we grab the `startTime`, calculate the `distance` to the target, and grab a reference to the `GameManagerBehaviour`.
