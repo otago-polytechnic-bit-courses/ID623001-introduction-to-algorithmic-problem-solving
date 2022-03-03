@@ -81,14 +81,15 @@ If there are multiple enemies within range, your monster should focus on the one
 ```csharp
 public float DistanceToGoal()
 {
-  float distance = 0;
-  distance += Vector2.Distance(gameObject.transform.position, waypoints [currentWaypoint + 1].transform.position);
+  float distance = Vector2.Distance(gameObject.transform.position, waypoints[currentWaypoint + 1].transform.position);
   for (int i = currentWaypoint + 1; i < waypoints.Length - 1; i++)
   {
-      Vector3 startPosition = waypoints [i].transform.position;
-      Vector3 endPosition = waypoints [i + 1].transform.position;
+      Vector3 startPosition = waypoints[i].transform.position;
+      Vector3 endPosition = waypoints[i + 1].transform.position;
       distance += Vector2.Distance(startPosition, endPosition);
   }
   return distance;
 }
 ```
+
+This code calculates the length of road not yet traveled by the enemy. It does so using `Vector2.Distance`, which calculates the difference between two vectors.
