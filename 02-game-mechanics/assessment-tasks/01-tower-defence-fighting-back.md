@@ -25,3 +25,17 @@ private float originalScale;
 ```csharp
 originalScale = gameObject.transform.localScale.x;
 ```
+
+In `Update` add the following lines of code:
+
+```csharp
+Vector3 tmpScale = gameObject.transform.localScale;
+tmpScale.x = currentHealth / maxHealth * originalScale;
+gameObject.transform.localScale = tmpScale;
+```
+
+This calculates the scale that the health bar should be based on the `currentHealth` / `maxHealth`.
+
+## Targeting enemies
+
+Select **Monster** in the prefabs folder and add a **Circle collider 2D** component to it. Set the collider's **Radius** to 2.5 - this is the monsters' firing range.
