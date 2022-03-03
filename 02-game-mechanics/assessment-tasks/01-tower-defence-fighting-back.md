@@ -129,3 +129,31 @@ gameManager = gm.GetComponent<GameManagerBehaviour>();
 ```
 
 When a new **bullet** is instantiated, we grab the `startTime`, calculate the `distance` to the target, and grab a reference to the `GameManagerBehaviour`.
+
+Add this code to `Update`:
+
+```csharp
+float timeInterval = Time.time - startTime;
+gameObject.transform.position = Vector3.Lerp(startPosition, targetPosition, timeInterval * speed / distance);
+
+if (gameObject.transform.position.Equals(targetPosition))
+{
+    if (target != null)
+    {
+        Transform healthBarTransform = target.transform.Find("HealthBar");
+        HealthBar healthBar = healthBarTransform.gameObject.GetComponent<HealthBar>();
+        healthBar.currentHealth -= Mathf.Max(damage, 0);
+    
+        if (healthBar.currentHealth <= 0)
+        {
+            Destroy(target);
+            AudioSource audioSource = target.GetComponent<AudioSource>();
+            AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
+            gameManager.Gold += 50;
+        }
+    }
+    Destroy(gameObject);
+}
+```
+
+The first two lines are moving the bullet toward the target's position. 
