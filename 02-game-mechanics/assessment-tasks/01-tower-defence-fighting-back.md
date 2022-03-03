@@ -45,3 +45,7 @@ Finally, at the top of the Inspector, set Monster's **Layer** to **Ignore Raycas
 Select **Enemy** in the prefabs folder and add a **Rigidbody 2D** component to it. Set **Body Type** to **Kinematic**.
 
 Add a **Circle collider 2D** with a **Radius** of 1.
+
+We are now going to set up something a bit tricky - a **delegate**, which is a function that can be passed around like a variable. We will use this to notify all the monsters when an enemy has been destroyed - this is so they don't try to keep attacking it and cause errors.
+
+Create a new C# script called **EnemyDestructionDelegate** and add it as a component to the **Enemy** prefab.
