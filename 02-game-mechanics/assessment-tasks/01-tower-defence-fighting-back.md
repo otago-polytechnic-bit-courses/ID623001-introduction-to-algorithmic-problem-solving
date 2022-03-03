@@ -167,3 +167,26 @@ Find the health bar in the hit enemy, and reduce the health by the damage amount
 If the health is less than or equal to 0, destroy the enemy. Also play a sound effect and increase the player's gold by 50.
 
 Finally, destroy the bullet.
+
+Save the script and return to the editor.
+
+### Bigger bullets
+
+Drag and drop **Bullet1** from the **hierarchy** to the prefabs folder to create a new prefab. Delete the **Bullet1** from the scene.
+
+Create two copies of the **Bullet1** prefab and rename them **Bullet2** and **Bullet3**. Select **Bullet2** and in the inspector, set the **Sprite Renderer** component's **Sprite** field to **Images\Objects\Bullet2**. Repeat the process for **Bullet3**.
+
+Now change the damage done by each bullet by selecting each one, and changing the **Damage** property in the **BulletBehaviour** component:
+
+- **Bullet1** : 10
+- **Bullet2** : 15
+- **Bullet3** : 20
+
+Open the **MonsterData** script and add these variables to `MonsterLevel`:
+
+```csharp
+public GameObject bullet;
+public float fireRate;
+```
+
+Select the **Monster** prefab and in the inspector, expand **Levels** in the **Monster Data** component. Set **Fire rate** to 1 for each element, and set the **Bullet** property to **Bullet1**, **Bullet2** and **Bullet3** for each element respectively.
