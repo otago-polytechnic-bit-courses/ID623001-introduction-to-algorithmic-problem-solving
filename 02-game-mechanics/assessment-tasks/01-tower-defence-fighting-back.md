@@ -73,3 +73,22 @@ void OnTriggerExit2D (Collider2D other)
         enemiesInRange.Remove(other.gameObject);
 }
 ```
+
+### Target switching
+
+If there are multiple enemies within range, your monster should focus on the one closest to the cookie... open the **MoveEnemy** script and add this new method to calculate the enemy's distance from the goal:
+
+```csharp
+public float DistanceToGoal()
+{
+  float distance = 0;
+  distance += Vector2.Distance(gameObject.transform.position, waypoints [currentWaypoint + 1].transform.position);
+  for (int i = currentWaypoint + 1; i < waypoints.Length - 1; i++)
+  {
+      Vector3 startPosition = waypoints [i].transform.position;
+      Vector3 endPosition = waypoints [i + 1].transform.position;
+      distance += Vector2.Distance(startPosition, endPosition);
+  }
+  return distance;
+}
+```
