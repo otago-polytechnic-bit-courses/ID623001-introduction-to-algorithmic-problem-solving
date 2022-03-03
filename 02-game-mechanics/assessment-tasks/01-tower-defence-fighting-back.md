@@ -41,3 +41,7 @@ This calculates the scale that the health bar should be based on the `currentHea
 Select **Monster** in the prefabs folder and add a **Circle collider 2D** component to it. Check **Is Trigger** and set the collider's **Radius** to 2.5 - this is the monsters' firing range.
 
 Finally, at the top of the Inspector, set Monster's **Layer** to **Ignore Raycast**. Click **Yes, change children** in the dialog. If you don't ignore raycasts, the collider reacts to click events, which is a problem because the **Monster** will block events meant for the **Openspot** below.
+
+Select **Enemy** in the prefabs folder and add a **Rigidbody 2D** component to it. Set **Body Type** to **Kinematic**.
+
+Add a **Circle collider 2D** with a **Radius** of 1.
