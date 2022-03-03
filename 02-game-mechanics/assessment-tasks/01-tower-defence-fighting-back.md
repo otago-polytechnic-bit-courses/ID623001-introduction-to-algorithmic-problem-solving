@@ -8,4 +8,7 @@ First, we need to add some sort of health indicator to the enemy bugs. Drag **En
 
 Next, select **Images\Objects\HealthBar** and ensure its **Pivot** is set to **Left**. Then add it as a child to **Enemy** in the **hierarchy** and set its position to **(X:-0.63, Y:1, Z:-5)**. Set its **X Scale** to 125.
 
-Create a new C# script called **HealthBar** and add it as a component to the **HealthBar** Game Object.
+Create a new C# script called **HealthBar** and add it as a component to the **HealthBar** Game Object. Select **Enemy** in the **hierarchy** and change its position to **(X:20, Y:0, Z:0)**. Click on the **Overrides** near the top of the Inspector and click **Apply All** to update all the prefabs.
+
+Run the scene - you should see all the enemy bugs now with health bars above them.
+
