@@ -46,6 +46,30 @@ Select **Enemy** in the prefabs folder and add a **Rigidbody 2D** component to i
 
 Add a **Circle collider 2D** with a **Radius** of 1.
 
-We are now going to set up something a bit tricky - a **delegate**, which is a function that can be passed around like a variable. We will use this to notify all the monsters when an enemy has been destroyed - this is so they don't try to keep attacking it and cause errors.
+Create a new C# script named **ShootEnemies** and add it to the **Monster** prefab. Add this variable:
 
-Create a new C# script called **EnemyDestructionDelegate** and add it as a component to the **Enemy** prefab.
+```csharp
+public List<GameObject> enemiesInRange;
+```
+
+This list will contain all the enemies currently in range to the monster. Initialise the list in `Start`:
+
+```csharp
+enemiesInRange = new List<GameObject>();
+```
+
+Add this code to the script to add and remove enemies to the list:
+
+```csharp
+void OnTriggerEnter2D (Collider2D other)
+{
+    if (other.gameObject.tag.Equals("Enemy"))
+        enemiesInRange.Add(other.gameObject);
+}
+
+void OnTriggerExit2D (Collider2D other)
+{
+    if (other.gameObject.tag.Equals("Enemy"))
+        enemiesInRange.Remove(other.gameObject);
+}
+```
