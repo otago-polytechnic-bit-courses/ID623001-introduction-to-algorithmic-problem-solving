@@ -190,3 +190,44 @@ public float fireRate;
 ```
 
 Select the **Monster** prefab and in the inspector, expand **Levels** in the **Monster Data** component. Set **Fire rate** to 1 for each element, and set the **Bullet** property to **Bullet1**, **Bullet2** and **Bullet3** for each element respectively.
+
+Open the **ShootEnemies** script and add these variables:
+
+```csharp
+private float lastShotTime;
+private MonsterData monsterData;
+```
+
+`lastShotTime` keeps track of when the last bullet fired (for ensuring Monsters don't fire too quickly/slowly), and `MonsterData` is a reference to th bullet type, fire rate, etc...
+
+Add this to `Start` to assign the starting values:
+
+```csharp
+lastShotTime = Time.time;
+monsterData = gameObject.GetComponentInChildren<MonsterData>();
+```
+
+Add the following method:
+
+```csharp
+void Shoot(Collider2D target)
+{
+    GameObject bulletPrefab = monsterData.CurrentLevel.bullet;
+    Vector3 startPosition = gameObject.transform.position;
+    Vector3 targetPosition = target.transform.position;
+    startPosition.z = bulletPrefab.transform.position.z;
+    targetPosition.z = bulletPrefab.transform.position.z;
+
+    GameObject newBullet = (GameObject)Instantiate(bulletPrefab);
+    newBullet.transform.position = startPosition;
+    BulletBehaviour bulletComp = newBullet.GetComponent<BulletBehaviour>();
+    bulletComp.target = target.gameObject;
+    bulletComp.startPosition = startPosition;
+    bulletComp.targetPosition = targetPosition;
+
+    Animator animator = monsterData.CurrentLevel.visualization.GetComponent<Animator>();
+    animator.SetTrigger("fireShot");
+    AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+    audioSource.PlayOneShot(audioSource.clip);
+}
+```
