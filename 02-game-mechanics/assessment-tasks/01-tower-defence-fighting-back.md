@@ -233,3 +233,30 @@ void Shoot(Collider2D target)
 ```
 
 Get the start and target positions of the bullet. Set the **z-Position** to that of the `bulletPrefab`. Instantiate a new bullet using the `bulletPrefab` for `MonsterLevel`. Assign the `startPosition` and `targetPosition` of the bullet. Run a shoot animation and play a laser sound whenever the monster shoots.
+
+Finally, add this code to `Update`:
+
+```csharp
+GameObject target = null;
+float minimalEnemyDistance = float.MaxValue;
+foreach (GameObject enemy in enemiesInRange)
+{
+    float distanceToGoal = enemy.GetComponent<MoveEnemy>().DistanceToGoal();
+    if (distanceToGoal < minimalEnemyDistance)
+    {
+        target = enemy;
+        minimalEnemyDistance = distanceToGoal;
+    }
+}
+
+if (target != null)
+{
+    if (Time.time - lastShotTime > monsterData.CurrentLevel.fireRate)
+    {
+        Shoot(target.GetComponent<Collider2D>());
+        lastShotTime = Time.time;
+    }
+    Vector3 direction = gameObject.transform.position - target.transform.position;
+    gameObject.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2 (direction.y, direction.x) * 180 / Mathf.PI, new Vector3 (0, 0, 1));
+}
+```
