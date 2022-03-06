@@ -96,7 +96,7 @@ This code calculates the length of road not yet traveled by the enemy. It does s
 
 ## Bullets
 
-Drag and drop **Images\Objects\Bullet1** onto the scene. Set the **Z** position to -2; the **X** and **Y** don't matter, so leave them at whatever.
+Drag and drop **Images\Objects\Bullet1** onto the scene. Set the **Z** position to -2; the **X** and **Y** don't matter, so leave them at whatever. We are setting the **Z** position so the bullet will appear behind the Monster firing it, but in front of enemies.
 
 Add a **Circle collider 2D** and check **Is Trigger**.
 
@@ -231,3 +231,5 @@ void Shoot(Collider2D target)
     audioSource.PlayOneShot(audioSource.clip);
 }
 ```
+
+Get the start and target positions of the bullet. Set the **z-Position** to that of the `bulletPrefab`. Instantiate a new bullet using the `bulletPrefab` for `MonsterLevel`. Assign the `startPosition` and `targetPosition` of the bullet. Run a shoot animation and play a laser sound whenever the monster shoots.
