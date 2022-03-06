@@ -260,3 +260,9 @@ if (target != null)
     gameObject.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2 (direction.y, direction.x) * 180 / Mathf.PI, new Vector3 (0, 0, 1));
 }
 ```
+
+- Determine the target of the monster. Start with the maximum possible distance in the `minimalEnemyDistance`. Iterate over all enemies in range and make an enemy the new target if its distance to the cookie is smaller than the current minimum.
+- Call `Shoot` if the time passed is greater than the fire rate of your monster and set `lastShotTime` to the current time.
+- Calculate the rotation angle between the monster and its target. You set the rotation of the monster to this angle. Now it always faces the target.
+
+Save the script and return to the editor. Play the scene and place some Monsters - they should attack the enemies as they make their way to the cookie!
