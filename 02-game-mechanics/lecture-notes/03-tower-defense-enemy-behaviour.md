@@ -145,7 +145,7 @@ if (currentWave < waves.Length)
 {
     float timeInterval = Time.time - lastSpawnTime;
     float spawnInterval = waves[currentWave].spawnInterval;
-    if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || (timeInterval > spawnInterval)) && 
+    if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) || (enemies != 0 && timeInterval > spawnInterval)) && 
     (enemiesSpawned < waves[currentWave].maxEnemies))
     {
         lastSpawnTime = Time.time;
