@@ -40,3 +40,39 @@ The `RequireComponent` attribute ensures that a **MazeConstructor** component wi
 The `generator` variable gets a reference to that component (which will be added automatically in a moment).
 
 Save the script and return to the editor. Drag the **GameController** script from the folder onto the **Controller** Game Object in the **hierarchy** - it adds **GameController** *and* **MazeConstructor** as components of the object.
+
+In the **MazeContstructor** script, replace everything with the following code:
+
+```csharp
+using UnityEngine;
+
+public class MazeConstructor : MonoBehaviour
+{
+    public bool showDebug;
+    
+    [SerializeField] private Material mazeMat1;
+    [SerializeField] private Material mazeMat2;
+    [SerializeField] private Material startMat;
+    [SerializeField] private Material treasureMat;
+
+    public int[,] data
+    {
+        get; private set;
+    }
+
+    void Awake()
+    {
+        // default to walls surrounding a single empty cell
+        data = new int[,]
+        {
+            {1, 1, 1},
+            {1, 0, 1},
+            {1, 1, 1}
+        };
+    }
+}
+```
+
+The `showDebug` boolean will be used to toggle the maze data on or off in the UI (that is, if we want to see the maze that was created on the screen).
+
+The four **Material** variables will be used to texture the parts of the maze (walls, floor, etc) - they are `private` so they can't be accessed through code outside this script, but marked `[SerializeField]` so we can still access them from the Inspector.
