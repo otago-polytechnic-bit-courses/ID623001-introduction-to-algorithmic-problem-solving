@@ -34,3 +34,9 @@ public class GameController : MonoBehaviour
     }
 }
 ```
+
+The `RequireComponent` attribute ensures that a **MazeConstructor** component will also be added when you add this script to a GameObject - we need a **MazeConstructor** always in this game.
+
+The `generator` variable gets a reference to that component (which will be added automatically in a moment).
+
+Save the script and return to the editor. Drag the **GameController** script from the folder onto the **Controller** Game Object in the **hierarchy** - it adds **GameController** *and* **MazeConstructor** as components of the object.
