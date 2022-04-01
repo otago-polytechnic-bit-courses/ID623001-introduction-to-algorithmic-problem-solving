@@ -78,3 +78,35 @@ The `showDebug` boolean will be used to toggle the maze data on or off in the UI
 The four **Material** variables will be used to texture the parts of the maze (walls, floor, etc) - they are `private` so they can't be accessed through code outside this script, but marked `[SerializeField]` so we can still access them from the Inspector.
 
 The next property - `data` - is a **2D array** (or **matrix**) of numbers (**int**) - `int[,]`. Our maze data is just a grid of rows and columns, and the data is just a **0** or a **1** to indicate if the spot is **open** or **blocked** (wall). Also, we have made the variable `public`, but then also specified a `private set`, which indicates this property is **read-only** outside of this class.
+
+In the `Awake` method, we are simply defaulting `data` to a 'single room' with walls all around.
+
+Add the following method:
+
+```csharp
+void OnGUI()
+{
+    if (!showDebug)
+        return;
+
+    int[,] maze = data;
+    int rMax = maze.GetUpperBound(0);
+    int cMax = maze.GetUpperBound(1);
+
+    string msg = "";
+
+    for (int i = rMax; i >= 0; i--)
+    {
+        for (int j = 0; j <= cMax; j++)
+        {
+            if (maze[i, j] == 0)
+                msg += "....";
+            else
+                msg += "==";
+        }
+        msg += "\n";
+    }
+
+    GUI.Label(new Rect(20, 20, 500, 500), msg);
+}
+```
