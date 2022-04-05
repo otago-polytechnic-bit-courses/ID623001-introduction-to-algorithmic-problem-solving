@@ -109,7 +109,7 @@ public GameObject target;
 public Vector3 startPosition;
 public Vector3 targetPosition;
 private Vector3 normalizeDirection;
-private GameManagerBehavior gameManager;
+private GameManagerBehaviour gameManager;
 ```
 
 - `speed` determines how quickly the bullets fly.
