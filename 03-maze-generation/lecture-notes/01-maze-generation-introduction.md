@@ -98,12 +98,7 @@ void OnGUI()
     for (int i = rMax; i >= 0; i--)
     {
         for (int j = 0; j <= cMax; j++)
-        {
-            if (maze[i, j] == 0)
-                msg += "....";
-            else
-                msg += "==";
-        }
+            msg += maze[i, j] == 0 ? "...." : "==";
         msg += "\n";
     }
 
