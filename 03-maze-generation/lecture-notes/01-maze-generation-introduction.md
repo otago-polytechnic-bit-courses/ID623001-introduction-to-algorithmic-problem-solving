@@ -182,3 +182,5 @@ for (int i = 0; i <= rMax; i++)
             maze[i+a, j+b] = 1;
         }  
 ```
+
+That's all there is to the maze generation! Extremely **small** code... but a **little complex** - let's break it down:
