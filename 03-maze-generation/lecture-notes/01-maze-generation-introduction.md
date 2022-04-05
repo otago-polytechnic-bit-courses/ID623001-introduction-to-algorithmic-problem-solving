@@ -146,4 +146,17 @@ public void GenerateNewMaze(int sizeRows, int sizeCols)
 }
 ```
 
-This is the method we called before in **GameController** that takes 
+This is the method we called before in **GameController** that takes the **rows** and **cols** - we are going to add a lot more to this method, but for now it doesn't do much. First, it checks to see if the **sizeRows** and **sizeCols** arguments are both even (`% 2 == 0`) - because of the way walls are placed in this dungeon, having both even numbers for the rows and cols doesn't work as well for generating the maze, so this simply prints out a warning. The next part gets the maze data from another method called `FromDimensions`, which we will add now...
+
+```csharp
+public int[,] FromDimensions(int sizeRows, int sizeCols)
+{
+    int[,] maze = new int[sizeRows, sizeCols];
+    // stub to fill in
+    return maze;
+}
+```
+
+Again, there is a lot more to add to this method, but for now it simply creates a new **2D array** of **int** to the row and col size we have specified, and returns it.
+
+Save the script and return to the editor. Specify some numbers in the **rows** and **cols** on **GameController** and hit **Play** - you should see a 'maze' generated to those sizes printed on the screen (note that the 'maze' is currently all 'empty space' - that's because the default value for our array slots is `0`, and we haven't put the logic in yet to place walls).
