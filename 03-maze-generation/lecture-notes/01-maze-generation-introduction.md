@@ -26,18 +26,18 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private MazeConstructor generator;
+    private MazeConstructor constructor;
 
     void Start()
     {
-        generator = GetComponent<MazeConstructor>();
+        constructor = GetComponent<MazeConstructor>();
     }
 }
 ```
 
 The `RequireComponent` attribute ensures that a **MazeConstructor** component will also be added when you add this script to a GameObject - we need a **MazeConstructor** always in this game.
 
-The `generator` variable gets a reference to that component (which will be added automatically in a moment).
+The `constructor` variable gets a reference to that component (which will be added automatically in a moment).
 
 Save the script and return to the editor. Drag the **GameController** script from the folder onto the **Controller** Game Object in the **hierarchy** - it adds **GameController** *and* **MazeConstructor** as components of the object.
 
@@ -110,3 +110,40 @@ void OnGUI()
     GUI.Label(new Rect(20, 20, 500, 500), msg);
 }
 ```
+
+This code simply prints a 'maze' onto the screen so we can see that the generation works - it is only for **debug purposes** and not used in the actual generation code.
+
+Save the script and return to the editor. Make sure **Show Debug** is ticked on the **MazeConstructor**, and hit **Play**: the default maze should be shown on the screen.
+
+### Generating the maze data
+
+In the **GameController** script add the following variables above `Start`:
+
+```csharp
+[SerializeField] private int rows;
+[SerializeField] private int cols;
+```
+
+This is how big our maze grid will be, in terms of rows and columns; we've made the variables `private` so we don't accidentally overwrite them somewhere in the code, but then marked them `[SerializeField]` so we can easily set them in the editor.
+
+Add the following code to `Start`:
+
+```csharp
+constructor.GenerateNewMaze(rows, cols);
+```
+
+We are calling a method on the **MazeConstructor** script (`constructor`) called `GenerateNewMaze` and passing in the **rows** and **cols** values (note: this method doesn't exist yet, but we'll make it soon).
+
+Open the **MazeConstructor** script and add the following method below `Awake`:
+
+```csharp
+public void GenerateNewMaze(int sizeRows, int sizeCols)
+{
+    if (sizeRows % 2 == 0 && sizeCols % 2 == 0)
+        Debug.LogError("Odd numbers work better for dungeon size.");
+
+    data = FromDimensions(sizeRows, sizeCols);
+}
+```
+
+This is the method we called before in **GameController** that takes 
