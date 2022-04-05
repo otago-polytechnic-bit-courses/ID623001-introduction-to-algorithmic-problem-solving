@@ -155,3 +155,30 @@ public int[,] FromDimensions(int sizeRows, int sizeCols)
 Again, there is a lot more to add to this method, but for now it simply creates a new **2D array** of **int** to the row and col size we have specified, and returns it.
 
 Save the script and return to the editor. Specify some numbers in the **rows** and **cols** on **GameController** and hit **Play** - you should see a 'maze' generated to those sizes printed on the screen (note that the 'maze' is currently all 'empty space' - that's because the default value for our array slots is `0`, and we haven't put the logic in yet to place walls).
+
+Before we code the **maze generation algorithm**, we'll talk generally about how it works:
+
+- the algorithm iterates over every other space in the grid (not every single space) to both **place a wall** and **choose an adjacent space to block** as well. 
+- the algorithm also randomly decides if **the space should be skipped instead**, resulting in open spaces to vary the maze. 
+ 
+This is an **extremely simple algorithm** that doesn't need to know anything about the rest of the maze, such as a list of branch points to iterate over (other implementations of maze generation algorithms will utilise **tree and graph structures** to trace back paths etc - generally needed for 'perfect mazes').
+
+Add the following code to `FromDimensions`, replacing the line that says ``// stub to fill in``:
+
+```csharp
+int rMax = maze.GetUpperBound(0);
+int cMax = maze.GetUpperBound(1);
+
+for (int i = 0; i <= rMax; i++)        
+    for (int j = 0; j <= cMax; j++)            
+        if (i == 0 || j == 0 || i == rMax || j == cMax)                
+            maze[i, j] = 1;                                    
+        else if (i % 2 == 0 && j % 2 == 0 && Random.value > placementThreshold)                                    
+        {
+            maze[i, j] = 1;
+
+            int a = Random.value < .5 ? 0 : (Random.value < .5 ? -1 : 1);
+            int b = a != 0 ? 0 : (Random.value < .5 ? -1 : 1);
+            maze[i+a, j+b] = 1;
+        }  
+```
