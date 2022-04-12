@@ -184,4 +184,7 @@ for (int i = 0; i <= rMax; i++)
 ```
 
 That's all there is to the maze generation! Extremely **small** code... but a **little complex** - let's break it down:
-- `int rMax = maze.GetUpperBound(0);` and `int cMax = maze.GetUpperBound(1);` are simply getting the upper indices of the maze (each dimension in turn).
+- `int rMax = maze.GetUpperBound(0);` and `int cMax = maze.GetUpperBound(1);` are simply getting the upper indices of the maze (each dimension in turn). We'll use them to 'walk' through the grid.
+- Next is a common programming pattern, the **double for loop**. Since we have a 2D array, we need to loop twice: once over all the rows, and then over each column (or cell) in that row.
+- The `if` condition is checking for the boundaries of the maze - basically, if we are anywhere in the **first row**, **first column**, **last row** or **last column**, this *must* be a wall. Like our default 'room' above, we are setting the walls to be **1**.
+- The `else if` is determining for all other **non-boundary spaces** if they should be a wall or a blank space (corridor). First, you'll notice the `% 2 == 0`, which we've seen a few times now. A refresher: this is calculating a **remainder** for a division by 2, which will give either a **0** or a **1**. In a nutshell, this code says **every second one** - we aren't looking at every space, but every **2nd space** (after the outer walls). This is because we want to always leave at least 1 blank space between inner walls: e.g. 101... 
