@@ -184,3 +184,4 @@ for (int i = 0; i <= rMax; i++)
 ```
 
 That's all there is to the maze generation! Extremely **small** code... but a **little complex** - let's break it down:
+- `int rMax = maze.GetUpperBound(0);` and `int cMax = maze.GetUpperBound(1);` are simply getting the upper indices of the maze (each dimension in turn).
