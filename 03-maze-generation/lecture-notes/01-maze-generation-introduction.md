@@ -163,6 +163,14 @@ Before we code the **maze generation algorithm**, we'll talk generally about how
  
 This is an **extremely simple algorithm** that doesn't need to know anything about the rest of the maze, such as a list of branch points to iterate over (other implementations of maze generation algorithms will utilise **tree and graph structures** to trace back paths etc - generally needed for 'perfect mazes').
 
+First add this variable to **MazeConstructor**:
+
+```csharp
+public float placementThreshold = 0.1f;   // chance of empty space
+```
+
+We will use this later to determine if we should place a wall in a space or not.
+
 Add the following code to `FromDimensions`, replacing the line that says ``// stub to fill in``:
 
 ```csharp
@@ -188,3 +196,5 @@ That's all there is to the maze generation! Extremely **small** code... but a **
 - Next is a common programming pattern, the **double for loop**. Since we have a 2D array, we need to loop twice: once over all the rows, and then over each column (or cell) in that row.
 - The `if` condition is checking for the boundaries of the maze - basically, if we are anywhere in the **first row**, **first column**, **last row** or **last column**, this *must* be a wall. Like our default 'room' above, we are setting the walls to be **1**.
 - The `else if` is determining for all other **non-boundary spaces** if they should be a wall or a blank space (corridor). First, you'll notice the `% 2 == 0`, which we've seen a few times now. A refresher: this is calculating a **remainder** for a division by 2, which will give either a **0** or a **1**. In a nutshell, this code says **every second one** - we aren't looking at every space, but every **2nd space** (after the outer walls). This is because we want to always leave at least 1 blank space between inner walls: e.g. 101... 
+- So, these are the first **2 conditions** - is this a space that *could potentially* be a wall? The final condition is randomly determining if the space *should be* a wall. `Random.value` is a quick **static** way of generating a number between 0 and 1. If that random value is greater than our `placementThreshold` variable (set at 0.1) then we will place a wall: `maze[i, j] = 1;`
+- 
