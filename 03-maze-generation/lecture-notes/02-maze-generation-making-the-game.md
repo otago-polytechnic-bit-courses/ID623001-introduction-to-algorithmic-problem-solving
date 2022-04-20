@@ -11,14 +11,42 @@ A lot of things have been included in the **starter code**, including a First Pe
 
 ## Adding the player
 
-First, we are going to add a heap of variables to **MazeConstructor** to store references to things for later use:
+First, we are going to add a few variables to **MazeConstructor** to store references to things for later use:
 
 ```csharp
 public float hallWidth{ get; private set; }
-public int startRow{ get; private set; }
-public int startCol{ get; private set; }
 public int goalRow{ get; private set; }
 public int goalCol{ get; private set; }
 ```
 
-`hallWidth` will be used later for placing the player and the treasure in the middle of the hallway. `startRow` and `startCol` will be references to where the player starts, and `goalRow` and `goalCol` are references to where the treasure (and Scary Man) will be placed.
+`hallWidth` will be used later for placing the player and the treasure in the middle of the hallway. `goalRow` and `goalCol` are references to where the treasure (and Scary Man) will be placed. 
+
+We can set `hallWidth` by putting this code in `Awake`, below the creation of the `meshGenerator`:
+
+```csharp
+hallWidth = meshGenerator.width;
+```
+
+And we can set `goalRow` and `goalCol` by adding these 2 lines to `GenerateNewMaze`, just before `DisplayMaze()`:
+
+```csharp
+goalRow = data.GetUpperBound(0) - 1;
+goalCol = data.GetUpperBound(1) - 1;
+```
+
+This gets both the last row and column from the maze data, but subtracts 1 (since the actual last row and column will be a wall).
+
+Next, we are going to add a utility method to destroy all the generated GameObjects when we need to create a new maze:
+
+```csharp
+public void DisposeOldMaze()
+{
+    GameObject[] objects = GameObject.FindGameObjectsWithTag("Generated");
+    foreach (GameObject go in objects) {
+        Destroy(go);
+    }
+}
+```
+
+This method simply finds all the GameObjects with the **Generated** tag and destroys them one by one.
+
