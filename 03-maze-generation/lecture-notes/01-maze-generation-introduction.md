@@ -213,6 +213,15 @@ Save the script and return to the editor. Run the game and you should see a rand
 
 This next part isn't really related to the maze generation algorithm, so we won't spend too long on the details of it - it is simply a way to procedurally generate the 3D walls and floor from the maze data.
 
+Before we get into the code, we need to link some materials that will be used to texture our generated mesh. Select the **Graphics** folder in the Project window, and then Select **Controller** in the hierarchy to expose the **Maze Constructor**. Drag each of the materials from the **Graphics** folder over to the material slots in **Maze Constructor**: 
+
+- **floor-mat** for Maze Mat 1
+- **wall-mat** for Maze Mat 2
+- **start** for Start Mat
+- **treasure** for Treasure Mat
+
+We will also create a new tag called **Generated** - click on the Tag menu at the top of the Inspector and select **Add Tag**. When we generate the meshes, we will assign this tag to them to identify them later.
+
 Create a new C# script called **MazeMeshGenerator** and replace the entire contents with this code:
 
 ```csharp
@@ -334,3 +343,46 @@ public class MazeMeshGenerator
 ```
 
 The code looks long and complicated, but a lot of it is simply repeated. The `AddQuad` function creates a 2D plane - either the ceiling, floor or a wall face. A quad is made up of 2 trianges (imagine slicing a square diagonally). And the main body of the code simply walks through the maze data, and for each cell: places a floor and ceiling quad in the scene, and then places the appropriate walls based on whether this cell's neighbours are supposed to be blocked or open.
+
+Save the script and open **MazeConstructor**. Add the following variable:
+
+```csharp
+private MazeMeshGenerator meshGenerator;
+```
+
+And add the following code to the top of the `Awake` method:
+
+```csharp
+meshGenerator = new MazeMeshGenerator();
+```
+
+Next, add the following method called `DisplayMaze`:
+
+```csharp
+private void DisplayMaze()
+{
+    GameObject go = new GameObject();
+    go.transform.position = Vector3.zero;
+    go.name = "Procedural Maze";
+    go.tag = "Generated";
+
+    MeshFilter mf = go.AddComponent<MeshFilter>();
+    mf.mesh = meshGenerator.FromData(data);
+    
+    MeshCollider mc = go.AddComponent<MeshCollider>();
+    mc.sharedMesh = mf.mesh;
+
+    MeshRenderer mr = go.AddComponent<MeshRenderer>();
+    mr.materials = new Material[2] {mazeMat1, mazeMat2};
+}
+```
+
+And finally, add this line to the end of `GenerateNewMaze`:
+
+```csharp
+DisplayMaze();
+```
+
+By itself, a **Mesh** is simply data. It isn't visible until assigned to an object (more specifically, the object's **MeshFilter**) in the scene. Thus `DisplayMaze()` doesn't only call `MazeMeshGenerator.FromData()`, but rather inserts that call in the middle of instantiating a new GameObject, setting the **Generated** tag, adding **MeshFilter** and the generated mesh, adding **MeshCollider** for colliding with the maze, and finally adding **MeshRenderer** and materials.
+
+Save the script and return to the editor. Run the scene, and you should have a rendered 3D maze!
