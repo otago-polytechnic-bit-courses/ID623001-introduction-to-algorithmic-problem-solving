@@ -206,3 +206,5 @@ The last 3 lines of code say that **as well as placing a wall here** we should *
 - After all that, `a` will be one of **0, 1 or -1**.
 - Next, we are assigning a value into a variable called `b`. It's the exact same pattern as before... if `a != 0` (i.e. a is **-1 or 1**), then we assign `b = 0` - this is because we don't want to place a **diagonal** wall... if *both* `a` and `b` are **non-zero** we will move in a diagonal direction (we'll see this in a second).
 - So, if `a == 0` (the **false/else** part of this), then we do our `Random.value < .5` trick again, and get either a **-1 or 1** to assign to `b`. At the end of this, `b` will be either **0, 1 or -1**, but will also be **opposite to a**, as in zero if a is non-zero or vice versa.
+
+Save the script and return to the editor. Run the game and you should see a random maze displayed on the GUI, different each time you run the game!
