@@ -54,6 +54,7 @@ This method simply finds all the GameObjects with the **Generated** tag and dest
 public void GenerateNewMaze(int sizeRows, int sizeCols)
 {        
     DisposeOldMaze();  
+    
     if (sizeRows % 2 == 0 && sizeCols % 2 == 0)
         Debug.LogError("Odd numbers work better for dungeon size.");
         
