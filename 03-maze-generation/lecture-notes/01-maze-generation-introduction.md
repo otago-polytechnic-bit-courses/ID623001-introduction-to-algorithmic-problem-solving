@@ -332,3 +332,5 @@ public class MazeMeshGenerator
     }
 }
 ```
+
+The code looks long and complicated, but a lot of it is simply repeated. The `AddQuad` function creates a 2D plane - either the ceiling, floor or a wall face. A quad is made up of 2 trianges (imagine slicing a square diagonally). And the main body of the code simply walks through the maze data, and for each cell: places a floor and ceiling quad in the scene, and then places the appropriate walls based on whether this cell's neighbours are supposed to be blocked or open.
