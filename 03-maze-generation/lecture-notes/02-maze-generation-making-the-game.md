@@ -48,5 +48,20 @@ public void DisposeOldMaze()
 }
 ```
 
-This method simply finds all the GameObjects with the **Generated** tag and destroys them one by one.
+This method simply finds all the GameObjects with the **Generated** tag and destroys them one by one. We want to call it before we create a new maze, so we'll add it to the very start of `GenerateNewMaze`... your entire `GenerateNewMaze` method should now look like this:
 
+```csharp
+public void GenerateNewMaze(int sizeRows, int sizeCols)
+{        
+    DisposeOldMaze();  
+    if (sizeRows % 2 == 0 && sizeCols % 2 == 0)
+        Debug.LogError("Odd numbers work better for dungeon size.");
+        
+    data = FromDimensions(sizeRows, sizeCols);
+
+    goalRow = data.GetUpperBound(0) - 1;
+    goalCol = data.GetUpperBound(1) - 1;                                    
+
+    DisplayMaze();            
+}  
+```
