@@ -5,9 +5,9 @@ In the last section we created a random maze and procedurally generated the envi
 A lot of things have been included in the **starter code**, including a First Person Controller (FPS) script, materials, the 'Scary Man' model, and various scene lighting etc. What we are going to do next is:
 
 - place the player at the 'start' of the maze;
+- instantiate the 'Scary Man' at the end of the maze and start his seeking behaviour;
 - create the 'treasure' to be found programatically, and place it at the 'end' of the maze;
-- rig up some triggers to restart the maze if the player 'finds' the treasure;
-- and finally, instantiate the 'Scary Man' at the end of the maze and start his seeking behaviour.
+- and finally rig up some triggers to restart the maze if the player 'finds' the treasure.
 
 ## Adding the player
 
@@ -66,3 +66,20 @@ public void GenerateNewMaze(int sizeRows, int sizeCols)
     DisplayMaze();            
 }  
 ```
+
+Save the script and return to the editor. Open the **GameController** script. We are going to add the player to the scene. The starter code comes with a **player prefab** and we are going to instantiate the player at the start of the maze in a very familiar way. Add these variables to **GameController**:
+
+```csharp
+private GameObject player;
+public GameObject playerPrefab;
+```
+
+In `Start` add these lines below `constructor.GenerateNewMaze(rows, cols);`:
+
+```csharp
+Vector3 playerStartPosition = new Vector3(constructor.hallWidth, 1, constructor.hallWidth);  
+player = Instantiate(playerPrefab, playerStartPosition, Quaternion.identity);
+player.tag = "Generated";
+```
+
+First, we are adding the player to the **start** of the maze - we are placing the player at square [1,1]
