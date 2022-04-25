@@ -4,3 +4,6 @@ So - we have a very scary man who is supposed to hunt you down as you wander aro
 
 ## AIController
 
+Ok, we are going to implement a very common pathfinding algorithm called **A* Search** - it is used to traverse **graphs** using the shortest possible path between nodes. Let's take a moment to talk about **graphs**...
+
+**Graphs** (and **trees**) are comprised of **nodes** and **edges**.
