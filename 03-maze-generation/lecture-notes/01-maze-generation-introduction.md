@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
 {
     private MazeConstructor constructor;
 
-    void Start()
+    void Awake()
     {
         constructor = GetComponent<MazeConstructor>();
     }
