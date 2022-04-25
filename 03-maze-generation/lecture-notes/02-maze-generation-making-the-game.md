@@ -72,19 +72,21 @@ public void GenerateNewMaze(int sizeRows, int sizeCols)
 Save the script and return to the editor. Open the **GameController** script. We are going to add the player to the scene. The starter code comes with a **player prefab** and we are going to instantiate the player at the start of the maze in a very familiar way. Add these variables to **GameController**:
 
 ```csharp
-private GameObject player;
 public GameObject playerPrefab;
 ```
 
-In `Start` add these lines below `constructor.GenerateNewMaze(rows, cols);`:
+First we will create a method called `CreatePlayer` and add this code to it:
 
 ```csharp
-Vector3 playerStartPosition = new Vector3(constructor.hallWidth, 1, constructor.hallWidth);  
-player = Instantiate(playerPrefab, playerStartPosition, Quaternion.identity);
-player.tag = "Generated";
+private void CreatePlayer()
+{
+    Vector3 playerStartPosition = new Vector3(constructor.hallWidth, 1, constructor.hallWidth);  
+    GameObject player = Instantiate(playerPrefab, playerStartPosition, Quaternion.identity);
+    player.tag = "Generated";
+}
 ```
 
-First, we are adding the player to the **start** of the maze - we are placing the player in square [1,1] (the first empty cell in the maze). Our floor meshes are centred on 0,0; if you recall the `AddQuad` method from **MazeMeshGenerator**, our quad meshes have these vertices:
+We are adding the player to the **start** of the maze - we are placing the player in square [1,1] (the first empty cell in the maze). Our floor meshes are centred on 0,0; if you recall the `AddQuad` method from **MazeMeshGenerator**, our quad meshes have these vertices:
 
 ```csharp
 Vector3 vert1 = new Vector3(-.5f, -.5f, 0);
@@ -99,7 +101,48 @@ Thus, in figuring out our `playerStartPosition` in **real world coordinates**, w
 
 We instantiate the player as we have in previous games, passing in a prefab, the start position, and `Quarternion.identity` for the default rotation.
 
-Finally, we tag the `player` with **"Generated"** for later use. Save the script and return to the editor. Run the game, and you should now be able to walk around your generated maze!
+Finally, we tag the `player` with **"Generated"** for later use. Call this method in `Start` below `constructor.GenerateNewMaze(rows,cols);`:
+
+```csharp
+void Start() 
+{
+    constructor.GenerateNewMaze(rows,cols);
+        
+    CreatePlayer();
+}
+```
+
+Save the script and return to the editor. Run the game, and you should now be able to walk around your generated maze!
 
 ## Adding the enemy
 
+Adding the 'Scary Man' enemy is going to be like adding the player, only on the opposite end of the maze. First, add this variable below `playerPrefab`:
+
+```csharp
+public GameObject monsterPrefab;
+```
+
+Next, create a new method called `CreateMonster` and add this code to it:
+
+```csharp
+private void CreateMonster()
+{
+    Vector3 monsterPosition = new Vector3(constructor.goalCol * constructor.hallWidth, 0f, constructor.goalRow * constructor.hallWidth);
+    GameObject monster = Instantiate(monsterPrefab, monsterPosition, Quaternion.identity);
+    monster.tag = "Generated";    
+}
+```
+
+Virtually the same, except we are using the `goalCol` and `goalRow` from the **MazeConstructor** in our calculations of where the final cell is in the real world. Add `CreateMonster()` to `Start`:
+
+```csharp
+void Start() 
+{
+    constructor.GenerateNewMaze(rows,cols);
+        
+    CreatePlayer();
+    CreateMonster();
+}
+```
+
+Save the script and return to the editor. Run the game again, make your way to the end of the maze (or just look at the Scene view) and you should have a very scary man crawling in place in the final cell.
