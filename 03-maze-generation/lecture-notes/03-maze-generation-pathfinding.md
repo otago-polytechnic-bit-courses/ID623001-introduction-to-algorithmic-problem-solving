@@ -14,3 +14,11 @@ Our maze can be thought of as a graph - if you visualise the cells as nodes, and
 
 ![](http://www.cs.umd.edu/class/spring2019/cmsc132-020X-040X/Project8/maze.png)
 
+Our **pathfinding algorithm** takes a **starting node** and an **end node** and calculates the **cost** of moving towards the goal taking various paths; after calculating all the **costs** it takes the shortest (least cost) path.
+
+![](https://miro.medium.com/max/300/1*iSt-urlSaXDABqhXX6xveQ.png)
+
+Look at a very simple example:
+
+[ ][ ]
+[ ][ ]
