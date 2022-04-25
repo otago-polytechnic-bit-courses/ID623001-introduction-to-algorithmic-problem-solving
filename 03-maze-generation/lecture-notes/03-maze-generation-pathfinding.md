@@ -20,5 +20,6 @@ Our **pathfinding algorithm** takes a **starting node** and an **end node** and 
 
 Look at a very simple example:
 
-[s][ ]<br/>
-[ ][e]
+[s][ ][ ]<br/>
+[ ][ ][ ]<br/>
+[ ][ ][e]
