@@ -24,7 +24,7 @@ Look at a very simple example:
 [ ][ ][ ]<br/>
 [ ][ ][e]
 
-If we atribute **cost** to the cells (how far each cell is from our goal) we get this:
+If we attribute **cost** to the cells (how far each cell is from our goal) we get this:
 
 [4][3][2]<br/>
 [3][2][1]<br/>
