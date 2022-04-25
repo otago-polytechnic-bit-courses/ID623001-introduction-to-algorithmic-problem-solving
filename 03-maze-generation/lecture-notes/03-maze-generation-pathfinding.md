@@ -23,3 +23,9 @@ Look at a very simple example:
 [s][ ][ ]<br/>
 [ ][ ][ ]<br/>
 [ ][ ][e]
+
+If we atribute **cost** to the cells (how far each cell is from our goal) we get this:
+
+[4][3][2]
+[3][2][1]
+[2][1][0]
