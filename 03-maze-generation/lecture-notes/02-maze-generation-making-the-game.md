@@ -9,7 +9,7 @@ A lot of things have been included in the **starter code**, including a First Pe
 - create the 'treasure' to be found programatically, and place it at the 'end' of the maze;
 - and finally rig up some triggers to restart the maze if the player 'finds' the treasure.
 
-## Adding the player
+## Setup
 
 First, we are going to add a few variables to **MazeConstructor** to store references to things for later use:
 
@@ -66,6 +66,8 @@ public void GenerateNewMaze(int sizeRows, int sizeCols)
     DisplayMaze();            
 }  
 ```
+
+## Adding the player
 
 Save the script and return to the editor. Open the **GameController** script. We are going to add the player to the scene. The starter code comes with a **player prefab** and we are going to instantiate the player at the start of the maze in a very familiar way. Add these variables to **GameController**:
 
