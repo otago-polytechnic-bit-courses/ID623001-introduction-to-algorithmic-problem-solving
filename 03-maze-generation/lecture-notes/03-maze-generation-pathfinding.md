@@ -4,7 +4,7 @@ So - we have a very scary man who is supposed to hunt you down as you wander aro
 
 ## AIController
 
-Ok, we are going to implement a very common pathfinding algorithm called **A* Search** - it is used to traverse **graphs** using the shortest possible path between nodes. Let's take a moment to talk about **graphs**...
+Ok, we are going to implement a very common pathfinding algorithm called **A\* Search** - it is used to traverse **graphs** using the shortest possible path between nodes. Let's take a moment to talk about **graphs**...
 
 **Graphs** (and **trees**) are comprised of **nodes** and **edges**. A **tree** is a recursive structure of parent/child nodes, while a **graph** is more complex and contrains **loops** in its structure. See below for examples of trees and graphs:
 
