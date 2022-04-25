@@ -82,4 +82,19 @@ player = Instantiate(playerPrefab, playerStartPosition, Quaternion.identity);
 player.tag = "Generated";
 ```
 
-First, we are adding the player to the **start** of the maze - we are placing the player at square [1,1]
+First, we are adding the player to the **start** of the maze - we are placing the player in square [1,1] (the first empty cell in the maze). Our floor meshes are centred on 0,0; if you recall the `AddQuad` method from **MazeMeshGenerator**, our quad meshes have these vertices:
+
+```csharp
+Vector3 vert1 = new Vector3(-.5f, -.5f, 0);
+Vector3 vert2 = new Vector3(-.5f, .5f, 0);
+Vector3 vert3 = new Vector3(.5f, .5f, 0);
+Vector3 vert4 = new Vector3(.5f, -.5f, 0);
+```
+
+Since they extend from -.5f to .5f along the two axes, the centre must be at 0,0.
+
+Thus, in figuring out our `playerStartPosition` in **real world coordinates**, we multiply the starting cell values [1,1] by the `hallWidth` value we set in **MazeConstructor**.
+
+We instantiate the player as we have in previous games, passing in a prefab, the start position, and `Quarternion.identity` for the default rotation.
+
+Finally, we tag the `player` with **"Generated"** for later use.
