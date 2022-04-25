@@ -99,4 +99,4 @@ Thus, in figuring out our `playerStartPosition` in **real world coordinates**, w
 
 We instantiate the player as we have in previous games, passing in a prefab, the start position, and `Quarternion.identity` for the default rotation.
 
-Finally, we tag the `player` with **"Generated"** for later use.
+Finally, we tag the `player` with **"Generated"** for later use. Save the script and return to the editor. Run the game, and you should now be able to walk around your generated maze!
