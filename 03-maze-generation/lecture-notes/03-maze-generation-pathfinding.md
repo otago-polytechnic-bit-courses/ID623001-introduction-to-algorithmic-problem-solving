@@ -30,13 +30,13 @@ Look at a very simple example:
 [ ][ ][ ]<br/>
 [ ][ ][e]
 
-First, we attribute something to each node called the **gCost** - this is how far the node is from the starting node:
+First, we attribute something to each node called the **gCost** - this is how far the node is from the **starting node**:
 
 [0][1][2]<br/>
 [1][2][3]<br/>
 [2][3][4]
 
-Next, each node gets an **hCost**, which is the **heuristic** - this is the **estimated** distance from the current node to the end node. So, for example, the initial node is 2 across and 2 up from the end - using a bit of trigonometry: a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>. So - 2<sup>2</sup> + 2<sup>2</sup> (we don't actually have to square root the answer - if we are consistent and never square root any of the calculations, we can leave them all in this format) - so 4 + 4 = 8. Our **hCost** for the first node is 8.
+Next, each node gets an **hCost**, which is the **heuristic** - this is the **estimated** distance from the **current node** to the **end node**. So, for example, the initial node is 2 across and 2 up from the end - using a bit of trigonometry: a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>. So - 2<sup>2</sup> + 2<sup>2</sup> (we don't actually have to square root the answer - if we are consistent and never square root any of the calculations, we can leave them all in this format) - so 4 + 4 = 8. Our **hCost** for the first node is 8.
 
 Let's do another: the second node to the right (currently with a **gCost** of 1) would have an **hCost** of: 1<sup>2</sup> + 2<sup>2</sup> = 5. So, all the **hCosts** of the nodes would be:
 
