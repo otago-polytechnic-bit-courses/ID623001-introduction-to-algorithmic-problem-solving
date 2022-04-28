@@ -26,9 +26,17 @@ So how does this algorithm really work, and what is this **heuristic**?
 
 Look at a very simple example:
 
-[s][ ][ ]<br/>
-[ ][ ][ ]<br/>
-[ ][ ][e]
+<div style="display:grid;width:100px;grid-template-rows:repeat(3, 1fr);">
+    <div>s</div>    
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div>e</div>
+</div>
 
 First, starting at the **s node**, we look at its **neighbours** and attribute something to each of them called the **gCost** - this is how far the node is from the **starting node** - typical gCost calculations use different values for **straight** or **diagonal** moves - we'll use **10** for a straight move and **14** for a diagonal move:
 
