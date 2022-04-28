@@ -26,10 +26,11 @@ So how does this algorithm really work, and what is this **heuristic**?
 
 Look at a very simple example:
 
-|--------|:------:|-------:|
-| a      |    b   |      c |
-| 1      |    2   |      3 |
-| foo    |   bar  |    baz |
+|   |   |   |
+|:-:|---|---|
+| s |   |   |
+|   |   |   |
+|   |   | e |
 
 First, starting at the **s node**, we look at its **neighbours** and attribute something to each of them called the **gCost** - this is how far the node is from the **starting node** - typical gCost calculations use different values for **straight** or **diagonal** moves - we'll use **10** for a straight move and **14** for a diagonal move:
 
