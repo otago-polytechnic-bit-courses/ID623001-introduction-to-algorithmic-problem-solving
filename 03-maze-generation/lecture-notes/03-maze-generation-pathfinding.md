@@ -26,7 +26,6 @@ So how does this algorithm really work, and what is this **heuristic**?
 
 Look at a very simple example:
 
-| header | header | header |
 |--------|:------:|-------:|
 | a      |    b   |      c |
 | 1      |    2   |      3 |
