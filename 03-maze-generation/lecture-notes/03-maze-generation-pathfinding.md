@@ -69,7 +69,9 @@ public class Node
 
 We have variables for this node's `x` and `y` position (essentially its **row** and **col** in the grid). We then have a series of 'cost' variables - **g**, **h** and **f** costs... how these are used will become clear later. We have a reference to what node preceded this one in the graph - we need to remember this later when our algorithm finally reaches the end node, so we can backtrack the 'path' back to the start. We have a boolean `isWalkable` so we don't try to calculate paths across the walls.
 
+The constructor for a new `Node` sets the `x` and `y` position, the `isWalkable` to true or false, and sets the `hCost` to a default value of 0.
 
+Finally, we have a method for calculating a node's `fCost`, which is simply its `gCost` plus its `hCost`.
 
 Create a new C# script called **AIController**. Add the following variables above `Start`:
 
