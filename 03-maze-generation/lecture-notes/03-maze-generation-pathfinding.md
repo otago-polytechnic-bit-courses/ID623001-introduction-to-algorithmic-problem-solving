@@ -26,17 +26,11 @@ So how does this algorithm really work, and what is this **heuristic**?
 
 Look at a very simple example:
 
-<div style="display:grid;width:100px;grid-template-rows:repeat(3, 1fr);grid-template-columns:repeat(3, 1fr)">
-    <div>s</div>    
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div>e</div>
-</div>
+| header | header | header |
+|--------|:------:|-------:|
+| a      |    b   |      c |
+| 1      |    2   |      3 |
+| foo    |   bar  |    baz |
 
 First, starting at the **s node**, we look at its **neighbours** and attribute something to each of them called the **gCost** - this is how far the node is from the **starting node** - typical gCost calculations use different values for **straight** or **diagonal** moves - we'll use **10** for a straight move and **14** for a diagonal move:
 
