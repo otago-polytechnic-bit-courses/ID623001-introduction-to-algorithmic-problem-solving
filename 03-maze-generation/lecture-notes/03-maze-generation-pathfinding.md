@@ -30,11 +30,11 @@ Look at a very simple example:
 [ ][ ][ ]<br/>
 [ ][ ][e]
 
-First, we attribute something to each node called the **gCost** - this is how far the node is from the **starting node**:
+First, starting at the **s node**, we look at its **neighbours** and attribute something to each of them called the **gCost** - this is how far the node is from the **starting node** - typical gCost calculations use different values for **straight** or **diagonal** moves - we'll use **10** for a straight move and **14** for a diagonal move:
 
-[0][1][2]<br/>
-[1][2][3]<br/>
-[2][3][4]
+[0 ][10][  ]<br/>
+[10][14][  ]<br/>
+[  ][  ][e ]
 
 Next, each node gets an **hCost**, which is the **heuristic** - this is the **estimated** distance from the **current node** to the **end node**. So, for example, the initial node is 2 across and 2 up from the end - using a bit of trigonometry: a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>. So - 2<sup>2</sup> + 2<sup>2</sup> (we don't actually have to square root the answer - if we are consistent and never square root any of the calculations, we can leave them all in this format) - so 4 + 4 = 8. Our **hCost** for the first node is 8.
 
