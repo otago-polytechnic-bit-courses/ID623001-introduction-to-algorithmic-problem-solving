@@ -14,7 +14,9 @@ Our maze can be thought of as a graph - if you visualise the cells as nodes, and
 
 ![](http://www.cs.umd.edu/class/spring2019/cmsc132-020X-040X/Project8/maze.png)
 
-Some algorithms (for example, **Dijkstra’s**) will calculate all paths from the start to the end node, and then simply take the path with the lowest total traversal cost - this can be really inefficient. **A\*** is a little different - it continually estimates the distance of a node from the end goal (using something called a **heuristic**) and prioritises nodes that have the lowest **estimated** cost of reaching the goal.
+Some algorithms (for example, **Dijkstra’s**) will calculate all paths from the start to the end node, and then simply take the path with the lowest total traversal cost - this can be really inefficient. 
+
+**A\*** is a little different - it continually estimates the distance of a node from the end goal (using something called a **heuristic**) and prioritises nodes that have the lowest **estimated** cost of reaching the goal.
 
 ![](https://miro.medium.com/max/300/1*iSt-urlSaXDABqhXX6xveQ.png)
 
