@@ -26,7 +26,7 @@ So how does this algorithm really work, and what is this **heuristic**?
 
 Look at a very simple example:
 
-<div style="display:grid;width:100px;grid-template-rows:repeat(3, 1fr);">
+<div style="display:grid;width:100px;grid-template-rows:repeat(3, 1fr);grid-template-columns:repeat(3, 1fr)">
     <div>s</div>    
     <div></div>
     <div></div>
