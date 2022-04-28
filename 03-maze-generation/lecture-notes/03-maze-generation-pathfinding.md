@@ -35,4 +35,42 @@ Now, starting at our starting node ("s", which is currently 4 squares away from 
 - **down** for a cost of **3**
 - **diagonally down/right** for a cost of **2**
 
-Thus, the algorithm goes diagonally down/right. On the next move, the choices are **1** (right), **1** (down) or **0** (diagnoal again) - and it takes the **0** path as this is the lowest cost.
+Thus, the algorithm goes diagonally down/right. On the next move, the choices are **1** (right), **1** (down) or **0** (diagonal again) - and it takes the **0** path as this is the lowest cost.
+
+Now that we have a basic understanding of how the algorithm works, let's start coding it. First, we need a representation of our maze data as **nodes**. Create a new C# script called **Node**. This will be a utility class, and we won't be using any of the Unity-specific things - so replace everything in the file with the following:
+
+```csharp
+public class Node
+{
+    public int x;
+    public int y;
+    
+    public int gCost;
+    public int hCost;
+    public int fCost;      
+
+    public Node cameFromNode;
+
+    public bool isWalkable;
+
+    public Node(int x, int y, bool isWalkable)
+    {
+        this.x = x;
+        this.y = y;
+        hCost = 0;
+        this.isWalkable = isWalkable;
+    }
+    
+    public void CalculateFCost(){
+        fCost = gCost + hCost;
+    } 
+}
+```
+
+
+
+Create a new C# script called **AIController**. Add the following variables above `Start`:
+
+```csharp
+
+```
