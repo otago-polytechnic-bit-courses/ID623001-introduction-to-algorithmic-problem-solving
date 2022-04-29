@@ -79,6 +79,8 @@ public Node[,] graph;
 And inside `GenerateNewMaze`, **before** the `DisplayMaze()` function call, add this code:
 
 ```csharp
+graph = new Node[sizeRows,sizeCols];
+
 for (int i = 0; i < sizeRows; i++)        
     for (int j = 0; j < sizeCols; j++)            
         graph[i, j] = data[i,j] == 0 ? new Node(i, j, true) : new Node(i, j, false);
