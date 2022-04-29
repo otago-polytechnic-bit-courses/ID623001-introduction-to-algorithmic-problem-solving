@@ -70,16 +70,27 @@ The constructor for a new `Node` sets the `x` and `y` position, the `isWalkable`
 
 Finally, we have a method for calculating a node's `fCost`, which is simply its `gCost` plus its `hCost`.
 
-Open the script **MazeConstructor** and before the `DisplayMaze()` function call, add this code:
+Open the script **MazeConstructor**. First, add this variable to hold our new graph of Nodes:
+
+```csharp
+public Node[,] graph;
+```
+
+And inside `GenerateNewMaze`, **before** the `DisplayMaze()` function call, add this code:
 
 ```csharp
 for (int i = 0; i < sizeRows; i++)        
     for (int j = 0; j < sizeCols; j++)            
-        grid[i, j] = data[i,j] == 0 ? new Node(i, j, true) : new Node(i, j, false);
+        graph[i, j] = data[i,j] == 0 ? new Node(i, j, true) : new Node(i, j, false);
 ```
 
-Create a new C# script called **AIController**. Add the following variables above `Start`:
+Here we are iterating through our maze data and creating a new `Node` for each cell - for every slot marked **0** we create a Node with `isWalkable` set to **true** and for every slot marked **1** we set `isWalkable` to **false**. All the nodes are saved into our new 2D array called `graph`.
+
+Ok - here comes the meaty stuff. Create a new C# script called **AIController**. Add the following variables above `Start`:
 
 ```csharp
-
+private const int MOVE_STRAIGHT_COST = 10;
+private const int MOVE_DIAGONAL_COST = 14;
 ```
+
+These constants hold the move costs like we used above - **10** for horizontal/vertical moves, and **14** for vertical moves.
