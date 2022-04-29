@@ -24,35 +24,15 @@ Some algorithms (for example, **Dijkstra’s**) will calculate all paths from th
 
 So how does this algorithm really work, and what is this **heuristic**?
 
-Look at a very simple example:
+First, from the **start node** we look at its **neighbours** and attribute something to each of them called the **gCost** - this is how far the node is from the **starting node** - typical gCost calculations use different values for **straight** or **diagonal** moves - we'll use **10** for a straight move and **14** for a diagonal move.
 
-|   |   |   |
-|:-:|---|---|
-| s |   |   |
-|   |   |   |
-|   |   | e |
+Next, each node gets an **hCost**, which is the **heuristic** - this is the **estimated** distance from the **current node** to the **end node**. You can count these off as moves horizontally, vertically or diagonally.
 
-First, starting at the **s node**, we look at its **neighbours** and attribute something to each of them called the **gCost** - this is how far the node is from the **starting node** - typical gCost calculations use different values for **straight** or **diagonal** moves - we'll use **10** for a straight move and **14** for a diagonal move:
+Finally, we calculate each node's **fCost** which is simply **fCost = gCost + hCost**. 
 
-[0 ][10][  ]<br/>
-[10][14][  ]<br/>
-[  ][  ][e ]
+At each step of the pathfinding, the algorithm takes the **current node** and considers all of its **neighbours** - top and bottom, both sides, and diagonals. First, obviously, if any of the neighbours is the **goal** it moves to it and it's done; if not, it takes the path with the lowest **fCost** and then repeats. If there is a choice of **equal fCost** values, it will then choose the one with the lowest **hCost** (or closest to the goal). If everything is equal between two nodes, it will evaluate both sets of neighbours.
 
-Next, each node gets an **hCost**, which is the **heuristic** - this is the **estimated** distance from the **current node** to the **end node**. So, for example, the initial node is 2 across and 2 up from the end - using a bit of trigonometry: a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>. So - 2<sup>2</sup> + 2<sup>2</sup> (we don't actually have to square root the answer - if we are consistent and never square root any of the calculations, we can leave them all in this format) - so 4 + 4 = 8. Our **hCost** for the first node is 8.
-
-Let's do another: the second node to the right (currently with a **gCost** of 1) would have an **hCost** of: 1<sup>2</sup> + 2<sup>2</sup> = 5. So, all the **hCosts** of the nodes would be:
-
-[8][5][4]<br/>
-[5][2][1]<br/>
-[4][1][0]
-
-Finally, we calculate each node's **fCost** which is simply **fCost = gCost + hCost**. So, after all those calculations, the **fCosts** of all the nodes would be:
-
-[8][6][6]<br/>
-[6][4][4]<br/>
-[6][4][4]
-
-At each step of the pathfinding, the algorithm takes the **current node** and considers all of its **neighbours** - top and bottom, both sides, and diagonals. First, obviously, if any of the neighbours is the **goal** it moves to it and it's done; if not, it takes the path with the lowest **fCost** and then repeats. In our very simple example, we start at the starting node **s** and consider the neighbours - we have 3, with **fCosts** of **6**, **6**, and **4**... thus, we move diagonally at this step.
+Adon will walk through the example here: https://codepen.io/dfenders/pen/NWyKpgg
 
 Now that we have a basic understanding of how the algorithm works, let's start coding it. First, we need a representation of our maze data as **nodes**. Create a new C# script called **Node**. This will be a utility class, and we won't be using any of the Unity-specific things - so replace everything in the file with the following:
 
