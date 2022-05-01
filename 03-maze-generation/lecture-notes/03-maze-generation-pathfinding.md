@@ -95,4 +95,4 @@ private const int MOVE_STRAIGHT_COST = 10;
 private const int MOVE_DIAGONAL_COST = 140;
 ```
 
-These constants hold the move costs like we used above - **10** for horizontal/vertical moves, and **140** for vertical moves (**NB:** in this particular scenario, with the way the man 'moves' around the 3D space, I have found a larger diagonal cost works much better - this gets the enemy to prioritise straighter moves around corners etc - it looks better. In larger open rooms, he should still move diagonally though, with no obstacles in the way... you can play with this value if you want different results).
+These constants hold the move costs like we used above - **10** for horizontal/vertical moves, and **140** for diagonal moves (**NB:** in this particular scenario, with the way the man 'moves' around the 3D space, I have found a larger diagonal cost works much better - this gets the enemy to prioritise straighter moves around corners etc - it looks better. In larger open rooms, he should still move diagonally though, with no obstacles in the way... you can play with this value if you want different results).
