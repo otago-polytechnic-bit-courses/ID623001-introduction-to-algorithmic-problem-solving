@@ -126,3 +126,38 @@ private Node GetLowestFCostNode(List<Node> pathNodeList){
 ```
 
 A pretty standard programming pattern - take the first thing in the List and **assume** it is the lowest. Then, walk through the rest of the List, and if you find something with a **lower value**, assign *that* to be the new lowest... continue until the end of the List, and you will have found the lowest value.
+
+The next utility method we add is for finding all the neighbours of a given Node:
+
+```csharp
+private List<Node> GetNeighbourList(Node currentNode){
+    List<Node> neighbourList = new List<Node>();
+
+    if(currentNode.x - 1 >= 0)
+    {
+        neighbourList.Add(graph[currentNode.x - 1,currentNode.y]);
+
+        if(currentNode.y - 1 >= 0)
+            neighbourList.Add(graph[currentNode.x - 1, currentNode.y - 1]);
+        if(currentNode.y + 1 < graph.GetLength(1))
+            neighbourList.Add(graph[currentNode.x - 1, currentNode.y + 1]);
+    }
+
+    if(currentNode.x + 1 < graph.GetLength(0))
+    {
+        neighbourList.Add(graph[currentNode.x + 1, currentNode.y]);
+            
+        if(currentNode.y - 1 >= 0) 
+            neighbourList.Add(graph[currentNode.x + 1, currentNode.y - 1]);
+        if(currentNode.y + 1 < graph.GetLength(1)) 
+            neighbourList.Add(graph[currentNode.x + 1, currentNode.y + 1]);
+    }
+
+    if(currentNode.y - 1 >= 0) 
+        neighbourList.Add(graph[currentNode.x, currentNode.y - 1]);
+    if(currentNode.y + 1 < graph.GetLength(1)) 
+        neighbourList.Add(graph[currentNode.x, currentNode.y + 1]);
+        
+    return neighbourList;
+}
+```
