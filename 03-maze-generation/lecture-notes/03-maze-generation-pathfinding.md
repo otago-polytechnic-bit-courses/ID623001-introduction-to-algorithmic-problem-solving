@@ -96,3 +96,33 @@ private const int MOVE_DIAGONAL_COST = 140;
 ```
 
 These constants hold the move costs like we used above - **10** for horizontal/vertical moves, and **140** for diagonal moves (**NB:** in this particular scenario, with the way the man 'moves' around the 3D space, I have found a larger diagonal cost works much better - this gets the enemy to prioritise straighter moves around corners etc - it looks better. In larger open rooms, he should still move diagonally though, with no obstacles in the way... you can play with this value if you want different results).
+
+We are going to fill in large chunks of the code here and not focus too much on the individual lines - instead, we'll get a good overview of what these methods do.
+
+Add the following method to the **AIController**:
+
+```csharp
+private int CalculateDistanceCost(Node a, Node b){
+    int xDistance = Mathf.Abs(a.x - b.x);
+    int yDistance = Mathf.Abs(a.y - b.y);
+    int remaining = xDistance - yDistance;
+    return MOVE_DIAGONAL_COST * Mathf.Min(xDistance, yDistance) + MOVE_STRAIGHT_COST * remaining;
+}
+```
+
+This is a 'distance' function, that we will use to calculate both **gCosts** (distance of Node from start) and **hCosts** (distance of Node from goal). The code uses some math to calculate what we were doing visually - combining vertical/horizontal moves and diagonal moves.
+
+Next, we'll add a utility method for finding the lowest **fCost** Node from a List:
+
+```csharp
+private Node GetLowestFCostNode(List<Node> pathNodeList){
+    Node lowestFCostNode = pathNodeList[0];
+    for(int i = 1; i < pathNodeList.Count; i++)
+        if(pathNodeList[i].fCost < lowestFCostNode.fCost)
+            lowestFCostNode = pathNodeList[i];
+                    
+    return lowestFCostNode;
+}
+```
+
+A pretty standard programming pattern - take the first thing in the List and **assume** it is the lowest. Then, walk through the rest of the List, and if you find something with a **lower value**, assign *that* to be the new lowest... continue until the end of the List, and you will have found the lowest value.
