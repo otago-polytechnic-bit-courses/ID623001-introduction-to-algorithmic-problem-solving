@@ -161,3 +161,5 @@ private List<Node> GetNeighbourList(Node currentNode){
     return neighbourList;
 }
 ```
+
+For the given Node, we run it through a series of **if statements** to check where on our grid it is - if it is along any of the edges, we *won't* add the neighbours that would be outside the grid. Otherwise, we add the neighbours on all **four straight sides** (above, below, left and right) and the **diagonals**.
