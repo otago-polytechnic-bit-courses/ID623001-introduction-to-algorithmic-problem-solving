@@ -222,7 +222,6 @@ Before we get into the code, we need to link some materials that will be used to
 
 - **floor-mat** for Maze Mat 1
 - **wall-mat** for Maze Mat 2
-- **start** for Start Mat
 - **treasure** for Treasure Mat
 
 We will also create a new tag called **Generated** - click on the Tag menu at the top of the Inspector and select **Add Tag**. When we generate the meshes, we will assign this tag to them to identify them later.
