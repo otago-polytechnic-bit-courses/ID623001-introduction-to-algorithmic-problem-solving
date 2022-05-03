@@ -118,7 +118,7 @@ Drag the **Player** prefab into the slot on **Game Controller**. Run the game, a
 
 ## Adding the enemy
 
-Adding the 'Scary Man' enemy is going to be like adding the player, only on the opposite end of the maze. First, add this variable below `playerPrefab`:
+Adding the 'Scary Man' enemy is going to be like adding the player, only on the opposite end of the maze. First, in the **GameController** script, add this variable below `playerPrefab`:
 
 ```csharp
 public GameObject monsterPrefab;
