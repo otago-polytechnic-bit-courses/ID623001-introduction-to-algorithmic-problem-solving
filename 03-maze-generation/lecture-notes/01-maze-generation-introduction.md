@@ -117,7 +117,7 @@ Save the script and return to the editor. Make sure **Show Debug** is ticked on 
 
 ### Generating the maze data
 
-In the **GameController** script add the following variables above `Start`:
+In the **GameController** script add the following variables above `Awake`:
 
 ```csharp
 [SerializeField] private int rows;
