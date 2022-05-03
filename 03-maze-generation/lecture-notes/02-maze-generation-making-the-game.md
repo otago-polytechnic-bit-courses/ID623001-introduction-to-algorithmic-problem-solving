@@ -147,4 +147,4 @@ void Start()
 }
 ```
 
-Save the script and return to the editor. Run the game again, make your way to the end of the maze (or just look at the Scene view) and you should have a very scary man crawling in place in the final cell.
+Save the script and return to the editor. Drag the **Monster** prefab into the slot on **Game Controller**. Run the game again, make your way to the end of the maze (or just look at the Scene view) and you should have a very scary man crawling in place in the final cell.
