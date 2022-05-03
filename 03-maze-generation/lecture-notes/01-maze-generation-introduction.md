@@ -32,6 +32,11 @@ public class GameController : MonoBehaviour
     {
         constructor = GetComponent<MazeConstructor>();
     }
+    
+    void Start()
+    {
+    
+    }
 }
 ```
 
