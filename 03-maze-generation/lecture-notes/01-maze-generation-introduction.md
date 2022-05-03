@@ -2,7 +2,10 @@
 
 ## Starter project
 
-Download the **starter code** and open it as a project in Unity.
+Download the **starter code** and open it as a project in Unity. *We may need to do a couple things to fix some missing references before we get started*.
+
+- Open the **Player** prefab. If you have a 'missing script' error, select the **FpsMovement** script. Drag the **Main Camera** onto the **Head Cam** slot. Save the prefab.
+- Open the **Monster** prefab. The **Animator** > **Controller** should be 'Low Crawl'. Select the **WhiteClown** in the hierarchy. The **Mesh** should be **WhiteClown**. Materials > Element 0 should be **whiteclown_diffuse**.
 
 ## Maze generation
 
