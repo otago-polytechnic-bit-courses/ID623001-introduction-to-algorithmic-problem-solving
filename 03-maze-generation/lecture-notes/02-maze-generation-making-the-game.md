@@ -112,7 +112,9 @@ void Start()
 }
 ```
 
-Save the script and return to the editor. Run the game, and you should now be able to walk around your generated maze!
+Save the script and return to the editor. Open the **Player** prefab. If you have a 'missing script' error, select the **FpsMovement** script. Drag the **Main Camera** onto the **Head Cam** slot. Save the prefab.
+
+Drag the **Player** prefab into the slot on **Game Controller**. Run the game, and you should now be able to walk around your generated maze!
 
 ## Adding the enemy
 
