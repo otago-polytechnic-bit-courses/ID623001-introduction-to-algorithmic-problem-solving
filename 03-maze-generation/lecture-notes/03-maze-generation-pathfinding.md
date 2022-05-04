@@ -163,3 +163,65 @@ private List<Node> GetNeighbourList(Node currentNode){
 ```
 
 For the given Node, we run it through a series of **if statements** to check where on our grid it is - if it is along any of the edges, we *won't* add the neighbours that would be outside the grid. Otherwise, we add the neighbours on all **four straight sides** (above, below, left and right) and the **diagonals**.
+
+Next comes the biggie - the actual **A\* pathfinding** logic, as we talked about earlier:
+
+```csharp
+List<Node> FindPath(int startX, int startY, int endX, int endY)
+{
+    Node startNode = graph[startX,startY];
+    Node endNode = graph[endX, endY];
+
+    List<Node> openList = new List<Node> { startNode };
+    List<Node> closedList = new List<Node>();
+
+    int graphWidth = graph.GetLength(0);
+    int graphHeight = graph.GetLength(1);
+
+    for(int x = 0; x < graphWidth; x++)
+        for(int y = 0; y < graphHeight; y++)
+        {
+            Node pathNode = graph[x, y];
+            pathNode.gCost = int.MaxValue;
+            pathNode.CalculateFCost();
+            pathNode.cameFromNode = null;
+        }
+
+    startNode.gCost = 0;
+    startNode.hCost = CalculateDistanceCost(startNode, endNode);
+    startNode.CalculateFCost();
+
+    while(openList.Count > 0)
+    {
+        Node currentNode = GetLowestFCostNode(openList);
+        if(currentNode == endNode)            
+            return CalculatePath(endNode);            
+
+        openList.Remove(currentNode);
+        closedList.Add(currentNode);
+
+        foreach(Node neighbourNode in GetNeighbourList(currentNode)){
+            if(closedList.Contains(neighbourNode)) continue;
+
+            if(!neighbourNode.isWalkable){
+                closedList.Add(neighbourNode);
+                continue;
+            }
+
+            int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
+            if(tentativeGCost < neighbourNode.gCost){
+                neighbourNode.cameFromNode = currentNode;
+                neighbourNode.gCost = tentativeGCost;
+                neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);  
+                neighbourNode.CalculateFCost();                  
+
+                if(!openList.Contains(neighbourNode))
+                    openList.Add(neighbourNode);
+            }
+        }
+    }
+
+    //out of nodes on the open list
+    return null;
+}
+```
