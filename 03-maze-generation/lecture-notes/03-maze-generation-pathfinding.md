@@ -225,3 +225,6 @@ List<Node> FindPath(int startX, int startY, int endX, int endY)
     return null;
 }
 ```
+
+First, we pull out the **startNode** and **endNode** from the graph - the Nodes we want to find a path between. We instantiate 2 Lists: the **openList** and **closedList** - this is simply *Nodes we haven't visited yet* and *ones we have*. The idea is to not revisit Nodes that have already been evaluated, as this is inefficient. As we choose Nodes based on their **fCost** and look at their **neighbours** we will constantly remove them from the **openList** and add them to the **closedList**.
+
