@@ -164,7 +164,27 @@ private List<Node> GetNeighbourList(Node currentNode){
 
 For the given Node, we run it through a series of **if statements** to check where on our grid it is - if it is along any of the edges, we *won't* add the neighbours that would be outside the grid. Otherwise, we add the neighbours on all **four straight sides** (above, below, left and right) and the **diagonals**.
 
-Next comes the biggie - the actual **A\* pathfinding** logic, as we talked about earlier:
+Next add this method:
+
+```csharp
+private List<Node> CalculatePath(Node endNode)
+{
+    List<Node> path = new List<Node>();
+    path.Add(endNode);
+    Node currentNode = endNode;
+    while(currentNode.cameFromNode != null)
+    {
+        path.Add(currentNode.cameFromNode);
+        currentNode = currentNode.cameFromNode;
+    }
+    path.Reverse();
+    return path;
+}
+```
+
+Once we have evaluated our way **to the endNode**, we will walk back through the path that led there, using the `cameFromNode` property to find our way back to the start. This method makes a List of the Nodes from the **end** back to the **start**, hence why we call `path.Reverse()` right at the end.
+
+Ok, now comes the biggie - the actual **A\* pathfinding** logic, as we talked about earlier:
 
 ```csharp
 List<Node> FindPath(int startX, int startY, int endX, int endY)
@@ -226,6 +246,15 @@ List<Node> FindPath(int startX, int startY, int endX, int endY)
 }
 ```
 
-- First, we pull out the `startNode` and `endNode` from the graph - the Nodes we want to find a path between. We instantiate 2 Lists: the `openList` and `closedList` - this is simply *Nodes we haven't visited yet* and *ones we have*. The idea is to not revisit Nodes that have already been evaluated, as this is inefficient. As we choose Nodes based on their **fCost** and look at their **neighbours** we will constantly remove them from the **openList** and add them to the **closedList**.
+- First, we pull out the `startNode` and `endNode` from the graph - the Nodes we want to find a path between. We instantiate 2 Lists: the `openList` and `closedList` - this is simply *Nodes we haven't visited yet* and *ones we have*. The idea is to not revisit Nodes that have already been evaluated, as this is inefficient. As we choose Nodes based on their **fCost** and look at their **neighbours** we will constantly remove them from the **openList** and add them to the **closedList**. We start with the `startNode` in the **openList**.
 - The `graphWidth` and `graphHeight` are simply holding the outer bounds of the whole graph (the max row and col, if you like).
-- We first walk the graph with a **double for loop**, visiting every Node and attributing some values to its properties: at this stage, we have no way of knowing what the **gCost** of a Node might be (we'll only know that as we start to measure the distance between Nodes), so we set it to the **highest possible value** - as we start evaluating neighbours, we want to make sure we're **moving away** from the start - so by assuming neighbours have a **high gCost** we assume they are **further away** (i.e., closer to the end). If we ever compare a **neighbour** and see that it has a **lower gCost** than we are currently moving, then we are going to assume we are moving **back towards the start**; we calculate the current **fCost** (which is inaccurate, but will be refined as we go); and we set the `cameFromNode` to `null` (we haven't started any paths so we don't yet know *what* Node has led to any other Node).
+- We first walk the graph with a **double for loop**, visiting every Node and attributing some values to its properties: at this stage, we have no way of knowing what the **gCost** of a Node might be (we'll only know that as we start to measure the distance between Nodes), so we set it to the **highest possible value** - as we start evaluating neighbours, we will attribute them **actual gCosts** as we see how far from the start they are on a given path... but sometimes we will *reevaluate* this cost (as we saw in the example), and come up with a lower value - we'll see this in practice later; we calculate the current **fCost** (which is inaccurate, but will be refined as we go); and we set the `cameFromNode` to `null` (we haven't started any paths so we don't yet know *what* Node has led to any other Node).
+- Once we've assigned some start values to all the Nodes, we start on the actual path. We start with the `startNode` and assign a **gCost** of **0** (obviously, this is the closest to the start), calculate its distance from the `endNode` (**hCost**), and calculate its **fCost**. We now have 1 actually evaluated Node in the **openList**... so, let's start evaluating **neighbours**.
+- `while(openList.Count > 0)` says: "Keep doing this code as long as there are open Nodes to evaluate".
+- First, the Node with the **lowest fCost** is looked at first (very first time around, there is only one candidate - the `startNode` - but as we fill the List, we will have decisions to make, like we looked at with the example earlier). If the currently examined Node *is* the `endNode` then we're done (and we can track back the path we took).
+- If we aren't at the `endNode` yet, we do a few things to this node: first, we remove it from the **openList** and add it to the **closedList**. Then we check out its **neighbours** using the `GetNeighbourList` method we added earlier.
+- For each **neighbour**, we check first if the **closedList** contains that Node. If it does, we've already checked it out, so we don't need to again; the `continue` keyword will **break us out of the current iteration of the loop** but not **stop the loop**.
+- We also check if the **neighbour in question** is **walkable** or not (i.e., is it a wall?) If it is **not walkable** then add it to the **closedList** and, again, break out of this iteration of the loop.
+- So, for any neighbours that we haven't checked out already and are walkable, we will move onto the next bit of code... we add together the current **gCost** and the cost of moving to this neighbour (this is the neighbour's **new gCost**... for now... it's called `tentativeGCost` because, if you remember the example from earlier, sometimes we *reevaluate* a Node's **gCost** if we've come at it from a different path... if we ever find that a **neighbour** can have a **lower gCost** because we've come at it from a new path, we will recalculate its **fCost** and, if need be, readd it to the **openList**.
+- And that's it... continually look at neighbour Nodes, evaluate if they are good candidates or not, and add them to the **openList** - as you check out new Nodes, remove them from the **openList** and you will eventually reach the endNode.
+
