@@ -34,6 +34,8 @@ At each step of the pathfinding, the algorithm takes the **current node** and co
 
 Adon will walk through the example here: https://codepen.io/dfenders/pen/NWyKpgg
 
+### Coding the algorithm
+
 Now that we have a basic understanding of how the algorithm works, let's start coding it. First, we need a representation of our maze data as **nodes**. Create a new C# script called **Node**. This will be a utility class, and we won't be using any of the Unity-specific things - so replace everything in the file with the following:
 
 ```csharp
@@ -93,9 +95,18 @@ Ok - here comes the meaty stuff. Create a new C# script called **AIController**.
 ```csharp
 private const int MOVE_STRAIGHT_COST = 10;
 private const int MOVE_DIAGONAL_COST = 140;
+
+private Node[,] graph;
+public Node[,] Graph 
+{
+    get { return graph; }
+    set { graph = value; }
+}
 ```
 
 These constants hold the move costs like we used above - **10** for horizontal/vertical moves, and **140** for diagonal moves (**NB:** in this particular scenario, with the way the man 'moves' around the 3D space, I have found a larger diagonal cost works much better - this gets the enemy to prioritise straighter moves around corners etc - it looks better. In larger open rooms, he should still move diagonally though, with no obstacles in the way... you can play with this value if you want different results).
+
+We also have a referene to the `graph` created in the **MazeConstructor** - we have a pattern we've seen before, a `private` variable with a `public` version for getting and setting it from other scripts.
 
 We are going to fill in large chunks of the code here and not focus too much on the individual lines - instead, we'll get a good overview of what these methods do.
 
@@ -258,3 +269,47 @@ List<Node> FindPath(int startX, int startY, int endX, int endY)
 - So, for any neighbours that we haven't checked out already and are walkable, we will move onto the next bit of code... we add together the current **gCost** and the cost of moving to this neighbour (this is the neighbour's **new gCost**... for now... it's called `tentativeGCost` because, if you remember the example from earlier, sometimes we *reevaluate* a Node's **gCost** if we've come at it from a different path... if we ever find that a **neighbour** can have a **lower gCost** because we've come at it from a new path, we will recalculate its **fCost** and, if need be, readd it to the **openList**.
 - And that's it... continually look at neighbour Nodes, evaluate if they are good candidates or not, and add them to the **openList** - as you check out new Nodes, remove them from the **openList** and you will eventually reach the endNode.
 
+## Implementing the pathfinding in our maze
+
+Nice, so we have a pathfinding algorithm that traces from a `startNode` to an `endNode` and gives us the shortest path between them. But how do we translate that to the **Scary Man** and get him moving?
+
+First, we'll add some variables for the AI to use:
+
+```csharp
+private GameObject monster;
+public GameObject Monster 
+{
+    get { return monster; }
+    set { monster = value; }       
+}
+
+private GameObject player;
+public GameObject Player
+{
+    get { return player; }
+    set { player = value; } 
+}
+
+private float hallWidth;
+public float HallWidth 
+{
+    get { return hallWidth; }
+    set { hallWidth = value; }
+}
+
+[SerializeField] private float monsterSpeed;
+private int startRow = 0;
+private int startCol = 0;
+```
+
+Let's add a new method just below `Start` called `StartAI`:
+
+```csharp
+public void StartAI()
+{
+    startRow = data.GetUpperBound(0) - 1;
+    startCol = data.GetUpperBound(1) - 1;            
+}
+```
+
+We will set the original maze data in another method, so here we are just checking that the data is not `null` before we try to do something with it.
