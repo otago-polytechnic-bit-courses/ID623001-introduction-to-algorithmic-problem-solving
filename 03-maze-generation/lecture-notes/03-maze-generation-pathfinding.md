@@ -298,13 +298,13 @@ public float HallWidth
 }
 
 [SerializeField] private float monsterSpeed;
-private int startRow = 0;
-private int startCol = 0;
+private int startRow = -1;
+private int startCol = -1;
 ```
 
 - `monster`, `player` and `hallWidth` are just things we've made in other scripts, and we want to know about them here - so we are doing our `private` and `public` pattern, like we've done many times before.
 - `monsterSpeed` is a new variable for how fast **Scary Man** should move - it's `private` but also marked with `[SerializeField]` so we can set it in the inspector.
-- `startRow` and `startCol` will be used to figure out the `startNode` for the pathfinding... we are just defaulting them to **0** to start with, but we'll set them to proper values in just a minute.
+- `startRow` and `startCol` will be used to figure out the `startNode` for the pathfinding... we are defaulting them to **-1** to start with because this is not a valid position in our graph, so it's a check for later code to say whether or not they have been set properly.
 
 Let's replace `Start` with a new method called `StartAI`:
 
@@ -317,6 +317,4 @@ public void StartAI()
 ```
 
 We'll call this from another script when we're ready to start the AI moving, so we don't need the actual `Start` method (i.e. we don't want this to start when the script loads, only when we purposefully call the method). Here, we set `startRow` and `startCol` to be the **Scary Man's start position** - remember, we are kind of seeking backwards from where we start - so our start position for the AI is the end of the maze and the goal is (currently) the start of the maze! We `- 1` from the bounds limit because of those darn outer walls again - we know the **Scary Man** must start 1 in from the sides.
-
-
 
