@@ -318,3 +318,38 @@ public void StartAI()
 
 We'll call this from another script when we're ready to start the AI moving, so we don't need the actual `Start` method (i.e. we don't want this to start when the script loads, only when we purposefully call the method). Here, we set `startRow` and `startCol` to be the **Scary Man's start position** - remember, we are kind of seeking backwards from where we start - so our start position for the AI is the end of the maze and the goal is (currently) the start of the maze! We `- 1` from the bounds limit because of those darn outer walls again - we know the **Scary Man** must start 1 in from the sides.
 
+Now, let's add some code to `Update` to move the **Scary Man** each frame of the game:
+
+```csharp
+void Update()
+{
+    if(startRow != -1 && startCol != -1)
+    {            
+        int playerCol = (int)Mathf.Round(player.transform.position.x / hallWidth);
+        int playerRow = (int)Mathf.Round(player.transform.position.z / hallWidth);
+
+        List<Node> path = FindPath(startRow, startCol, playerRow, playerCol);
+        Vector3 startPosition = monster.transform.position;            
+
+        if(path != null && path.Count > 1)
+        {
+            Node nextNode = path[1];
+            float nextX = nextNode.y * hallWidth;
+            float nextZ = nextNode.x * hallWidth;
+            Vector3 endPosition = new Vector3(nextX, 0f, nextZ);
+
+            float step =  monsterSpeed * Time.deltaTime;
+            monster.transform.position = Vector3.MoveTowards(monster.transform.position, endPosition, step);
+
+            Vector3 targetDirection = endPosition - monster.transform.position;
+            Vector3 newDirection = Vector3.RotateTowards(monster.transform.forward, targetDirection, step, 0.0f);
+            monster.transform.rotation = Quaternion.LookRotation(newDirection);
+
+            if(monster.transform.position == endPosition){
+                startRow = nextNode.x;
+                startCol = nextNode.y;
+            }
+        }
+    }
+}
+```
