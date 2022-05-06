@@ -1,8 +1,10 @@
-## Implementing the pathfinding in our maze
+# 01: Maze generation assessment tasks - Moving the scary man
 
 Nice, so we have a pathfinding algorithm that traces from a `startNode` to an `endNode` and gives us the shortest path between them. But how do we translate that to the **Scary Man** and get him moving?
 
-First, we'll add some variables for the AI to use:
+## Implementing the pathfinding in our maze
+
+First, we'll add some variables for the AI to use... in **AIController** add the following variables:
 
 ```csharp
 private GameObject monster;
@@ -74,3 +76,8 @@ void Update()
     }
 }
 ```
+
+We know that `Update` runs every frame from the start of the script, so the first `if(startRow != -1 && startCol != -1)` is just ensuring that the `startRow` and `startCol` have been set before trying to use them in some calculations.
+
+This whole bit of code is really just translating 'real world coordinates' to cells in the data grid, and vice versa:
+- We know where the player is *physically* in the game world (the current **X** and **Z** positions of the player), but we need to translate those back to what row and column that corresponds to in our graph; each of our real maze 'cells' is `hallWidth` wide...
