@@ -55,8 +55,9 @@ void Update()
     {            
         int playerCol = (int)Mathf.Round(player.transform.position.x / hallWidth);
         int playerRow = (int)Mathf.Round(player.transform.position.z / hallWidth);
+        
         List<Node> path = FindPath(startRow, startCol, playerRow, playerCol);
-        Vector3 startPosition = monster.transform.position;            
+
         if(path != null && path.Count > 1)
         {
             Node nextNode = path[1];
@@ -80,4 +81,10 @@ void Update()
 We know that `Update` runs every frame from the start of the script, so the first `if(startRow != -1 && startCol != -1)` is just ensuring that the `startRow` and `startCol` have been set before trying to use them in some calculations.
 
 This whole bit of code is really just translating 'real world coordinates' to cells in the data grid, and vice versa:
-- We know where the player is *physically* in the game world (the current **X** and **Z** positions of the player), but we need to translate those back to what row and column that corresponds to in our graph; each of our real maze 'cells' is `hallWidth` wide...
+- We know where the player is *physically* in the game world (the current **X** and **Z** positions of the player), but we need to translate those back to what row and column that corresponds to in our graph; each of our real maze's 'cells' is `hallWidth` wide... so to get where the player is in the graph, we divide by `hallWidth` (and then round to an `int` for the index location).
+- Next we `FindPath` (call our pathfinding algorithm) to seek out a path from `startRow` and `startCol` (to begin with, the **last** free cell of the maze) to the player (`playerRow` and `playerCol`).
+- If the path is not `null` (i.e., there *is* a path returned by the algorithm), and the path is longer than 1 cell (i.e., the monster is not in the same cell as the player), then we will update the monster's position to move him closer to the player.
+- `path[0]` would be the starting node (the node the monster is on), so we want to know where he's supposed to go next; hence, we pull out `path[1]`.
+- We figure out where that is in the game world: the Node's `x` and `y` translated into world coordinates by multiplying by `hallWidth` (the reverse of what we did before)... **Note:** the game world coordinates are **X** and **Z** but our Node has properties `x` and `y` - so it's not a typo, just matching up the right axes to the right property :)
+- Then we create a `Vector3` from those coordinates.
+- The next 5 lines of code are simply moving and rotating the monster towards the next game world point - some of this should look familiar, using `Time.deltaTime` etc... there are some handy methods like `MoveTowards` and `RotateTowards` that
