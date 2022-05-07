@@ -131,4 +131,4 @@ private GameObject CreatePlayer()
 
 By having this method now return the created player, we can pass it into the **AIController**... make the exact same changes to `CreateMonster` so the `monster` is returned by that method now.
 
-And that should be it! Save the scripts, return to the editor and play the scene. Your very scary man should now start seeking you out in the maze, wherever you roam!
+And that should be it! Save the scripts, return to the editor and play the scene. Your very scary man should now start seeking you out in the maze, wherever you roam (don't forget to set the **Monster speed** to something other than 0... or he ain't gonna move very fast... or at all)!
