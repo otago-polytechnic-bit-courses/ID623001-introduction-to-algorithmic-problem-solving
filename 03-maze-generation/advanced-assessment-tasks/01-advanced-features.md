@@ -15,5 +15,16 @@ Implement this advanced functionality. These tasks are self-directed and will re
 - **Hint 1:** you can implement the spheres in a *similar* way as you made the treasure cube...
 - **Hint 2:** you can call the `FindPath` method from the **AIController** to do the pathfinding... just need to figure out the right values to pass into it...
 - **Hint 3:** you should destroy any previous path spheres before showing the path (so you don't get confused by multiple spheres on the screen).
+- **Hint 4:** here is some starter code for how you would write this (this goes in **GameController**):
+
+```csharp
+void Update()
+{
+    if(Input.GetKeyDown("f"))
+    {
+        // put your code here
+    }
+}
+```
 
 All these things we've done in one form or another! It's you job to puzzle out where we've already written some similar code that can be adapated to these tasks!
