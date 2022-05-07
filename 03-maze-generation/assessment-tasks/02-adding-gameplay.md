@@ -68,3 +68,5 @@ public void StopAI()
 ```
 
 First we set `startRow` and `startCol` back to **-1** (the condition that makes the `Update` stop trying to do things), and we destroy the actual `monster` from the game.
+
+Now - what happens when if the monster gets you? Check out the **Advanced Assessment Tasks** to find out!
