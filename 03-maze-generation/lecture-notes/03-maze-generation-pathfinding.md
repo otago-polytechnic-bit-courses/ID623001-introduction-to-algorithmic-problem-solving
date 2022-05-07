@@ -198,7 +198,7 @@ Once we have evaluated our way **to the endNode**, we will walk back through the
 Ok, now comes the biggie - the actual **A\* pathfinding** logic, as we talked about earlier:
 
 ```csharp
-List<Node> FindPath(int startX, int startY, int endX, int endY)
+public List<Node> FindPath(int startX, int startY, int endX, int endY)
 {
     Node startNode = graph[startX,startY];
     Node endNode = graph[endX, endY];
