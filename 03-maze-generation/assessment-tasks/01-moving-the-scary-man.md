@@ -90,3 +90,45 @@ This whole bit of code is really just translating 'real world coordinates' to ce
 - The next 5 lines of code are simply moving and rotating the monster towards the next game world point - some of this should look familiar, using `Time.deltaTime` etc... there are some handy methods like `MoveTowards` and `RotateTowards` that take care of some of the Vector work for us.
 - Finally, the last `if(monster.transform.position == endPosition)` is checking to see if the Scary Man has reached his destination point (the next cell in the path), if he has, we change `startRow` and `startCol` to the Node we just reached, and let the `Update` code run through with these new values - this way, the Scary Man is constantly reevaluating his goal (i.e., us!) - so no matter where you go, he will find you!
 
+### Rigging all the bits up
+
+In **GameController** add this variable:
+
+```csharp
+private AIController aIController;
+```
+
+And add this line to the bottom of `Awake`:
+
+```csharp
+aIController = GetComponent<AIController>(); 
+```
+
+Now we add some things to the `aIController`... **delete** the `CreatePlayer()` and `CreateMonster()` lines from `Start`, and instead add the following lines to the bottom of the method:
+
+```csharp
+aIController.Graph = constructor.graph;
+aIController.Player = CreatePlayer();
+aIController.Monster = CreateMonster(); 
+aIController.HallWidth = constructor.hallWidth;         
+aIController.StartAI();
+```
+
+We are using all those `public` setter methods we set up earlier to set the `Graph`, `Player`, `Monster` and `HallWidth` from info we have available to us here (you'll notice we have reused the `CreatePlayer()` and `CreateMonster()` methods here, but we'll need to make a **change** to them before they will work... we'll do that in a minute). Finally, tell the **AIController** to `StartAI()`.
+
+Now, change the **return type** of `CreatePlayer` from `void` to `GameObject`, and add a `return player;` to the very end of the method... it should look like this when you've done it:
+
+```csharp
+private GameObject CreatePlayer()
+{
+    Vector3 playerStartPosition = new Vector3(constructor.hallWidth, 1, constructor.hallWidth);  
+    GameObject player = Instantiate(playerPrefab, playerStartPosition, Quaternion.identity);
+    player.tag = "Generated";
+
+    return player;
+}
+```
+
+By having this method now return the created player, we can pass it into the **AIController**... make the exact same changes to `CreateMonster` so the `monster` is returned by that method now.
+
+And that should be it! Save the scripts, return to the editor and play the scene. Your very scary man should now start seeking you out in the maze, wherever you roam!
