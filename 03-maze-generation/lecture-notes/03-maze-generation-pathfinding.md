@@ -90,7 +90,7 @@ for (int i = 0; i < sizeRows; i++)
 
 Here we are iterating through our maze data and creating a new `Node` for each cell - for every slot marked **0** we create a Node with `isWalkable` set to **true** and for every slot marked **1** we set `isWalkable` to **false**. All the nodes are saved into our new 2D array called `graph`.
 
-Ok - here comes the meaty stuff. Create a new C# script called **AIController**. Add the following variables above `Start`:
+Ok - here comes the meaty stuff. Create a new C# script called **AIController**, and add it to the **Controller** Game Object. Add the following variables above `Start`:
 
 ```csharp
 private const int MOVE_STRAIGHT_COST = 10;
