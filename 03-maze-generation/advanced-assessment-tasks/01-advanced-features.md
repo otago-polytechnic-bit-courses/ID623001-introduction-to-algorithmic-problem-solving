@@ -27,4 +27,4 @@ void Update()
 }
 ```
 
-All these things we've done in one form or another! It's you job to puzzle out where we've already written some similar code that can be adapated to these tasks!
+All these things we've done in one form or another! It's your job to puzzle out where we've already written some similar code that can be adapated to these tasks!
