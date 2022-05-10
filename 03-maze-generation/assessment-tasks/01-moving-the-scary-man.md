@@ -39,8 +39,8 @@ Let's replace `Start` with a new method called `StartAI`:
 ```csharp
 public void StartAI()
 {
-    startRow = data.GetUpperBound(0) - 1;
-    startCol = data.GetUpperBound(1) - 1;            
+    startRow = graph.GetUpperBound(0) - 1;
+    startCol = graph.GetUpperBound(1) - 1;            
 }
 ```
 
