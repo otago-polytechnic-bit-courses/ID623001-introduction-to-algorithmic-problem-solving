@@ -7,7 +7,7 @@ A lot of things have been included in the **starter code**, including a First Pe
 - place the player at the 'start' of the maze;
 - instantiate the 'Scary Man' at the end of the maze and start his seeking behaviour;
 - create the 'treasure' to be found programatically, and place it at the 'end' of the maze;
-- and finally rig up some triggers to restart the maze if the player 'finds' the treasure.
+- and finally rig up some triggers to restart the maze if the player gets caught by the enemy.
 
 ## Setup
 
