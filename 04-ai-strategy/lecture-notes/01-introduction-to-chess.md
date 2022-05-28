@@ -21,3 +21,11 @@ It becomes very obvious what path the AI should take for this one step - the one
 ![](../../dec_tree3.png)
 
 Now the AI's best move **is** to go left, use its shield, and then move left again - this is where **AI** can become **"smarter"** than human players - the ability to *look ahead* and evaluate hundreds or thousands of options very quickly, and act in its best interest. This is how the first **computer chess** algorithms were able to beat human players. The ability of humans to consider all available options is difficult, especially if the **first option** acutally looks **immediately worse** but is eventually **the best move**.
+
+## A chess algorithm - MiniMax
+
+The algorithm we are going to use in our chess program is a simple **decision tree** called **Minimax** - this algorithm looks at all possible moves by the AI **AND** then all possible moves by the player in response to those AI moves (and then, depending on the depth of the algorithm, again the AI, and again the player, etc, etc). The idea is to **maximise** the AI's score on its turn, and **minimise** the player's score on its turn... 
+
+This works especially well in chess because it is what we call a **zero-sum game**: first, the game *has* an end, and there are 3 ways the game can end and they all 'equal' zero: you win (+1) and the opponent loses (-1); you lose (-1) and the opponent wins (+1); or neither of you win (a draw: 0).
+
+So, in its **simplest conception**, each move will determine if anyone 'wins' and attribute **+1**, **-1** or **0**... think about tic tac toe... each turn will eventually lead to one of these outcomes - the **Minimax algorithm** works through every available combination of moves until one of them returns a **+1** - then it walks back up the path that led to that outcome, and makes whatever move is the first in that path (very similar to our **pathfinding algorithm** actually).
