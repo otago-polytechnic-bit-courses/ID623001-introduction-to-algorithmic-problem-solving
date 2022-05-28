@@ -42,4 +42,14 @@ Now in chess there are **way more moves** that can be made than in tic tac toe. 
 - **Queen** 90
 - **King** 10000
 
-The **King** has the highest value because, obviously, if it is taken the game is over - so this needs to be a **strong consideration** for the algorithm. After that, the **Queen** is the next most valuable piece, down to the **Pawns** which are pretty expendable.
+The **King** has the highest value because, obviously, if it is taken the game is over - so this needs to be a **strong consideration** for the algorithm. After that, the **Queen** is the next most valuable piece, down to the **Pawns** which are pretty expendable. The full set generates the following score:
+
+- **Pawn** 10 * 8 = **80**
+- **Knight** 30 * 2 = **60**
+- **Bishop** 30 * 2 = **60**
+- **Rook** 50 * 2 = **100**
+- **Queen** 90 * 1 = **90**
+- **King** 10000 * 1 = **10000**
+- **Total** = **10390**
+
+
