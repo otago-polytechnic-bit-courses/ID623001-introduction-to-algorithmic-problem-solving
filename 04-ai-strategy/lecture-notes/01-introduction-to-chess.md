@@ -10,9 +10,9 @@ Download the **starter code** for this game, which is a fully coded chess game, 
 
 As the name suggests, the idea of **decision trees** are just trees (remember from last module: nodes and edges, in a hierarchical structure) that evaluate different scenarios and assign some sort of **weighting** to those scenarios. Let's consider a very basic example: the **AI** is deciding whether to move **left** or **right**. These form the nodes of the tree:
 
-START
-  |
-  |
- / \
-L   R
+START<br/>
+  |<br/>
+  |<br/>
+ / \<br/>
+L   R<br/>
   
