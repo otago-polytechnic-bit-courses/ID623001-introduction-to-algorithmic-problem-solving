@@ -32,3 +32,14 @@ This works especially well in chess because it is what we call a **zero-sum game
 - or neither of you win (a draw: +0 for both).
 
 So, in its **simplest conception**, each move will determine if anyone 'wins' and attribute **+1**, **-1** or **0**... think about tic tac toe... each turn will eventually lead to one of these outcomes - the **Minimax algorithm** works through every available combination of moves until one of them returns a **+1** - then it walks back up the path that led to that outcome, and makes whatever move is the first in that path (very similar to our **pathfinding algorithm** actually).
+
+Now in chess there are **way more moves** that can be made than in tic tac toe. There are more ways to win/lose, and the pieces move in different ways (some being more 'dangerous' or 'powerful' than others). So we don't just work on **+1** or **-1** for our algorithm; instead we assign **weightings** to the pieces, and use those to determine the **score** of the board at each move. A common **scoring** for chess pieces is as follows (although this is by no means 'standard'; especially the **King** score varies according to different implementations):
+
+- **Pawn** 10
+- **Knight** 30
+- **Bishop** 30
+- **Rook** 50
+- **Queen** 90
+- **King** 10000
+
+The **King** has the highest value because, obviously, if it is taken the game is over - so this needs to be a **strong consideration** for the algorithm. After that, the **Queen** is the next most valuable piece, down to the **Pawns** which are pretty expendable.
