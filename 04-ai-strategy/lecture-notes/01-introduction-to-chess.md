@@ -42,7 +42,7 @@ Now in chess there are **way more moves** that can be made than in tic tac toe. 
 - **Queen** 90
 - **King** 10000
 
-The **King** has the highest value because, obviously, if it is taken the game is over - so this needs to be a **strong consideration** for the algorithm. After that, the **Queen** is the next most valuable piece, down to the **Pawns** which are pretty expendable. The full set generates the following score:
+The **King** has the highest value because, obviously, if it is taken the game is over - so this needs to be a **strong consideration** for the algorithm. After that, the **Queen** is the next most valuable piece, down to the **Pawns** which are pretty expendable. The full set (for these values) generates the following score:
 
 - **Pawn** 10 * 8 = **80**
 - **Knight** 30 * 2 = **60**
@@ -52,4 +52,12 @@ The **King** has the highest value because, obviously, if it is taken the game i
 - **King** 10000 * 1 = **10000**
 - **Total** = **10390**
 
+### First moves
 
+So - let's take a look at what the algorithm has to **consider** for its moves. For simplicity, we are going to **ignore** any **special moves** that are available in chess (such as castling, en passant, or promotion, etc). We will assume also **2 AI players**, again for simplicity - so we can show evaluations at both moves.
+
+So, **white** moves first. **White** can move **10 pieces** on its opening move (the **8 Pawns** and the **2 Knights** are allowed to move; all other pieces are 'blocked').
+
+So - there are **10 possible moves** to consider in its **decision tree**... but wait! Actually, **each Pawn** on its first turn is allowed to move **either 1 or 2 spaces**... so actually there are **16 possible moves** for the **Pawns** + **2 moves for the Knights** = **18 total moves**... nope, that's not right either! The **Knights** have **2 possible spots** they can move to on their opening move... so we're up to **20 possible openings in chess**.
+
+![](../../white_move1.png)
