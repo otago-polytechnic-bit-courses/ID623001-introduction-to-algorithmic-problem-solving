@@ -63,3 +63,5 @@ So - there are **10 possible moves** to consider in its **decision tree**... but
 ![](../../white_move1.png)
 
 The algorithm will "make each move" and then evaluate the score of the board, adding up how many **white pieces** are still alive (+10390) and how many **black pieces** are still alive (-10390). Each of the **opening moves** comes to the same score of **0**, so it can choose any of these to make without **gaining** anything or **losing** anything. This algorithm has a **depth of 1**.
+
+And that would be an **extremely stupid AI** if we stopped there... it would continue evaluating only its own moves each turn, and really only *doing something* if it had a piece to capture, or if moving a certain piece will cause it to lose a piece - otherwise, its moves are kind of just 'random' (or as good as).
