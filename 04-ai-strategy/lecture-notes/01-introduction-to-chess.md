@@ -70,3 +70,5 @@ So, we crank up its 'intelligence' by adding another **level** to the tree: now 
 
 
 ![](../../white_move2.png)
+
+Again, there are **20 possible moves** that **black** can make as its opening... but it can make those 20 moves **in response** to each of **white's** moves! So **20 black moves** for moving **white's pawn** from **a2:a3**; **20 black moves** for moving **white's pawn** from **a2:a4**, and so on, and so on... that's **400 total moves** it calculates at a **depth of 2**. And still, every path for the opening returns a **score of 0** (I mean, it's the start of the game... not much is happening yet!)
