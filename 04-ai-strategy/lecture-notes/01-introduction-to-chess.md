@@ -75,4 +75,6 @@ Again, there are **20 possible moves** that **black** can make as its opening...
 
 What happens at a **depth of 3**? The algorithm will then try another move of the **white pieces** in response to each of the **black moves** - let's say another **20 moves per branch on the tree** (in actuality, it isn't exactly 20, as the pawns can only move 1 space after their first move; a moved pawn might now be blocking where a knight can move; a knight can move backwards so has more options after it is moved out, etc, etc...) For simplicity's sake, we'll say 20.
 
-So now the algorithm is considering **8000 possible moves** just to make its first **white move**.
+So now the algorithm is considering **8000 possible moves** just to make its first **white move**! Later, as the board opens up and pieces can start moving all sorts of places, the tree can grow very large! (for example, a **Queen**, if not blocked, can move ~20 moves all on its own!)
+
+We will work with a **depth of 3** initially in our chess game - any more levels to the tree and you get **noticeable performance issues** as the algorithm tries **hundreds of thousands** to **millions** of combinations before making its move.
