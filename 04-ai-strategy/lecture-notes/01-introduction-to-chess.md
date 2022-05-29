@@ -58,10 +58,15 @@ So - let's take a look at what the algorithm has to **consider** for its moves. 
 
 So, **white** moves first. **White** can move **10 pieces** on its opening move (the **8 Pawns** and the **2 Knights** are allowed to move; all other pieces are 'blocked').
 
-So - there are **10 possible moves** to consider in its **decision tree**... but wait! Actually, **each Pawn** on its first turn is allowed to move **either 1 or 2 spaces**... so actually there are **16 possible moves** for the **Pawns** + **2 moves for the Knights** = **18 total moves**... nope, that's not right either! The **Knights** have **2 possible spots** they can move to on their opening move... so we're up to **20 possible openings in chess**.
+So - there are **10 possible moves** to consider in its **decision tree**... but wait! Actually, **each Pawn** on its first turn is allowed to move **either 1 or 2 spaces**... so actually there are **16 possible moves** for the **Pawns** + **2 moves for the Knights** = **18 total moves**... nope, that's not right either! The **Knights** have **2 possible spots** they can move to on their opening move... so we're up to **20 possible openings in chess**. Already our decision tree has **20 possible nodes** to evaluate.
 
 ![](../../white_move1.png)
 
 The algorithm will "make each move" and then evaluate the score of the board, adding up how many **white pieces** are still alive (+10390) and how many **black pieces** are still alive (-10390). Each of the **opening moves** comes to the same score of **0**, so it can choose any of these to make without **gaining** anything or **losing** anything. This algorithm has a **depth of 1**.
 
-And that would be an **extremely stupid AI** if we stopped there... it would continue evaluating only its own moves each turn, and really only *doing something* if it had a piece to capture, or if moving a certain piece will cause it to lose a piece - otherwise, its moves are kind of just 'random' (or as good as).
+And that would be an **extremely stupid AI** if we stopped there... it would continue evaluating only its own moves each turn, and really only *doing something* if it could capture a piece - otherwise, its moves are kind of just 'random' (or as good as). It doesn't even look at whether it will **lose a piece** on the next turn!
+
+So, we crank up its 'intelligence' by adding another **level** to the tree: now our algorithm has a **depth of 2**. Let's think about what that means: the algorithm will now 'move' each of the **black pieces** to see what would happen on the opponent's turn.
+
+
+![](../../white_move2.png)
