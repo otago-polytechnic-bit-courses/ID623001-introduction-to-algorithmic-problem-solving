@@ -78,3 +78,7 @@ What happens at a **depth of 3**? The algorithm will then try another move of th
 So now the algorithm is considering **8000 possible moves** just to make its first **white move**! Later, as the board opens up and pieces can start moving all sorts of places, the tree can grow very large! (for example, a **Queen**, if not blocked, can move ~20 moves all on its own!)
 
 We will work with a **depth of 3** initially in our chess game - any more levels to the tree and you get **noticeable performance issues** as the algorithm tries **hundreds of thousands** to **millions** of combinations before making its move.
+
+## Familiarise yourself with the chess code
+
+We aren't going to write much of the actual chess game - all the board setup and move data has already been coded for you (it would just be too long to program all of this ourselves). But we need to know a little bit about what is included in the **starter code**
