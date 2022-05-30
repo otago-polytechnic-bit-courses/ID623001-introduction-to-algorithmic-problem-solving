@@ -159,3 +159,63 @@ private void Update()
     StartCoroutine(DoAIMove());
 }
 ```
+
+The couroutine itself is what runs the actual game:
+
+```csharp
+IEnumerator DoAIMove()
+{       
+    if(isCoroutineExecuting)
+        yield break;
+
+    isCoroutineExecuting = true;
+
+    if (kingDead)                    
+        Debug.Log(playerTurn + " wins!");        
+    else if (!kingDead)
+    {                     
+        MoveFunction movement = new MoveFunction(board);
+        MoveData move = null;
+        for (int y = 0; y < 8; y++)                
+            for (int x = 0; x < 8; x++)            
+            {
+                TileData tile = board.GetTileFromBoard(new Vector2(x, y));
+                if(tile.CurrentPiece != null && tile.CurrentPiece.Team == playerTurn)
+                {
+                    List<MoveData> pieceMoves = movement.GetMoves(tile.CurrentPiece, tile.Position);
+                    if(pieceMoves.Count > 0)                        
+                        move = pieceMoves[0];                        
+                }
+            }
+
+        RemoveObject("Highlight");
+        ShowMove(move);
+
+        yield return new WaitForSeconds(1);
+
+        SwapPieces(move);  
+        if(!kingDead)                
+            UpdateTurn();     
+
+        isCoroutineExecuting = false;                                                                                                         
+    }
+}
+```
+
+This code first checks if the coroutine is already running; if so, don't try to run it again.
+
+Next, it checks whether the game is over (`kingDead`) - if not, it will make a move for the current `playerTurn`.
+
+`MoveFunction movement` is a script with all the legal moves of the pieces. At the moment, our logic for making a move is **extrememly rudimentary**... all it does is iterate through the squares on the board and takes the first piece of the current `playerTurn` that can make a legal move... and moves it the first of its legal moves. That's it. Whatever it comes across first that it can move it will... so, not a very thrilling match!
+
+The `RemoveObject("Highlight")` gets rid of the previous 'move highlights'.
+
+`ShowMove(move)` instantiates new highlights for the current move.
+
+`yield return new WaitForSeconds(1)` is what creates a delay in the coroutine.
+
+`SwapPieces(move)` actual makes the move.
+
+Then the code checks if the game is now over following the current move - if the game is not over, it switches the `playerTurn` to the opponent team.
+
+Finally, we set `isCoroutineExecuting` back to false so that the coroutine can fire the next time `Update` gets called.
