@@ -128,3 +128,13 @@ The first variable `BoardManager board` is a reference to the `BoardManager` scr
 `private static GameManager instance` is the **singleton** instance for this class; it is `private`, and a `public` version called `Instance` is declared for accessing it from other scripts. Note that we don't need a `set` method because we **don't want to** set it from anywhere else.
 
 `private bool isCoroutineExecuting = false` is a flag we will use in a **coroutine** below - this is purely to add a **delay** to the game so we can watch the moves play out... otherwise it would go too fast and we wouldn't be able to tell what was happening.
+
+```csharp
+private void Awake()
+{
+    if (instance == null)        
+        instance = this;        
+    else if (instance != this)        
+        Destroy(this);    
+}  
+```
