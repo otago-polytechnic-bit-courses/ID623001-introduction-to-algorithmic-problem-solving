@@ -222,7 +222,7 @@ Finally, we set `isCoroutineExecuting` back to false so that the coroutine can f
 
 ### BoardManager.cs
 
-
+This script maintains the state of the board, in terms of managing all the 'tiles' (see below).
 
 ### TileData.cs
 
