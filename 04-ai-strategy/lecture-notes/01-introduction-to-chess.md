@@ -220,6 +220,10 @@ Then the code checks if the game is now over following the current move - if the
 
 Finally, we set `isCoroutineExecuting` back to false so that the coroutine can fire the next time `Update` gets called.
 
+### BoardManager.cs
+
+
+
 ### TileData.cs
 
 The **board** is a 2D array of `TileData` - each `TileData` has information about the tile's position on the board, and what piece (if any) is on the tile.
@@ -227,4 +231,8 @@ The **board** is a 2D array of `TileData` - each `TileData` has information abou
 ### MoveFunction.cs
 
 This script, as mentioned, returns a list of legal moves for a given piece.
+
+### ChessPiece.cs
+
+This is a really basic script that holds some info for a given piece (mostly information about its position and where it's moving to).
 
