@@ -81,4 +81,50 @@ We will work with a **depth of 3** initially in our chess game - any more levels
 
 ## Familiarise yourself with the chess code
 
-We aren't going to write much of the actual chess game - all the board setup and move data has already been coded for you (it would just be too long to program all of this ourselves). But we need to know a little bit about what is included in the **starter code**
+We aren't going to write much of the actual chess game - all the board setup and move data has already been coded for you (it would just be too long to program all of this ourselves). But we need to know a little bit about what is included in the **starter code**:
+
+### GameManager.cs
+
+This script is the main script that runs the game. It starts off with a global `enum`:
+
+```csharp
+public enum PlayerTeam
+{
+    NONE = -1,
+    WHITE,
+    BLACK,
+};
+```
+
+We use this as an easy way to say what team is currently playing: **whtie** or **black**. 
+
+Next comes the `GameManager` class, and several variables:
+
+```csharp
+BoardManager board;
+public PlayerTeam playerTurn;
+bool kingDead = false;
+
+public GameObject fromHighlight;
+public GameObject toHighlight;
+
+private static GameManager instance;    
+public static GameManager Instance
+{
+    get { return instance; }
+}
+    
+private bool isCoroutineExecuting = false;
+```
+
+The first variable `BoardManager board` is a reference to the `BoardManager` script - a lot of things in this game won't be instantiated, but rather the scripts will be marked as `static` and their methods called from the one instance - this pattern is known as a **singleton pattern** as one instance only is required - we'll see it implemented in a second.
+
+`public PlayerTeam playerTurn` is used to say whose turn it currently is.
+
+`bool kingDead = false` is a flag for when the game is over; while this is `false` the game will keep going.
+
+`fromHighlight` and `toHighlight` are materials that are assigned in the inspector - they appear on the board to show the piece moves.
+
+`private static GameManager instance` is the **singleton** instance for this class; it is `private`, and a `public` version called `Instance` is declared for accessing it from other scripts. Note that we don't need a `set` method because we **don't want to** set it from anywhere else.
+
+`private bool isCoroutineExecuting = false` is a flag we will use in a **coroutine** below - this is purely to add a **delay** to the game so we can watch the moves play out... otherwise it would go too fast and we wouldn't be able to tell what was happening.
