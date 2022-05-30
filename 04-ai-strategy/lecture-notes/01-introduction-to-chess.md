@@ -129,6 +129,8 @@ The first variable `BoardManager board` is a reference to the `BoardManager` scr
 
 `private bool isCoroutineExecuting = false` is a flag we will use in a **coroutine** below - this is purely to add a **delay** to the game so we can watch the moves play out... otherwise it would go too fast and we wouldn't be able to tell what was happening.
 
+In the `Awake` method we set the `instance` to this (the **singleton**) - we'll see this pattern a few times in the code, so we won't look at it each time - it always does the same thing.
+
 ```csharp
 private void Awake()
 {
@@ -137,4 +139,23 @@ private void Awake()
     else if (instance != this)        
         Destroy(this);    
 }  
+```
+
+The `Start` method sets up the board:
+
+```csharp
+void Start()
+{
+    board = BoardManager.Instance;        
+    board.SetupBoard();
+}
+```
+
+And the `Update` runs the coroutine mentioned above:
+
+```csharp
+private void Update()
+{
+    StartCoroutine(DoAIMove());
+}
 ```
