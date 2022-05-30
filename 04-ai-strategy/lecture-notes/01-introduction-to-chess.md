@@ -219,3 +219,8 @@ The `RemoveObject("Highlight")` gets rid of the previous 'move highlights'.
 Then the code checks if the game is now over following the current move - if the game is not over, it switches the `playerTurn` to the opponent team.
 
 Finally, we set `isCoroutineExecuting` back to false so that the coroutine can fire the next time `Update` gets called.
+
+### TileData
+
+The **board** is a 2D array of `TileData` - each `TileData` has information about the tile's position on the board, and what piece (if any) is on the tile.
+
