@@ -236,3 +236,6 @@ This script, as mentioned, returns a list of legal moves for a given piece.
 
 This is a really basic script that holds some info for a given piece (mostly information about its position and where it's moving to).
 
+### MoveData.cs
+
+This script holds some data about moves - what tile they move from, what tile they move to, and whether a piece was already on the tile being moved to (`pieceKilled`).
