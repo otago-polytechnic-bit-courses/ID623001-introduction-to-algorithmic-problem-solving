@@ -26,7 +26,7 @@ Now the AI's best move **is** to go left, use its shield, and then move left aga
 
 The algorithm we are going to use in our chess program is a simple **decision tree** called **Minimax** - this algorithm looks at all possible moves by the AI **AND** then all possible moves by the player in response to those AI moves (and then, depending on the depth of the algorithm, again the AI, and again the player, etc, etc). The idea is to **maximise** the AI's score on its turn, but also **minimise** the player's score on its turn... 
 
-This works especially well in chess because it is what we call a **zero-sum game**: first, the game *has* an end, and there are 3 ways the game can end and they all 'equal' zero:
+This works especially well in chess because it is what we call a **zero-sum game**: first, it's two player, the game *has* an end, and there are 3 ways the game can end and they all 'equal' zero:
 - you win (+1) and the opponent loses (-1); 
 - you lose (-1) and the opponent wins (+1); 
 - or neither of you win (a draw: +0 for both).
