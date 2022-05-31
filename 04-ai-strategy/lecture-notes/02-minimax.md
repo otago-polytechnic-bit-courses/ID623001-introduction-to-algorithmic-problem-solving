@@ -37,3 +37,11 @@ public static MiniMax Instance
     get { return instance; }
 }
 ```
+
+- The first two are just references to the `BoardManager` and `GameManager` **singletons**.
+- `bestMove` will be the returned from the **Minimax** algorithm - each node that is a 'better' move than the previously identified 'best move' will overwrite this variable as we check the different nodes.
+- `myScore` and `opponentScore` are used in the **evaluation function** - this is like the +10390 and -10390 we saw in the last lesson.
+- `maxDepth` is the signal to our **recursive function** when to stop - as long as we aren't at the `maxDepth` (or the end), keep calling this function for the next level down.
+- The three `List<TileData>` variables are used later when the algorithm 'fake plays' the moves, to keep track of the 'board state' each time.
+- `Stack<MoveData>` - the **Stack** is a new data structure, and quite important for this particular algorithm... as we walk down the tree, we add the moves (and then children moves, etc) into the **Stack** - the algorithm works **left to right**, and we saw in the example last lesson. A **Stack** is a **LIFO** data structure - of **last in first out**... so when we **pop** off the stack, we get the most recently added node (for example, the end node), then the next node we added *before* that etc... that's why the order is important, we keep adding the nodes in a particular order as we walk the tree, so we need to get them back out in the same order.
+- The `MoveHeuristic`
