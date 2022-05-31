@@ -100,7 +100,7 @@ public enum PlayerTeam
 };
 ```
 
-We use this as an easy way to say what team is currently playing: **whtie** or **black**. 
+We use this as an easy way to say what team is currently playing: **white** or **black**. 
 
 Next comes the `GameManager` class, and several variables:
 
