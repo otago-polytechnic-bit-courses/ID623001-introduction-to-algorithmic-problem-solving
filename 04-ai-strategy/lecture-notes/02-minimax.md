@@ -4,3 +4,4 @@ With the basic chess game working, we need to replace the rudimentary move syste
 
 ## The algorithm
 
+First create a new C# script called **MiniMax**.
