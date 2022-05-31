@@ -15,3 +15,25 @@ So technically it isn't even really considering its **next move**, but making de
 ### Coding Minimax
 
 First create a new C# script called **Minimax**. Add the following variables:
+
+```csharp
+BoardManager board;
+GameManager gameManager;
+MoveData bestMove;
+int myScore = 0;
+int opponentScore = 0;
+int maxDepth;
+
+List<TileData> tilesWithPieces = new List<TileData>();
+List<TileData> myPieces = new List<TileData>();
+List<TileData> opponentPieces = new List<TileData>();
+Stack<MoveData> moveStack = new Stack<MoveData>();
+MoveHeuristic weight = new MoveHeuristic();
+TileData[,] localBoard = new TileData[8, 8];
+
+public static MiniMax instance = null;
+public static MiniMax Instance
+{
+    get { return instance; }
+}
+```
