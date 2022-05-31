@@ -10,7 +10,7 @@ So technically it isn't even really considering its **next move**, but making de
 
 (There is a really **helpful gif** on the Wikipedia page for Minimax if you want to watch the algorithm do its thing step-by-step... I've also put it here for your convenience...)
 
-![](https://en.wikipedia.org/wiki/Minimax#/media/File:Plminmax.gif)
+![](https://upload.wikimedia.org/wikipedia/commons/e/e1/Plminmax.gif)
 
 ### Coding Minimax
 
