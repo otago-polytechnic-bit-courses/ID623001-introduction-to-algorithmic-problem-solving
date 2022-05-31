@@ -8,6 +8,10 @@ What we're going to write is a script that 'fake' plays all the possible moves f
 
 So technically it isn't even really considering its **next move**, but making decisions based on a move **3 turns away**... in **Minimax**, your **strongest move** is only as good as your opponent's **weakest move**.
 
+(There is a really **helpful gif** on the Wikipedia page for Minimax if you want to watch the algorithm do its thing step-by-step... I've also put it here for your convenience...)
+
+![](https://en.wikipedia.org/wiki/Minimax#/media/File:Plminmax.gif)
+
 ### Coding Minimax
 
 First create a new C# script called **Minimax**. Add the following variables:
