@@ -31,7 +31,7 @@ Stack<MoveData> moveStack = new Stack<MoveData>();
 MoveHeuristic weight = new MoveHeuristic();
 TileData[,] localBoard = new TileData[8, 8];
 
-public static MiniMax instance = null;
+public static MiniMax instance;
 public static MiniMax Instance
 {
     get { return instance; }
