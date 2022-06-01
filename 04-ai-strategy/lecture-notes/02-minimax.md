@@ -48,6 +48,27 @@ public static MiniMax Instance
 - `localBoard` is a **copy** of the real board that the algorithm uses to 'fake play' (we don't want to actually mess up the real board, so this is our temporary board).
 - Finally, we have the **singleton** instance properties for this class.
 
+We need a few **utility methods** before coding the actual algorithm... first:
+
+```csharp
+MoveData CreateMove(TileData from, TileData to)
+{
+    MoveData tempMove = new MoveData
+    {
+        firstPosition = from,
+        pieceMoved = from.CurrentPiece,
+        secondPosition = to
+    };
+
+    if (to.CurrentPiece != null)        
+        tempMove.pieceKilled = to.CurrentPiece;        
+
+    return tempMove;
+}
+```
+
+This method creates a `MoveData` based on a hypothetical move - where the move is coming `from`, where it's going `to`, the `piece` moving, and whether any other piece is **killed** after the move is made. (It's very similar to the `CheckAndStoreMove` function from **MoveFunction.cs**.)
+
 Next we'll add the public method that will be called from `GameManager` to run the algorithm:
 
 ```csharp
