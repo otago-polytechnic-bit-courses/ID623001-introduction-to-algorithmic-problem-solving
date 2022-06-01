@@ -47,3 +47,25 @@ public static MiniMax Instance
 - `MoveHeuristic` is a **new class** we haven't made yet... basically, it will contain the **piece weightings**, but could, in a different/bigger game, contain much more data to factor into the **evaluation function**. We'll create it soon.
 - `localBoard` is a **copy** of the real board that the algorithm uses to 'fake play' (we don't want to actually mess up the real board, so this is our temporary board).
 - Finally, we have the **singleton** instance properties for this class.
+
+Next we'll add the public method that will be called from `GameManager` to run the algorithm:
+
+```csharp
+public MoveData GetMove()
+{
+    board = BoardManager.Instance;
+    gameManager = GameManager.Instance;
+    bestMove = CreateMove(board.GetTileFromBoard(new Vector2(0, 0)), board.GetTileFromBoard(new Vector2(0, 0)));
+
+    maxDepth = 3;
+    CalculateMinMax(maxDepth, true);
+
+    return bestMove;
+} 
+```
+
+This method sets the instances for the `board` and `gameManager` and then sets up a `bestMove` - to begin with, it's just a default 'move' for tile **0,0**. This will get overwritten as the algorithm does its thing.
+
+We also set `maxDepth` to 3 - again, you can set this to whatever you want but the higher you set it, the slower your game will run.
+
+Next comes the **recursive function** - `CalculateMinMax`... it takes the `maxDepth` (so it knows when to stop), and a `bool` that will be used to switch between **mximising** and **minimising** the move scores.
