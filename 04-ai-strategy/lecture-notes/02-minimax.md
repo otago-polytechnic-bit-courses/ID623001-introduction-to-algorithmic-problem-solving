@@ -188,4 +188,59 @@ This method sets the instances for the `board` and `gameManager` and then sets u
 
 We also set `maxDepth` to 3 - again, you can set this to whatever you want but the higher you set it, the slower your game will run.
 
-Next comes the **recursive function** - `CalculateMinMax`... it takes the `maxDepth` (so it knows when to stop), and a `bool` that will be used to switch between **maximising** and **minimising** the move scores.
+Finally, we come to the **recursive function** - `CalculateMinMax`... it takes the `maxDepth` (so it knows when to stop), and a `bool` that will be used to switch between **maximising** and **minimising** the move scores.
+
+```csharp
+int CalculateMinMax(int depth, bool max)
+{
+    GetBoardState();
+
+    if (depth == 0)        
+        return Evaluate();
+
+    if (max)
+    {
+        int maxScore = int.MinValue;
+        List<MoveData> allMoves = GetMoves(gameManager.playerTurn);
+        allMoves = Shuffle(allMoves);
+        foreach (MoveData move in allMoves)
+        {
+            moveStack.Push(move);
+
+            DoFakeMove(move.firstPosition, move.secondPosition);
+            int score = CalculateMinMax(depth - 1, false);
+            UndoFakeMove();
+
+            move.score = score;
+
+            if(score > maxScore)                
+                maxScore = score;                         
+
+            if(score > bestMove.score && depth == maxDepth)
+                bestMove = move;                   
+        }
+       return maxScore;
+    }
+    else
+    {
+        PlayerTeam opponent = gameManager.playerTurn == PlayerTeam.WHITE ? PlayerTeam.BLACK : PlayerTeam.WHITE;
+        int minScore = int.MaxValue;
+        List<MoveData> allMoves = GetMoves(opponent);
+        allMoves = Shuffle(allMoves);
+        foreach (MoveData move in allMoves)
+        {
+            moveStack.Push(move);
+
+            DoFakeMove(move.firstPosition, move.secondPosition);
+            int score = CalculateMinMax(depth - 1, true);
+            UndoFakeMove();
+
+            move.score = score;
+
+            if(score < minScore)                
+                minScore = score;                            
+        }
+       return minScore;
+    }
+}
+````
