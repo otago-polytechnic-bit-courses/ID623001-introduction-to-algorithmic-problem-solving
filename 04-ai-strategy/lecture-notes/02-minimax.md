@@ -166,7 +166,7 @@ void GetBoardState()
         }     
 }
 ```
-This method goes through the pieces on the board and assigns the appropriate pieces to either **myPieces** or **opponentPieces**
+This method goes through the pieces on the board and assigns the appropriate pieces to either **myPieces** or **opponentPieces**, and calculates each player's **score**.
 
 Next, we'll add the public method that will be called from `GameManager` to run the algorithm:
 
