@@ -36,6 +36,14 @@ public static MiniMax Instance
 {
     get { return instance; }
 }
+
+private void Awake()
+{
+    if (instance == null)        
+        instance = this;        
+    else if (instance != this)        
+        Destroy(this);    
+}
 ```
 
 - The first two are just references to the `BoardManager` and `GameManager` **singletons**.
@@ -46,7 +54,7 @@ public static MiniMax Instance
 - `Stack<MoveData>` - the **Stack** is a new data structure, and quite important for this particular algorithm... as we walk down the tree, we add the moves (and then children moves, etc) into the **Stack** - the algorithm works **left to right**, and we saw in the example last lesson. A **Stack** is a **LIFO** data structure - of **last in first out**... so when we **pop** off the stack, we get the most recently added node (for example, the end node), then the next node we added *before* that etc... that's why the order is important, we keep adding the nodes in a particular order as we walk the tree, so we need to get them back out in the same order.
 - `MoveHeuristic` is a **new class** we haven't made yet... basically, it will contain the **piece weightings**, but could, in a different/bigger game, contain much more data to factor into the **evaluation function**. We'll create it soon.
 - `localBoard` is a **copy** of the real board that the algorithm uses to 'fake play' (we don't want to actually mess up the real board, so this is our temporary board).
-- Finally, we have the **singleton** instance properties for this class.
+- Finally, we have the familiar **singleton** instance properties for this class.
 
 We need a few **utility methods** before coding the actual algorithm... first:
 
@@ -69,7 +77,69 @@ MoveData CreateMove(TileData from, TileData to)
 
 This method creates a `MoveData` based on a hypothetical move - where the move is coming `from`, where it's going `to`, the `piece` moving, and whether any other piece is **killed** after the move is made. (It's very similar to the `CheckAndStoreMove` function from **MoveFunction.cs**.)
 
-Next we'll add the public method that will be called from `GameManager` to run the algorithm:
+Next, we'll add a method to get **all available moves** for a player:
+
+```csharp
+List<MoveData> GetMoves(PlayerTeam team)
+{
+    List<MoveData> turnMove = new List<MoveData>();
+    List<TileData> pieces = (team == gameManager.playerTurn) ? myPieces : opponentPieces;      
+
+    foreach (TileData tile in pieces)
+    {
+        MoveFunction movement = new MoveFunction(board);
+        List<MoveData> pieceMoves = movement.GetMoves(tile.CurrentPiece, tile.Position);
+
+        foreach (MoveData move in pieceMoves)
+        {
+            MoveData newMove = CreateMove(move.firstPosition, move.secondPosition);
+            turnMove.Add(newMove);
+        }
+    }
+    return turnMove;
+}
+```
+This method simply iterates through all the available pieces for this player, and gets a `List` of `MoveData` for all legal moves.
+
+This next method is used to perform the 'fake moves' by the algorithm:
+
+```csharp
+void DoFakeMove(TileData currentTile, TileData targetTile)
+{
+    targetTile.SwapFakePieces(currentTile.CurrentPiece);
+    currentTile.CurrentPiece = null;
+}
+```
+
+And, we need something to **undo** the moves again, for moving back up the tree and evaluating previous states:
+
+```csharp
+void UndoFakeMove()
+{
+    MoveData tempMove = moveStack.Pop();
+    TileData movedTo = tempMove.secondPosition;
+    TileData movedFrom = tempMove.firstPosition;
+    ChessPiece pieceKilled = tempMove.pieceKilled;
+    ChessPiece pieceMoved = tempMove.pieceMoved;
+
+    movedFrom.CurrentPiece = movedTo.CurrentPiece;
+    movedTo.CurrentPiece = (pieceKilled != null) ? pieceKilled : null;      
+}
+```
+
+In this method, we **pop** the last move off the stack and basically revert the move (position, pieces killed, etc).
+
+Next, we'll add our very simple **evaluation function**, which simply subtracts the opponent's score from our score (like we saw in the examples from last lesson).
+
+```csharp
+int Evaluate()
+{
+    float pieceDifference = myScore - opponentScore;            
+    return Mathf.RoundToInt(pieceDifference * 100);
+}
+```
+
+Next, we'll add the public method that will be called from `GameManager` to run the algorithm:
 
 ```csharp
 public MoveData GetMove()
@@ -89,4 +159,4 @@ This method sets the instances for the `board` and `gameManager` and then sets u
 
 We also set `maxDepth` to 3 - again, you can set this to whatever you want but the higher you set it, the slower your game will run.
 
-Next comes the **recursive function** - `CalculateMinMax`... it takes the `maxDepth` (so it knows when to stop), and a `bool` that will be used to switch between **mximising** and **minimising** the move scores.
+Next comes the **recursive function** - `CalculateMinMax`... it takes the `maxDepth` (so it knows when to stop), and a `bool` that will be used to switch between **maximising** and **minimising** the move scores.
