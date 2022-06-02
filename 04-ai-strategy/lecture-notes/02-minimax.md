@@ -134,8 +134,8 @@ Next, we'll add our very simple **evaluation function**, which simply subtracts 
 ```csharp
 int Evaluate()
 {
-    float pieceDifference = myScore - opponentScore;            
-    return Mathf.RoundToInt(pieceDifference * 100);
+    int pieceDifference = myScore - opponentScore;            
+    return pieceDifference;
 }
 ```
 
