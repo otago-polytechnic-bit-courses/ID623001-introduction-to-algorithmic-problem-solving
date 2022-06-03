@@ -243,4 +243,7 @@ int CalculateMinMax(int depth, bool max)
        return minScore;
     }
 }
-````
+```
+
+First, it calls `GetBoardState()` for whatever node we're on currently. If we're at `depth == 0` that means we're at an end node (we pass in the `maxDepth` and then we will **-1** each time we move down a level... so eventually, we will reach 0, and that's where we'll stop. When we reach `depth == 0` we return the `Evaluate()` function - add up the weight of our pieces, the opponent's pieces, and calculate this move's score.
+
