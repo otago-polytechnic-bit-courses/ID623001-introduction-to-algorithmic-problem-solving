@@ -219,7 +219,7 @@ int CalculateMinMax(int depth, bool max)
             if(score > bestMove.score && depth == maxDepth)
                 bestMove = move;                   
         }
-       return maxScore;
+        return maxScore;
     }
     else
     {
@@ -240,11 +240,12 @@ int CalculateMinMax(int depth, bool max)
             if(score < minScore)                
                 minScore = score;                            
         }
-       return minScore;
+        return minScore;
     }
 }
 ```
 
 First, it calls `GetBoardState()` for whatever node we're on currently. If we're at `depth == 0` that means we're at an end node (we pass in the `maxDepth` and then we will **-1** each time we move down a level... so eventually, we will reach 0, and that's where we'll stop. When we reach `depth == 0` we return the `Evaluate()` function - add up the weight of our pieces, the opponent's pieces, and calculate this move's score.
 
-The condition `if(max)`
+The condition `if(max)` is for determing if we are **maximising** or **minimising** this current level. Each time we call this function again, we will pass in the **opposite** boolean.
+
