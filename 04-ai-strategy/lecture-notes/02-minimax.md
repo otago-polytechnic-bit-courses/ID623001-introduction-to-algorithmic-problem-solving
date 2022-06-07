@@ -29,8 +29,8 @@ List<TileData> opponentPieces = new List<TileData>();
 Stack<MoveData> moveStack = new Stack<MoveData>();
 MoveHeuristic weight = new MoveHeuristic();
 
-public static MiniMax instance;
-public static MiniMax Instance
+public static Minimax instance;
+public static Minimax Instance
 {
     get { return instance; }
 }
@@ -259,3 +259,43 @@ Then we iterate over all the moves and:
 - `move.score = score;` set the score of this move (node) to whatever was returned from `CalculateMinMax` - remember, at the end nodes, this will be `Evaluate()`, and at each of the nodes above, it will be one of the returns here - either `maxScore` or `minScore`
 - Then do some comparisons - e.g. if `score` is larger than `maxScore`, this is the **new max score** for this level.
 - On the **max** turns, there is also this line: `if(score > bestMove.score && depth == maxDepth)` - basically, this is for the **top node** - once we're back up the tree, check each of the scores again the `bestMove.score` - overwrite as necessary.
+
+The **min** side of the condition is the same, but the comparisons are reversed. 
+
+Finally, we need to add some code to **GameManager.cs** to make this all work. First add this variable:
+
+```csharp
+Minimax minimax;
+```
+
+Then in `Start` add this:
+
+```csharp
+minimax = Minimax.Instance;
+```
+
+And finally replace all this in `DoAIMove`:
+
+```csharp
+MoveFunction movement = new MoveFunction(board);
+MoveData move = null;
+for (int y = 0; y < 8; y++)                
+    for (int x = 0; x < 8; x++)            
+    {
+        TileData tile = board.GetTileFromBoard(new Vector2(x, y));
+        if(tile.CurrentPiece != null && tile.CurrentPiece.Team == playerTurn)
+        {
+            List<MoveData> pieceMoves = movement.GetMoves(tile.CurrentPiece, tile.Position);
+            if(pieceMoves.Count > 0)                        
+                move = pieceMoves[0];                        
+        }
+    }
+```
+
+With:
+
+```csharp
+MoveData move = minimax.GetMove();
+```
+
+And now your chess game should play **much better**!
