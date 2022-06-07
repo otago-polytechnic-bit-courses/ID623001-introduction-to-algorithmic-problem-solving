@@ -202,7 +202,6 @@ int CalculateMinMax(int depth, bool max)
     {
         int maxScore = int.MinValue;
         List<MoveData> allMoves = GetMoves(gameManager.playerTurn);
-        allMoves = Shuffle(allMoves);
         foreach (MoveData move in allMoves)
         {
             moveStack.Push(move);
@@ -226,7 +225,6 @@ int CalculateMinMax(int depth, bool max)
         PlayerTeam opponent = gameManager.playerTurn == PlayerTeam.WHITE ? PlayerTeam.BLACK : PlayerTeam.WHITE;
         int minScore = int.MaxValue;
         List<MoveData> allMoves = GetMoves(opponent);
-        allMoves = Shuffle(allMoves);
         foreach (MoveData move in allMoves)
         {
             moveStack.Push(move);
@@ -249,3 +247,15 @@ First, it calls `GetBoardState()` for whatever node we're on currently. If we're
 
 The condition `if(max)` is for determing if we are **maximising** or **minimising** this current level. Each time we call this function again, we will pass in the **opposite** boolean.
 
+Both parts of the **if statement** are kind of the same (just reversed), so we'll just kind of cover them once. First we set the **opposite** score of what we're trying to do - e.g., if we're **maximising** we set `int maxScore = int.MinValue;` - the lowest value possible as the default - then as we go, we compare higher scores against this and keep overwriting it with higher scores.
+
+We get all possible moves for the player in question: `List<MoveData> allMoves = GetMoves(gameManager.playerTurn);`
+
+Then we iterate over all the moves and:
+- push the move onto the `Stack` (remember, this is so we can walk backwards (**pop**) through the nodes)
+- `DoFakeMove(move.firstPosition, move.secondPosition);` to "do" this move
+- `int score = CalculateMinMax(depth - 1, false);` call this function again (**recursion**) for the next level down (`depth - 1`), and reverse the `max` boolean.
+- `UndoFakeMove();` to get the pieces back when they were before
+- `move.score = score;` set the score of this move (node) to whatever was returned from `CalculateMinMax` - remember, at the end nodes, this will be `Evaluate()`, and at each of the nodes above, it will be one of the returns here - either `maxScore` or `minScore`
+- Then do some comparisons - e.g. if `score` is larger than `maxScore`, this is the **new max score** for this level.
+- On the **max** turns, there is also this line: `if(score > bestMove.score && depth == maxDepth)` - basically, this is for the **top node** - once we're back up the tree, check each of the scores again the `bestMove.score` - overwrite as necessary.
