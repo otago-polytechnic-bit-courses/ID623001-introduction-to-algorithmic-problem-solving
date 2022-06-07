@@ -6,7 +6,7 @@ As discussed, this algorithm gets expensive due to the sheer number of nodes it 
 
 The concept behind alpha beta pruning is to essentially maintain candidates for the **maximum** (alpha) and **minimum** values (beta) at each level, and stop checking **a subtree** when you realize nothing down that branch can beat your current candidate (this is called **pruning**). Check out the following example image:
 
-![](https://static.javatpoint.com/tutorial/ai/images/alpha-beta-pruning-step8.png)
+![](https://static.javatpoint.com/tutorial/ai/images/alpha-beta-pruning-step7.png)
 
 This tree has already had some branches pruned (the 'x' marks on the tree), but this later step illustrates the benefit of this approach... 
 
