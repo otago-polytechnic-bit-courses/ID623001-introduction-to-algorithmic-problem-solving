@@ -208,15 +208,16 @@ int CalculateMinMax(int depth, bool max)
 
             DoFakeMove(move.firstPosition, move.secondPosition);
             int score = CalculateMinMax(depth - 1, false);
-            UndoFakeMove();
-
-            move.score = score;
+            UndoFakeMove();            
 
             if(score > maxScore)                
                 maxScore = score;                         
 
             if(score > bestMove.score && depth == maxDepth)
-                bestMove = move;                   
+            {
+                move.score = score;
+                bestMove = move;   
+            }
         }
         return maxScore;
     }
@@ -232,8 +233,6 @@ int CalculateMinMax(int depth, bool max)
             DoFakeMove(move.firstPosition, move.secondPosition);
             int score = CalculateMinMax(depth - 1, true);
             UndoFakeMove();
-
-            move.score = score;
 
             if(score < minScore)                
                 minScore = score;                            
