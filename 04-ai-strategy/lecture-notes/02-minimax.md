@@ -257,7 +257,7 @@ Then we iterate over all the moves and:
 - `UndoFakeMove();` to get the pieces back when they were before
 - then we will set the score of this move to whatever was returned from `CalculateMinMax` - remember, at the end nodes, this will be `Evaluate()`, and at each of the nodes above, it will be one of the returns here - either `maxScore` or `minScore`
 - Then do some comparisons - e.g. if `score` is larger than `maxScore`, this is the **new max score** for this level.
-- On the **max** turns, there is also this line: `if(score > bestMove.score && depth == maxDepth)` - basically, this is for the **top node** - once we're back up the tree, check each of the scores again the `bestMove.score` - overwrite as necessary.
+- On the **max** turns, there is also this line: `if(score > bestMove.score && depth == maxDepth)` - basically, this is for the **top node** - once we're back up the tree, check each of the scores against the `bestMove.score` - overwrite as necessary.
 
 The **min** side of the condition is the same, but the comparisons are reversed. 
 
