@@ -20,4 +20,7 @@ Obviously this approach works best when the number of branches that can be prune
 
 ### Coding Alph-Beta pruning into our game
 
-All we need to do is keep track of the **alpha** and **beta** candidates as we traverse the tree.
+All we need to do is keep track of the **alpha** and **beta** candidates as we traverse the tree. The rules are
+
+- on a **maximizing** level, if a **score** is greater than the current **alpha** it becomes the new **alpha**; and if a **score** is greater than the current **beta** you can stop checking children of this node
+- on a **minimizing** level, if a **score** is less than the current **beta** it becomes the new **beta**
