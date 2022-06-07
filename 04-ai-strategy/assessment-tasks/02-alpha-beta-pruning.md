@@ -17,3 +17,7 @@ This tree has already had a branch pruned (the 'x' mark coming down from Node E)
 - So the algorithm prunes the whole **subtree** of Node G and we've saved evaluating 3 nodes at this step (which doesn't seem like much, but the algorithm also earlier pruned another node, so there are a total of 4 nodes here that it didn't need to evaluate... and this tree only has 15 nodes total - so even in this trivial example we've improved the efficiency by 27%)
 
 Obviously this approach works best when the number of branches that can be pruned is higher. And that depends heavily on the order that the nodes are evaluated in - imagine Node D and E in the image were swapped and the algorithm evaluated E first... then the candidate would be 9, and it would have to check both options of D for possible lower values. In a **real chess engine** the moves would be ordered in certain ways to make the tree more 'prunable' and thus more efficient (e.g. certain pieces at certain positions will be known to be better moves for attacking or defending, etc... there are usually lookup tables of moves that can help prioritise a certain order to the tree - this is beyond the scope of this class, but it's interesting to know about).
+
+### Coding Alph-Beta pruning into our game
+
+All we need to do is keep track of the **alpha** and **beta** candidates as we traverse the tree.
