@@ -4,3 +4,6 @@ As discussed, this algorithm gets expensive due to the sheer number of nodes it 
 
 ## Alpha-Beta pruning
 
+The concept behind alpha beta pruning is to essentially maintain candidates for the **maximum** (alpha) and **minimum** values (beta) at each level, and stop checking **a subtree** when you realize nothing down that branch can beat your current candidate (this is called **pruning**). Check out the following example image:
+
+![](https://static.javatpoint.com/tutorial/ai/images/alpha-beta-pruning-step8.png)
