@@ -28,5 +28,7 @@ All we need to do is keep track of the **alpha** and **beta** candidates as we t
 The first change we will make is to the signature of `CalculateMinMax`:
 
 ```csharp
-
+int CalculateMinMax(int depth, int alpha, int beta, bool max)
 ```
+
+So, it's mostly the same (`depth` and `max`), but we've added the `alpha` and `beta` variables as well to keep passing up and down the tree.
