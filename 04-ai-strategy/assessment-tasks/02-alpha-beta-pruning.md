@@ -8,7 +8,7 @@ The concept behind alpha beta pruning is to essentially maintain candidates for 
 
 ![](https://static.javatpoint.com/tutorial/ai/images/alpha-beta-pruning-step7.png)
 
-This tree has already had some branches pruned (the 'x' marks on the tree), but this later step illustrates the benefit of this approach... 
+This tree has already had a branch pruned (the 'x' mark coming down from Node E), but this is a later step that illustrates the benefit of this approach... 
 
 - Node A is looking to pick the **maximum** option from B and C
 - Node B's current value is already 3
