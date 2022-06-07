@@ -255,7 +255,7 @@ Then we iterate over all the moves and:
 - `DoFakeMove(move.firstPosition, move.secondPosition);` to "do" this move
 - `int score = CalculateMinMax(depth - 1, false);` call this function again (**recursion**) for the next level down (`depth - 1`), and reverse the `max` boolean.
 - `UndoFakeMove();` to get the pieces back when they were before
-- `move.score = score;` set the score of this move (node) to whatever was returned from `CalculateMinMax` - remember, at the end nodes, this will be `Evaluate()`, and at each of the nodes above, it will be one of the returns here - either `maxScore` or `minScore`
+- then we will set the score of this move to whatever was returned from `CalculateMinMax` - remember, at the end nodes, this will be `Evaluate()`, and at each of the nodes above, it will be one of the returns here - either `maxScore` or `minScore`
 - Then do some comparisons - e.g. if `score` is larger than `maxScore`, this is the **new max score** for this level.
 - On the **max** turns, there is also this line: `if(score > bestMove.score && depth == maxDepth)` - basically, this is for the **top node** - once we're back up the tree, check each of the scores again the `bestMove.score` - overwrite as necessary.
 
