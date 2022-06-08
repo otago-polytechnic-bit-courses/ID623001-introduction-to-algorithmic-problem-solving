@@ -39,18 +39,44 @@ Next, you can get rid of these two lines, as we won't be using these variables a
 - `int maxScore = int.MinValue;`
 - `int minScore = int.MaxValue;`
 
-And since we aren't using those variables anymore, these sections of code can go as well:
+Since we aren't using those variables anymore, we can change the returns of each side of the condition; instead of `return maxScore` we will `return alpha`, and instead of `return minScore` we will `return beta`.
 
-```csharp
-if(score > maxScore)                
-    maxScore = score;
-```
-
-And:
+These sections of code can be replaced as well:
 
 ```csharp
 if(score < minScore)                
     minScore = score;
 ```
 
-And we can change the returns of each side of the condition; instead of `return maxScore` we will `return alpha`, and instead of `return minScore` we will `return beta`.
+With:
+
+```csharp
+if (score < beta)                
+    beta = score;
+```
+
+The `max` condition is slightly different... we will replace:
+
+```csharp
+if(score > maxScore)                
+    maxScore = score;                      
+
+if(score > bestMove.score && depth == maxDepth)
+{
+    move.score = score;
+    bestMove = move;                    
+}
+```
+
+With:
+
+```csharp
+if (score > alpha)
+{
+    alpha = score;
+    move.score = score;
+
+    if (score > bestMove.score && depth == maxDepth)                                                                
+        bestMove = move;                                                            
+}
+```
