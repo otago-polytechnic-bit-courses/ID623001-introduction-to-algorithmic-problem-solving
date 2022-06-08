@@ -38,3 +38,17 @@ Everywhere you call `CalculateMinMax` you need to add `alpha` and `beta` to the 
 Next, you can get rid of these two lines, as we won't be using these variables anymore: 
 - `int maxScore = int.MinValue;`
 - `int minScore = int.MaxValue;`
+
+And since we aren't using those variables anymore, these sections of code can go as well:
+
+```csharp
+if(score > maxScore)                
+    maxScore = score;
+```
+
+And:
+
+```csharp
+if(score < minScore)                
+    minScore = score;
+```
