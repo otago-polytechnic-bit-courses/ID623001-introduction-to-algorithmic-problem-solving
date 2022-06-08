@@ -52,3 +52,5 @@ And:
 if(score < minScore)                
     minScore = score;
 ```
+
+And we can change the returns of each side of the condition; instead of `return maxScore` we will `return alpha`, and instead of `return minScore` we will `return beta`.
