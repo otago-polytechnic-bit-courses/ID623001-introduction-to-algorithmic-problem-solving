@@ -80,3 +80,17 @@ if (score > alpha)
         bestMove = move;                                                            
 }
 ```
+
+Finally, we need those conditions to 'prune' the branches (or, another way to think about it, break out of the loop that is checking children). Add these as the last lines of code *inside* the `foreach` loops:
+
+```csharp
+if (score >= beta)                
+    break;
+```
+
+And:
+
+```csharp
+if (score <= alpha)                
+    break; 
+```
