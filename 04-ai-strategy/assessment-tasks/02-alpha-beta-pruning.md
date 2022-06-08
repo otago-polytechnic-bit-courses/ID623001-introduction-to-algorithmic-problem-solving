@@ -32,3 +32,9 @@ int CalculateMinMax(int depth, int alpha, int beta, bool max)
 ```
 
 So, it's mostly the same (`depth` and `max`), but we've added the `alpha` and `beta` variables as well to keep passing up and down the tree.
+
+Everywhere you call `CalculateMinMax` you need to add `alpha` and `beta` to the signature as well.
+
+Next, you can get rid of these two lines, as we won't be using these variables anymore: 
+- `int maxScore = int.MinValue;`
+- `int minScore = int.MaxValue;`
