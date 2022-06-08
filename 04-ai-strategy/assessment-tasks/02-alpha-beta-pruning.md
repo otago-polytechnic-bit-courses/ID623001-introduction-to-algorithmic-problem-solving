@@ -97,4 +97,7 @@ if (score <= alpha)
 
 And that's it! Your algorithm should now prune branches that wouldn't have affected its final decision anyway... and your efficiency should be greatly improved. You can test this by declaring a `int count` variable in this class, setting it to **0** at the beginning of `GetMove()`, incrementing it at the beginning of `CalculateMinMax` (`count++`), and adding `Debug.Log(count);` just before the return in `GetMove()`. This will tell you how many times the algorithm checked a node. You can compare to the previous way we wrote the Minimax code, to now with the alpha-beta pruning. For example, here are some of my counts as an example:
 
-![](../../minmax%20counts.JPG)
+| Depth 3, no AB-pruning      | Depth 3, with AB-pruning |
+| ----------- | ----------- |
+| ![](../../minmax%20counts.JPG)      | ![](../../alpha%20beta%20pruning%20level%203.JPG)       |
+
