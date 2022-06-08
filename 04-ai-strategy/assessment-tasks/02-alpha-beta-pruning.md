@@ -101,3 +101,7 @@ And that's it! Your algorithm should now prune branches that wouldn't have affec
 | ----------- | ----------- |
 | ![](../../minmax%20counts.JPG)      | ![](../../alpha%20beta%20pruning%20level%203.JPG)       |
 
+
+| Depth 5, no AB-pruning      | Depth 5, with AB-pruning |
+| ----------- | ----------- |
+| ![](../../no%20alpha%20pruning%20level%205.JPG)      | ![](../../alpha%20beta%20pruning%20level%205.JPG)       |
