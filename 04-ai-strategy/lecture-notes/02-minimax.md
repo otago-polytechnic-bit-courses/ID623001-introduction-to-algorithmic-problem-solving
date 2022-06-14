@@ -297,4 +297,4 @@ With:
 MoveData move = minimax.GetMove();
 ```
 
-And now your chess game should play **much better**!
+Save the script and return to the editor. Add your **Minimax** component to the **GameManager**. Run the game, and now your chess game should play **much better**!
