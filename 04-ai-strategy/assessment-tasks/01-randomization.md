@@ -27,4 +27,4 @@ This shuffles a list (of anything... `T` here is a placeholder for any type) and
 allMoves = Shuffle(allMoves);
 ```
 
-Now your game should be differet each time (this also helps avoid those annoying 'back-and-forth' moves that the AI tends to do when there are no obvious beneficial moves, and it just kind of moves a piece left and then right, over and over again while it waits for something to open up).
+Now your game should be different each time (this also helps avoid those annoying 'back-and-forth' moves that the AI tends to do when there are no obvious beneficial moves, and it just kind of moves a piece left and then right, over and over again while it waits for something to open up).
