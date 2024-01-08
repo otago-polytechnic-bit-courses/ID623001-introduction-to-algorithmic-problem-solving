@@ -1,4 +1,4 @@
-# 02: AI Strategy assessment tasks - Alpha-Beta pruning
+# 01: AI Strategy Assessment Tasks
 
 As discussed, this algorithm gets expensive due to the sheer number of nodes it needs to evaluate in the tree - if we could add more levels, we could make the AI 'smarter'. One method of improving the efficiency of the algorithm is called **Alpha-Beta pruning**.
 
@@ -8,7 +8,7 @@ The concept behind alpha beta pruning is to essentially maintain candidates for 
 
 ![](https://static.javatpoint.com/tutorial/ai/images/alpha-beta-pruning-step7.png)
 
-This tree has already had a branch pruned (the 'x' mark coming down from Node E), but this is a later step that illustrates the benefit of this approach... 
+This tree has already had a branch pruned (the 'x' mark coming down from Node E), but this is a later step that illustrates the benefit of this approach...
 
 - Node A is looking to pick the **maximum** option from B and C
 - Node B's current value is already 3
@@ -35,7 +35,8 @@ So, it's mostly the same (`depth` and `max`), but we've added the `alpha` and `b
 
 Everywhere you call `CalculateMinMax` you need to add `alpha` and `beta` to the signature as well (these will be `int.MinValue` and `int.MaxValue` in the first call, respectively - the default values to be overwritten).
 
-Next, you can get rid of these two lines, as we won't be using these variables anymore: 
+Next, you can get rid of these two lines, as we won't be using these variables anymore:
+
 - `int maxScore = int.MinValue;`
 - `int minScore = int.MaxValue;`
 
@@ -44,27 +45,27 @@ Since we aren't using those variables anymore, we can change the returns of each
 These sections of code can be replaced as well:
 
 ```csharp
-if(score < minScore)                
+if(score < minScore)
     minScore = score;
 ```
 
 With:
 
 ```csharp
-if (score < beta)                
+if (score < beta)
     beta = score;
 ```
 
 The `max` condition is slightly different... we will replace:
 
 ```csharp
-if(score > maxScore)                
-    maxScore = score;                      
+if(score > maxScore)
+    maxScore = score;
 
 if(score > bestMove.score && depth == maxDepth)
 {
     move.score = score;
-    bestMove = move;                    
+    bestMove = move;
 }
 ```
 
@@ -76,32 +77,31 @@ if (score > alpha)
     alpha = score;
     move.score = score;
 
-    if (score > bestMove.score && depth == maxDepth)                                                                
-        bestMove = move;                                                            
+    if (score > bestMove.score && depth == maxDepth)
+        bestMove = move;
 }
 ```
 
-Finally, we need those conditions to 'prune' the branches (or, another way to think about it, break out of the loop that is checking children). Add these as the last lines of code *inside* the `foreach` loops:
+Finally, we need those conditions to 'prune' the branches (or, another way to think about it, break out of the loop that is checking children). Add these as the last lines of code _inside_ the `foreach` loops:
 
 ```csharp
-if (score >= beta)                
+if (score >= beta)
     break;
 ```
 
 And:
 
 ```csharp
-if (score <= alpha)                
-    break; 
+if (score <= alpha)
+    break;
 ```
 
 And that's it! Your algorithm should now prune branches that wouldn't have affected its final decision anyway... and your efficiency should be greatly improved. You can test this by declaring a `int count` variable in this class, setting it to **0** at the beginning of `GetMove()`, incrementing it at the beginning of `CalculateMinMax` (`count++`), and adding `Debug.Log(count);` just before the return in `GetMove()`. This will tell you how many times the algorithm checked a node. You can compare to the previous way we wrote the Minimax code, to now with the alpha-beta pruning. For example, here are some of my counts as an example:
 
-| Depth 3, no AB-pruning      | Depth 3, with AB-pruning |
-| ----------- | ----------- |
-| ![](../../minmax%20counts.JPG)      | ![](../../alpha%20beta%20pruning%20level%203.JPG)       |
+| Depth 3, no AB-pruning         | Depth 3, with AB-pruning                          |
+| ------------------------------ | ------------------------------------------------- |
+| ![](../../resources/img/minmax%20counts.JPG) | ![](../../resources/img/alpha%20beta%20pruning%20level%203.JPG) |
 
-
-| Depth 5, no AB-pruning      | Depth 5, with AB-pruning |
-| ----------- | ----------- |
-| ![](../../no%20alpha%20pruning%20level%205.JPG)      | ![](../../alpha%20beta%20pruning%20level%205.JPG)       |
+| Depth 5, no AB-pruning                          | Depth 5, with AB-pruning                          |
+| ----------------------------------------------- | ------------------------------------------------- |
+| ![](../../resources/img/no%20alpha%20pruning%20level%205.JPG) | ![](../../resources/img/alpha%20beta%20pruning%20level%205.JPG) |

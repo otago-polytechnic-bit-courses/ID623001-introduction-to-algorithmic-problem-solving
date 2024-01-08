@@ -1,4 +1,4 @@
-# 01: Maze generation assessment tasks - Moving the scary man
+# 01: Maze Generation Assessment Tasks
 
 Nice, so we have a pathfinding algorithm that traces from a `startNode` to an `endNode` and gives us the shortest path between them. But how do we translate that to the **Scary Man** and get him moving?
 

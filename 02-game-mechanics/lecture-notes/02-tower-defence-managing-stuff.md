@@ -1,4 +1,4 @@
-# 02: Game Mechanics - Managing stuff (resources, enemies)
+# 02: Game Mechanics - Managing Stuff
 
 ## Game manager
 

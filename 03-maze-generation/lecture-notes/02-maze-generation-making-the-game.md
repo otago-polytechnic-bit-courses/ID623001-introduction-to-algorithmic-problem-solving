@@ -1,4 +1,4 @@
-# 02: Maze Generation - Making the game
+# 02: Maze Generation - Making the Game
 
 In the last section we created a random maze and procedurally generated the environment (floor, ceiling and walls). Now we want to actually create a game around the maze, where the player walks around the dungeon to locate the 'treasure' while avoiding the crawling 'Scary Man' that is constantly hunting them.
 
@@ -19,7 +19,7 @@ public int goalRow{ get; private set; }
 public int goalCol{ get; private set; }
 ```
 
-`hallWidth` will be used later for placing the player and the treasure in the middle of the hallway. `goalRow` and `goalCol` are references to where the treasure (and Scary Man) will be placed. 
+`hallWidth` will be used later for placing the player and the treasure in the middle of the hallway. `goalRow` and `goalCol` are references to where the treasure (and Scary Man) will be placed.
 
 We can set `hallWidth` by putting this code in `Awake`, below the creation of the `meshGenerator`:
 
@@ -52,19 +52,19 @@ This method simply finds all the GameObjects with the **Generated** tag and dest
 
 ```csharp
 public void GenerateNewMaze(int sizeRows, int sizeCols)
-{        
-    DisposeOldMaze();  
-    
+{
+    DisposeOldMaze();
+
     if (sizeRows % 2 == 0 && sizeCols % 2 == 0)
         Debug.LogError("Odd numbers work better for dungeon size.");
-        
+
     data = FromDimensions(sizeRows, sizeCols);
 
     goalRow = data.GetUpperBound(0) - 1;
-    goalCol = data.GetUpperBound(1) - 1;                                    
+    goalCol = data.GetUpperBound(1) - 1;
 
-    DisplayMaze();            
-}  
+    DisplayMaze();
+}
 ```
 
 ## Adding the player
@@ -80,7 +80,7 @@ First we will create a method called `CreatePlayer` and add this code to it:
 ```csharp
 private void CreatePlayer()
 {
-    Vector3 playerStartPosition = new Vector3(constructor.hallWidth, 1, constructor.hallWidth);  
+    Vector3 playerStartPosition = new Vector3(constructor.hallWidth, 1, constructor.hallWidth);
     GameObject player = Instantiate(playerPrefab, playerStartPosition, Quaternion.identity);
     player.tag = "Generated";
 }
@@ -104,10 +104,10 @@ We instantiate the player as we have in previous games, passing in a prefab, the
 Finally, we tag the `player` with **"Generated"** for later use. Call this method in `Start` below `constructor.GenerateNewMaze(rows,cols);`:
 
 ```csharp
-void Start() 
+void Start()
 {
     constructor.GenerateNewMaze(rows,cols);
-        
+
     CreatePlayer();
 }
 ```
@@ -129,17 +129,17 @@ private void CreateMonster()
 {
     Vector3 monsterPosition = new Vector3(constructor.goalCol * constructor.hallWidth, 0f, constructor.goalRow * constructor.hallWidth);
     GameObject monster = Instantiate(monsterPrefab, monsterPosition, Quaternion.identity);
-    monster.tag = "Generated";    
+    monster.tag = "Generated";
 }
 ```
 
 Virtually the same, except we are using the `goalCol` and `goalRow` from the **MazeConstructor** in our calculations of where the final cell is in the real world. Add `CreateMonster()` to `Start`:
 
 ```csharp
-void Start() 
+void Start()
 {
     constructor.GenerateNewMaze(rows,cols);
-        
+
     CreatePlayer();
     CreateMonster();
 }

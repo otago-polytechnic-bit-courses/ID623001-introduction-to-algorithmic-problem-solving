@@ -2,7 +2,7 @@
 
 ## Starter project
 
-Download the **starter code** and open it as a project in Unity. *We may need to do a couple things to fix some missing references before we get started*.
+Download the **starter code** and open it as a project in Unity. _We may need to do a couple things to fix some missing references before we get started_.
 
 - Open the **Player** prefab. If you have a 'missing script' error, select the **FpsMovement** script. Drag the **Main Camera** onto the **Head Cam** slot. Save the prefab.
 - Open the **Monster** prefab. The **Animator** > **Controller** should be 'Low Crawl'. Select the **WhiteClown** in the hierarchy. The **Mesh** should be **WhiteClown**. Materials > Element 0 should be **whiteclown_diffuse**.
@@ -25,7 +25,7 @@ Replace everything in **GameController** with the following code
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(MazeConstructor))]           
+[RequireComponent(typeof(MazeConstructor))]
 
 public class GameController : MonoBehaviour
 {
@@ -35,10 +35,10 @@ public class GameController : MonoBehaviour
     {
         constructor = GetComponent<MazeConstructor>();
     }
-    
+
     void Start()
     {
-    
+
     }
 }
 ```
@@ -47,7 +47,7 @@ The `RequireComponent` attribute ensures that a **MazeConstructor** component wi
 
 The `constructor` variable gets a reference to that component (which will be added automatically in a moment).
 
-Save the script and return to the editor. Drag the **GameController** script from the folder onto the **Controller** Game Object in the **hierarchy** - it adds **GameController** *and* **MazeConstructor** as components of the object.
+Save the script and return to the editor. Drag the **GameController** script from the folder onto the **Controller** Game Object in the **hierarchy** - it adds **GameController** _and_ **MazeConstructor** as components of the object.
 
 In the **MazeContstructor** script, replace everything with the following code:
 
@@ -57,7 +57,7 @@ using UnityEngine;
 public class MazeConstructor : MonoBehaviour
 {
     public bool showDebug;
-    
+
     [SerializeField] private Material mazeMat1;
     [SerializeField] private Material mazeMat2;
     [SerializeField] private Material startMat;
@@ -166,9 +166,9 @@ Save the script and return to the editor. Specify some numbers in the **rows** a
 
 Before we code the **maze generation algorithm**, we'll talk generally about how it works:
 
-- the algorithm iterates over every other space in the grid (not every single space) to both **place a wall** and **choose an adjacent space to block** as well. 
-- the algorithm also randomly decides if **the space should be skipped instead**, resulting in open spaces to vary the maze. 
- 
+- the algorithm iterates over every other space in the grid (not every single space) to both **place a wall** and **choose an adjacent space to block** as well.
+- the algorithm also randomly decides if **the space should be skipped instead**, resulting in open spaces to vary the maze.
+
 This is an **extremely simple algorithm** that doesn't need to know anything about the rest of the maze, such as a list of branch points to iterate over (other implementations of maze generation algorithms will utilise **tree and graph structures** to trace back paths etc - generally needed for 'perfect mazes').
 
 First add this variable to **MazeConstructor**:
@@ -179,40 +179,42 @@ public float placementThreshold = 0.1f;   // chance of empty space
 
 We will use this later to determine if we should place a wall in a space or not.
 
-Add the following code to `FromDimensions`, replacing the line that says ``// stub to fill in``:
+Add the following code to `FromDimensions`, replacing the line that says `// stub to fill in`:
 
 ```csharp
 int rMax = maze.GetUpperBound(0);
 int cMax = maze.GetUpperBound(1);
 
-for (int i = 0; i <= rMax; i++)        
-    for (int j = 0; j <= cMax; j++)            
-        if (i == 0 || j == 0 || i == rMax || j == cMax)                
-            maze[i, j] = 1;                                    
-        else if (i % 2 == 0 && j % 2 == 0 && Random.value > placementThreshold)                                    
+for (int i = 0; i <= rMax; i++)
+    for (int j = 0; j <= cMax; j++)
+        if (i == 0 || j == 0 || i == rMax || j == cMax)
+            maze[i, j] = 1;
+        else if (i % 2 == 0 && j % 2 == 0 && Random.value > placementThreshold)
         {
             maze[i, j] = 1;
 
             int a = Random.value < .5 ? 0 : (Random.value < .5 ? -1 : 1);
             int b = a != 0 ? 0 : (Random.value < .5 ? -1 : 1);
             maze[i+a, j+b] = 1;
-        }  
+        }
 ```
 
 That's all there is to the maze generation! Extremely **small** code... but a **little complex** - let's break it down:
+
 - `int rMax = maze.GetUpperBound(0);` and `int cMax = maze.GetUpperBound(1);` are simply getting the upper indices of the maze (each dimension in turn). We'll use them to 'walk' through the grid.
 - Next is a common programming pattern, the **double for loop**. Since we have a 2D array, we need to loop twice: once over all the rows, and then over each column (or cell) in that row.
-- The `if` condition is checking for the boundaries of the maze - basically, if we are anywhere in the **first row**, **first column**, **last row** or **last column**, this *must* be a wall. Like our default 'room' above, we are setting the walls to be **1**.
-- The `else if` is determining for all other **non-boundary spaces** if they should be a wall or a blank space (corridor). First, you'll notice the `% 2 == 0`, which we've seen a few times now. A refresher: this is calculating a **remainder** for a division by 2, which will give either a **0** or a **1**. In a nutshell, this code says **every second one** - we aren't looking at every space, but every **2nd space** (after the outer walls). This is because we want to always leave at least 1 blank space between inner walls: e.g. 101... 
-- So, these are the first **2 conditions** - is this a space that *could potentially* be a wall? The final condition is randomly determining if the space *should be* a wall. `Random.value` is a quick **static** way of generating a number between 0 and 1. If that random value is greater than our `placementThreshold` variable (set at 0.1) then we will place a wall: `maze[i, j] = 1;`
+- The `if` condition is checking for the boundaries of the maze - basically, if we are anywhere in the **first row**, **first column**, **last row** or **last column**, this _must_ be a wall. Like our default 'room' above, we are setting the walls to be **1**.
+- The `else if` is determining for all other **non-boundary spaces** if they should be a wall or a blank space (corridor). First, you'll notice the `% 2 == 0`, which we've seen a few times now. A refresher: this is calculating a **remainder** for a division by 2, which will give either a **0** or a **1**. In a nutshell, this code says **every second one** - we aren't looking at every space, but every **2nd space** (after the outer walls). This is because we want to always leave at least 1 blank space between inner walls: e.g. 101...
+- So, these are the first **2 conditions** - is this a space that _could potentially_ be a wall? The final condition is randomly determining if the space _should be_ a wall. `Random.value` is a quick **static** way of generating a number between 0 and 1. If that random value is greater than our `placementThreshold` variable (set at 0.1) then we will place a wall: `maze[i, j] = 1;`
 
 The last 3 lines of code say that **as well as placing a wall here** we should **also place a wall next to here** in one of four directions: North, South, East or West. The first line is a **shorthand** way of writing if statements called a **ternary statement**. Let's break it down:
+
 - `int a =` means that we are assigning into a variable called `a` something as a result of this if statement. Regardless of which condition is met (the if or else) we will assign some value into `a`.
 - `Random.value < .5 ?` is the **condition** - it's the same as having `if(Random.value < .5){ ... }` - so we are generating a random number (between 0 and 1) and checking if it is less than 0.5.
-- Next comes the **true** and **false** parts of the if statement: `0 : (Random.value < .5 ? -1 : 1);` - The `:` is like the `else` in this scenario... *if* the condition is **true** then assign `a = 0`... *else* assign `a = (Random.value < .5 ? -1 : 1)`. And what does that look like? Why, *another ternary!*
-- So... we're in the **false** part of `(Random.value < .5)` (i.e. `Random.value` came out to be equal to or greater than 0.5)... Now we generate **a second random value** and see if *that* is less than 0.5... *if it is* then we are assigning `a = -1`, *else* we are assigning `a = 1`.
+- Next comes the **true** and **false** parts of the if statement: `0 : (Random.value < .5 ? -1 : 1);` - The `:` is like the `else` in this scenario... _if_ the condition is **true** then assign `a = 0`... _else_ assign `a = (Random.value < .5 ? -1 : 1)`. And what does that look like? Why, _another ternary!_
+- So... we're in the **false** part of `(Random.value < .5)` (i.e. `Random.value` came out to be equal to or greater than 0.5)... Now we generate **a second random value** and see if _that_ is less than 0.5... _if it is_ then we are assigning `a = -1`, _else_ we are assigning `a = 1`.
 - After all that, `a` will be one of **0, 1 or -1**.
-- Next, we are assigning a value into a variable called `b`. It's the exact same pattern as before... if `a != 0` (i.e. a is **-1 or 1**), then we assign `b = 0` - this is because we don't want to place a **diagonal** wall... if *both* `a` and `b` are **non-zero** we will move in a diagonal direction (we'll see this in a second).
+- Next, we are assigning a value into a variable called `b`. It's the exact same pattern as before... if `a != 0` (i.e. a is **-1 or 1**), then we assign `b = 0` - this is because we don't want to place a **diagonal** wall... if _both_ `a` and `b` are **non-zero** we will move in a diagonal direction (we'll see this in a second).
 - So, if `a == 0` (the **false/else** part of this), then we do our `Random.value < .5` trick again, and get either a **-1 or 1** to assign to `b`. At the end of this, `b` will be either **0, 1 or -1**, but will also be **opposite to a**, as in zero if a is non-zero or vice versa.
 
 Save the script and return to the editor. Run the game and you should see a random maze displayed on the GUI, different each time you run the game!
@@ -221,7 +223,7 @@ Save the script and return to the editor. Run the game and you should see a rand
 
 This next part isn't really related to the maze generation algorithm, so we won't spend too long on the details of it - it is simply a way to procedurally generate the 3D walls and floor from the maze data.
 
-Before we get into the code, we need to link some materials that will be used to texture our generated mesh. Select the **Graphics** folder in the Project window, and then Select **Controller** in the hierarchy to expose the **Maze Constructor**. Drag each of the materials from the **Graphics** folder over to the material slots in **Maze Constructor**: 
+Before we get into the code, we need to link some materials that will be used to texture our generated mesh. Select the **Graphics** folder in the Project window, and then Select **Controller** in the hierarchy to expose the **Maze Constructor**. Drag each of the materials from the **Graphics** folder over to the material slots in **Maze Constructor**:
 
 - **floor-mat** for Maze Mat 1
 - **wall-mat** for Maze Mat 2
@@ -236,7 +238,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeMeshGenerator
-{    
+{
     // generator params
     public float width;     // how wide are hallways
     public float height;    // how tall are hallways
@@ -261,8 +263,8 @@ public class MazeMeshGenerator
         int cMax = data.GetUpperBound(1);
         float halfH = height * .5f;
 
-        for (int i = 0; i <= rMax; i++)        
-            for (int j = 0; j <= cMax; j++)            
+        for (int i = 0; i <= rMax; i++)
+            for (int j = 0; j <= cMax; j++)
                 if (data[i, j] != 1)
                 {
                     // floor
@@ -279,38 +281,38 @@ public class MazeMeshGenerator
                         new Vector3(width, width, 1)
                     ), ref newVertices, ref newUVs, ref floorTriangles);
 
-                    if (i - 1 < 0 || data[i-1, j] == 1)                    
+                    if (i - 1 < 0 || data[i-1, j] == 1)
                         AddQuad(Matrix4x4.TRS(
                             new Vector3(j * width, halfH, (i-.5f) * width),
                             Quaternion.LookRotation(Vector3.forward),
                             new Vector3(width, height, 1)
-                        ), ref newVertices, ref newUVs, ref wallTriangles);                    
+                        ), ref newVertices, ref newUVs, ref wallTriangles);
 
-                    if (j + 1 > cMax || data[i, j+1] == 1)                    
+                    if (j + 1 > cMax || data[i, j+1] == 1)
                         AddQuad(Matrix4x4.TRS(
                             new Vector3((j+.5f) * width, halfH, i * width),
                             Quaternion.LookRotation(Vector3.left),
                             new Vector3(width, height, 1)
-                        ), ref newVertices, ref newUVs, ref wallTriangles);                    
+                        ), ref newVertices, ref newUVs, ref wallTriangles);
 
-                    if (j - 1 < 0 || data[i, j-1] == 1)                    
+                    if (j - 1 < 0 || data[i, j-1] == 1)
                         AddQuad(Matrix4x4.TRS(
                             new Vector3((j-.5f) * width, halfH, i * width),
                             Quaternion.LookRotation(Vector3.right),
                             new Vector3(width, height, 1)
-                        ), ref newVertices, ref newUVs, ref wallTriangles);                    
+                        ), ref newVertices, ref newUVs, ref wallTriangles);
 
-                    if (i + 1 > rMax || data[i+1, j] == 1)                    
+                    if (i + 1 > rMax || data[i+1, j] == 1)
                         AddQuad(Matrix4x4.TRS(
                             new Vector3(j * width, halfH, (i+.5f) * width),
                             Quaternion.LookRotation(Vector3.back),
                             new Vector3(width, height, 1)
-                        ), ref newVertices, ref newUVs, ref wallTriangles);                    
-                }               
+                        ), ref newVertices, ref newUVs, ref wallTriangles);
+                }
 
         maze.vertices = newVertices.ToArray();
         maze.uv = newUVs.ToArray();
-        
+
         maze.SetTriangles(floorTriangles.ToArray(), 0);
         maze.SetTriangles(wallTriangles.ToArray(), 1);
         maze.RecalculateNormals();
@@ -375,7 +377,7 @@ private void DisplayMaze()
 
     MeshFilter mf = go.AddComponent<MeshFilter>();
     mf.mesh = meshGenerator.FromData(data);
-    
+
     MeshCollider mc = go.AddComponent<MeshCollider>();
     mc.sharedMesh = mf.mesh;
 

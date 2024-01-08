@@ -1,4 +1,4 @@
-# 01: Game mechanics Advanced Assessment Tasks
+# 02: Game Mechanics Advanced Assessment Tasks
 
 ## Extra features
 

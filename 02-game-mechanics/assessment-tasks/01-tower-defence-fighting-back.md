@@ -1,4 +1,4 @@
-# 01: Game Mechanics assessment tasks - Fighting back
+# 01: Game Mechanics Assessment Tasks
 
 In this section we will set up our defence monsters to fire at the bugs as they march towards the cookie.
 

@@ -1,4 +1,4 @@
-# 01: AI Strategy assessment tasks - Randomization
+# 01: AI Strategy Assessment Tasks
 
 The only drawback with the algorithm as we've currently coded it is that it **always** returns the same list of moves, in the same order, and walks the tree from left to right... so, we will actually replay the same game over and over... not much fun. So we are going to introduce a little **randomness**, but in a way that doesn't impact the algorithm results. Specifically, the results of these kinds of **comparisons** will be adjusted slightly: `(score > maxScore)` - there might be many moves that return an **equivalent** score (i.e., are as 'good' as each other) but the algorithm never considers them because they aren't **greater than** the current score. So, we will, simply, change the order that the moves are evaluated, so there is a chance that a different move gets set first and other equivalent scores are then ignored (but greater scores will still overwrite).
 
@@ -7,16 +7,16 @@ The only drawback with the algorithm as we've currently coded it is that it **al
 Add this method into **Minimax.cs**:
 
 ```csharp
-public List<T> Shuffle<T>(List<T> list)  
-{  
-    int n = list.Count;  
-    while (n > 1) {  
-        n--;  
-        int k = Random.Range(0,n);  
-        T value = list[k];  
-        list[k] = list[n];  
-        list[n] = value;  
-    }  
+public List<T> Shuffle<T>(List<T> list)
+{
+    int n = list.Count;
+    while (n > 1) {
+        n--;
+        int k = Random.Range(0,n);
+        T value = list[k];
+        list[k] = list[n];
+        list[n] = value;
+    }
     return list;
 }
 ```

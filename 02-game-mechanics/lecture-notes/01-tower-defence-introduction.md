@@ -1,4 +1,4 @@
-# 01: Game Mechanics - Tower defence introduction
+# 01: Game Mechanics - Tower Defence introduction
 
 ## Starter project
 
