@@ -5,3 +5,5 @@
 *.out
 *.synctex.gz
 *.xdv
+**/Library/*
+**/Temp/*
