@@ -14,7 +14,7 @@ There are many game engines out there, but we have chosen Unity because:
 
 As developers, we are in charge of making our games **interactive**. Without a developer, you might have some pretty art or nice soundtracks, but you won't have a game.
 
-The main way we bring interactivity into a game is by writing code.
+The main way we bring interactivity into a game is by writing **code.**
 
 **What is code!?** Code is, fundamentally, just a **sequence of instructions** that we are telling the computer. These sequences of instructions are referred to as **algorithms**. 
 
@@ -128,7 +128,7 @@ So that begs the question: Could we write a script to perform this rotation for 
 The answer is: **Yes.**
 
 Before we write any code, let's think about what we are trying to do:
-    - While the game is running, we want to change the y-rotation of the Wheel Game Object over time.
+- While the game is running, we want to change the y-rotation of the Wheel Game Object over time.
 
 Unity allows us to write code that repeats every single frame of the game (~60 times per second). Could we come up with an instruction that runs 60 times per second and updates the y-rotation of the Wheel to make it smoothly rotate over time? What would that instruction look like?
 
@@ -171,15 +171,17 @@ public class Rotate : MonoBehaviour
 
 This is how every new C# Unity script looks.
 
-We're interested in the Update() function. Whatever code we put in Update will run every frame that the Game Object this script is attached to is active in the scene.
+We're interested in the `Update()` function. Whatever code we put in `Update` will run every frame that the Game Object this script is attached to is active in the scene.
 
-Based on the class discussion, add 1 line of code to the Update function that will make the windmill wheel rotate.
+### Task
 
-The answer will utilize Unity's Transform.Rotate method:
+Based on the class discussion, add 1 line of code to the `Update` function that will make the windmill wheel rotate.
+
+The answer will utilize Unity's `Transform.Rotate` method:
 
 **Resource:** <https://docs.unity3d.com/ScriptReference/Transform.Rotate.html>
 
-Try to solve this for yourselves first. Only look at the solution if you are really stuck. After ~10 minutes, I will walk everyone through the solution.
+**Try to solve this for yourselves first.** Only look at the solution if you are really stuck. After ~10 minutes, I will walk everyone through the solution, so it's not a race.
 
 
 
@@ -195,16 +197,19 @@ transform.Rotate(0, 50 * Time.deltaTime, 0);
 
 Our code works, but there is a problem with it that the untrained eye will likely miss:
 
-This `50` is what programmers like to refer to as a "magic number". What makes it magic? It just appears out of thin air with no explanation. If someone else was to read this code, they wouldn't know why we used the number 50, nor what the 50 was supposed to represent (although an experienced programmer could work it out.) It's also difficult to change. If someone (such as a designer) wants to make the windmill wheels rotate faster or slower, they have to go into our code and change this specific number. A non-programmer is **never** going to do that.
+This `50` is what programmers like to refer to as a **"magic number"**. What makes it magic? 
+- It just appears out of thin air with no explanation.
+
+If someone else was to read this code, they wouldn't know why we used the number `50`, nor what the `50` was supposed to represent (although an experienced programmer could work it out.) It's also difficult to change. If someone (such as a designer) wants to make the windmill wheels rotate faster or slower, they have to go into our code and change this specific number. A non-programmer is **never** going to do that.
 
 Instead of using a magic number in our code, let's store the number in a **variable**.
 
 Why use a variable?
-    - **Variables** allow you to assign names to values. This makes your code much easier to read.
-    - **Single source of truth** for values. If you wrote `50` for the windmill speed in multiple places across multiple scripts, you'd have many instances of the number that you need to update. If 50 is stored in a variable, it only needs to be updated in one place.
-    - **Mutability** - A fancy word for "something that can be changed". Putting the `50` in a variable allows it to be changed at runtime, meaning your windmill could speed up or slow down based on what's happening in the game.
+- **Variables** allow you to assign names to values. This makes your code much easier to read.
+- **Single source of truth** for values. If you wrote `50` for the windmill speed in multiple places across multiple scripts, you'd have many instances of the number that you need to update. If `50` is stored in a variable, it only needs to be updated in one place.
+- **Mutability** - A fancy word for "something that can be changed". Putting the `50` in a variable allows it to be changed at runtime, meaning your windmill could speed up or slow down based on what's happening in the game.
 
-We can declare a new variable on the line above Start():
+We can declare a new variable on the line above `Start()`:
 
 ```csharp
 public float RotationSpeed = 50f;
@@ -212,12 +217,12 @@ public float RotationSpeed = 50f;
 
 We'll break down exactly what each of these terms means later. For now, just know that we've created a variable called `RotationSpeed` with a default value of `50`.
 
-Look at the inspector view with your Wheel Game Object selected. You will see that under the Rotate Component, there is a new editable text field called `Rotation Speed`. This is the variable we just created, and it's editable directly in Unity. Cool!
+Look at the inspector view with your **Wheel Game Object** selected. You will see that under the **Rotate Component**, there is a new editable text field called `Rotation Speed`. This is the variable we just created, and it's editable directly in Unity. Cool!
 
 Play around with different values in this field and see how they affect the windmill when the game is playing.
 
 **Lesson takeaways:**
-    - Unity is a powerful game engine
-    - The main views you will use while working are the scene, hierarchy, project, and inspector views. Get familiar with them.
-    - We can write scripts to change things in our scene while the game is running.
-    - We can use variables to make our code cleaner and our components usable for non-programmers.
+ - Unity is a powerful game engine
+- The main views you will use while working are the scene, hierarchy, project, and inspector views. Get familiar with them.
+- We can write scripts to change things in our scene while the game is running.
+- We can use variables to make our code cleaner and our components usable for non-programmers.
