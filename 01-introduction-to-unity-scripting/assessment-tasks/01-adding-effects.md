@@ -1,5 +1,9 @@
 # 01: Introduction to Unity Scripting Assessment Tasks
 
+## Assesments
+
+These assessments are designed to walk you through some real coding, before presenting you with an algorithm that you must implement on your own. Your implementation of the algorithm is what will be assessed.
+
 ## Adding Effects
 
 ### Visuals

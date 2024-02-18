@@ -1,10 +1,44 @@
 # 01: Introduction to Unity Scripting
 
+## Unity
+
+**Unity** is a **game engine**. A game engine is a powerful piece of software that provides the tools necessary for developers, artists, musicians, designers, and all types of creatives to come together and make amazing video games!
+
+There are many game engines out there, but we have chosen Unity because:
+- It's very powerful
+- It's extremely well documented
+- There are an insane number of resources out there for it
+- **$ It's free! $**
+
+## Algorithms
+
+As developers, we are in charge of making our games **interactive**. Without a developer, you might have some pretty art or nice soundtracks, but you won't have a game.
+
+The main way we bring interactivity into a game is by writing code.
+
+**What is code!?** Code is, fundamentally, just a **sequence of instructions** that we are telling the computer. These sequences of instructions are referred to as **algorithms**. 
+
+Algorithms power every piece of **interactivity** in a game, from making a character move when you press a button, to deciding the response an NPC is going to give you in Baldur's Gate 3 after you robbed them blind.
+
+## Game Objects
+
+Everything that the player sees and interacts with in your Unity game is a **Game Object**. *Mario*? - Game Object. *Dark Souls boss*? - Game Object. The dialogue screen in *Hades*? - a bunch of Game Objects. 
+
+A Game Object in its purest form is not very exciting, but we can add **code** to a Game Object to make it do pretty much anything. 
+
+Needless to say, you're going to be seeing a lot of Game Objects in the next few weeks.
+
 ## Scripts
 
-A **script** is a small collection of code that can be attached to a Game Object inside Unity to perform some functionality. Scripts can hold variables that can be changed in the editor, detect player input and react to it, use physics, change values over time, and much more.
+A **script** is a small collection of code that can be attached to a Game Object inside Unity to perform some functionality. Scripts can:
+- Hold variables that can be changed by you or a designer
+- Detect player input and react to it
+- Use physics
+- Change values over time
+- Play sound effects
+- Solve world hunger (maybe one day)
 
-Unity scripts are written in **C#**, an object-oriented programming language developed by Microsoft.
+Unity scripts are written in **C#**. C# is an object-oriented programming language designed by Microsoft. A programming language is like a real language, but instead of using it to talk to people, we use it to talk to computers.
 
 **Resource:** <https://docs.unity3d.com/Manual/ScriptingSection.html>
 
@@ -14,17 +48,19 @@ Download the **starter code** and open it as a project in Unity.
 
 ### Assets
 
-The Assets folder contains all the resources for the project, including the models, textures, and music. This is also where we will store our game scripts.
+Imagine that you are the director of a film. If your Unity game is a film, the Assets folder is a big old warehouse filled with all of the movie props (assets) you plan to use on set. An **asset** is literally anything that you intend to use in your game; from 3D models to sound effects, and most importantly for us; **scripts**.
 
-- **Materials** - these are applied to models to give them their appearance. Materials are a combination of **textures** (bitmap images) and **shaders** (graphical scripts that contain calculations and algorithms for determining how to render the texture, based on lighting and other configurations).
-- **Models** - the individual base models of the game objects.
+Our Asset folder already has a bunch of assets inside it. Here's a quick overview of how those assets are organized:
+
+- **Materials** - images that can be applied to models to change their appearance.
+- **Models** - 3D models that are used in the game.
 - **Music** - the music in the game.
-- **Prefabs** - these are complete Game Objects with models, child objects, starting values... you combine multiple elements into a reusable object and save it as a Prefab.
-- **Scenes** - the entire environment of this part of the game. Unity works on the premise of **scenes**, which house all of the Game Objects for a logical sequence of the game (could be the entire game). For example, the title screen is likely a separate scene from the main game.
-- **Scripts** - where we will store our C# scripts.
+- **Prefabs** - pre-fabricated Game Objects that we can use straight out of the box. More on these later.
+- **Scenes** - back to the film director analogy: a scene is like a scene in your film, with the curtains lowered, ready to play. You can split your game into as many or as few scenes as you want. A main menu is an example of something that could be split into its own scene.
+- **Scripts** - where all the magic happens.
 - **Sounds** - sound effect files.
-- **Sprites** - 2D image files. In 3D games, typically reserved for UI graphical elements.
-- **Textures** - a bitmap image that can be applied to models via **materials**.
+- **Sprites** - 2D image files. In 3D games, these are typically reserved for UI graphical elements.
+- **Textures** - an image that can be applied to models via **materials**.
 
 ### Scene view
 
