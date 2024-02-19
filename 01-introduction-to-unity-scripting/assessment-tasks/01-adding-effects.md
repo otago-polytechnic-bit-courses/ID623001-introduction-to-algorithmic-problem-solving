@@ -4,7 +4,9 @@
 
 These assessments are designed to walk you through some real coding, before presenting you with an algorithm that you must implement on your own. Your implementation of the algorithm is what will be assessed.
 
-## Adding Effects
+
+
+## Task for today: Adding Effects
 
 ### Visuals
 
@@ -15,6 +17,9 @@ We are going to add a small heart model that appears when the sheep are hit by h
 - rotate around
 - scale down (get smaller)
 - eventually disappear after a short time
+
+
+
 
 First, we'll create the heart prefab. Create a new empty Game Object in the **hierarchy** and name it **Heart**. Set its position to **(X:0, Y:5, Z:0)**. Now add a model to it by dragging **Heart** from the models folder onto **Heart** in the **hierarchy**. Name the child **Heart Model** and reset its Transform and set its rotation to **(X:-90, Y:-45, Z:0)**.
 

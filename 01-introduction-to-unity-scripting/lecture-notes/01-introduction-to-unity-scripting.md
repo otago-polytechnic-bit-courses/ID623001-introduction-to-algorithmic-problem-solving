@@ -41,7 +41,7 @@ A **script** is a small collection of code that can be attached to a Game Object
 
 Unity scripts are written in **C#**. C# is an object-oriented programming language designed by Microsoft. A programming language is like a real language, but instead of using it to talk to people, we use it to talk to computers.
 
-**Resource:** <https://docs.unity3d.com/Manual/ScriptingSection.html>
+>**Resource:** <https://docs.unity3d.com/Manual/ScriptingSection.html>
 
 ## Starter project
 
@@ -72,12 +72,12 @@ In the scenes folder, there is a scene called **Game**. Double click it to open 
 Open the **Game** scene. You should notice some objects appear in the **scene view**. (By default this is in the middle of the screen.)
 
 **If you can't see the scene:**
-    - Select Window -> Layout -> Default from the top dropdown menu.
+- Select Window -> Layout -> Default from the top dropdown menu.
 
 In the **hierarchy tab** you can see all the scene's Game Objects organised into a tree-like hierarchy. The hierarchy tab lists out all of the objects in the current scene and is linked to the **scene view**. If you select an object in the hierarchy, it will also be selected in the scene view, and vice-versa.
 
-**Tip:**
-    - If you're looking for an object in your scene, its usually easier to search the hierarchy than trying to locate the obect in the scene view.
+>**Tip:**
+- If you're looking for an object in your scene, its usually easier to search the hierarchy than trying to locate the obect in the scene view.
 
 There are currently 5 **Game Objects** in the top level of our **hierarchy**:
 
@@ -91,7 +91,7 @@ Press the **play button** to run the game. You'll see that it's not a very excit
 
 Press the button again to stop the game and return to the scene view.
 
-**Tip:**
+>**Tip:**
     Any changes you make to your project while the game is playing **WILL NOT BE SAVED. *ALWAYS*** stop playing your game before you make any changes that you intend to keep.
 
 ### Inspector View
@@ -113,7 +113,7 @@ We don't care too much about the second 2 just yet, but we are interested in the
 
 Every single Game Object has a **transform**. Transforms define crucial spatial coordinates for the Game Object in the scene. A transform is made up of:
 
-- **Position** - Where the object is in 3D space, relative to the center of the scene (0,0,0).
+- **Position** - Where the object is in 3D space, relative to its parent.
 - **Rotation** - How the object has been rotated from its default rotation.
 - **Scale** - How much bigger or smaller the object is from its default size. Objects can be scaled on different dimensions.
 
@@ -132,9 +132,9 @@ Before we write any code, let's think about what we are trying to do:
 
 Unity allows us to write code that repeats every single frame of the game (~60 times per second). Could we come up with an instruction that runs 60 times per second and updates the y-rotation of the Wheel to make it smoothly rotate over time? What would that instruction look like?
 
----
-**Collaborative Problem Solving Session 1: Make a Wheel Rotate**
----
+
+# **Collaborative Problem Solving Session 1: Make a Wheel Rotate**
+
 
 ## Creating the script
 
@@ -171,27 +171,33 @@ public class Rotate : MonoBehaviour
 
 This is how every new C# Unity script looks.
 
-We're interested in the `Update()` function. Whatever code we put in `Update` will run every frame that the Game Object this script is attached to is active in the scene.
+We're interested in the `Update()` function:
+
+```csharp
+void Update() { 
+
+}
+```
+
+Whatever code we put inside the `{` curly braces will run every frame that the Game Object this script is attached to is active in the scene.
 
 ### Task
 
-Based on the class discussion, add 1 line of code to the `Update` function that will make the windmill wheel rotate.
+Based on the class discussion, add 1 line of code to the `Update()` function that will make the windmill wheel rotate.
 
 The answer will utilize Unity's `Transform.Rotate` method:
 
-**Resource:** <https://docs.unity3d.com/ScriptReference/Transform.Rotate.html>
+>**Resource:** <https://docs.unity3d.com/ScriptReference/Transform.Rotate.html>
 
 **Try to solve this for yourselves first.** Only look at the solution if you are really stuck. After ~10 minutes, I will walk everyone through the solution, so it's not a race.
 
-
-
-***---SOLUTION:---***
-
-
+<details>
+<summary>Solution Example</summary>
 
 ```csharp
 transform.Rotate(0, 50 * Time.deltaTime, 0);
 ```
+</details>
 
 ### Variables
 
@@ -219,9 +225,12 @@ We'll break down exactly what each of these terms means later. For now, just kno
 
 Look at the inspector view with your **Wheel Game Object** selected. You will see that under the **Rotate Component**, there is a new editable text field called `Rotation Speed`. This is the variable we just created, and it's editable directly in Unity. Cool!
 
+Back in `Rotate.cs`, change the line we wrote in `Update()` to use the `RotationSpeed` variable instead of a magic number.
+
 Play around with different values in this field and see how they affect the windmill when the game is playing.
 
-**Lesson takeaways:**
+## Lesson takeaways
+
  - Unity is a powerful game engine
 - The main views you will use while working are the scene, hierarchy, project, and inspector views. Get familiar with them.
 - We can write scripts to change things in our scene while the game is running.
