@@ -31,6 +31,8 @@ They come in 3 flavours:
 - **Kinematic:** the Game Object still acts upon other objects but has to be moved in code. Useful for moving platforms.
 - **Static:** The Game Object can’t move or have forces applied to it. Great for static geometry in levels, such as walls that cannot be moved.
 
+> **Note:** in Unity 2019.x, there is no such thing as a **static** rigidbody. Instead, rigidbodies are **dynamic** by default, and can be made **kinematic** by ticking the `isKinematic` checkbox. This is different in later Unity versions.
+
 ### Tags
 
 **Tags** are not components, but rather **strings** that are attached to Game Objects.

@@ -1,18 +1,132 @@
-# 04: Introduction to Unity Scripting - Keeping Track of GameObjects
+# 04: Introduction to Unity Scripting - Managing Objects 
 
-## Lists
 
-Start by creating a new empty Game Object at the root of the **hierarchy** and name it **Sheep Spawn Points** and reset its Transform. Create three empty Game Objects as children **Sheep Spawn Points** and name each one **Spawn Point**.
+## Data structures
 
-Set the position of each spawn point to (respectively):
+There are many different data structures in C#, and they all have their uses. None is better than the other, but some data structures are better suited for specific tasks than others. Knowing which data structures you should use for a given problem takes practice and experience.
 
-- **(X:-16, Y:0, Z:60)**
-- **(X:0, Y:0, Z:60)**
-- **(X:16, Y:0, Z:60)**
+The only data structure we will use today is called a `List`.
 
-This spaces them evenly just at the edge of the far end of the field. Now let's write the script that spawns the sheep.
+### Arrays
 
-Create a new C# script and name it **SheepSpawner**. Add these variables above `Start`:
+If you have programmed before, you will likely be familiar with Arrays. An array is a list of values ordered by index.
+
+- An array can be any length
+- Array indices start at 0. So the first value in the array would be at index 0, then the second value would be at index 1 etc.
+
+If you need a refresher, check this resource:
+
+> Resource: <https://www.w3schools.com/cs/cs_arrays.php>
+
+### Lists
+
+A list is just like an array, only much more convenient! C# Lists provide us with a bunch of handy methods for manipulating the stored values in commonly-needed ways:
+
+- Adding elements to the end of the list - no need to know its length.
+- Removing elements from the list and having it automatically reorder.
+- Querying the list to see if it contains a specific value.
+
+Code Example:
+
+```csharp
+
+void PlayWithList() {
+    List<string> pokemon = new List<string> 
+    {
+        "Squirtle",
+        "Charizard",
+        "Pikachu",
+        "Eevee",
+        "Ho-oh"
+    };
+
+    // Adds a new element to the list:
+    pokemon.Add("Rapidash");
+    // The list will now be: ["Squirtle", "Charizard", "Pikachu", "Eevee", "Ho-oh", "Rapidash"]
+
+    // Removes an existing element from the list and reorders it:
+    pokemon.Remove("Squirtle");
+    // The list will now be: ["Charizard", "Pikachu", "Eevee", "Ho-oh", "Rapidash"]
+
+    // This condition evaluates to true, because "Pikachu" is in the List:
+    if (pokemon.Contains("Pikachu")) 
+    {
+        Debug.Log("Gotta catch em' all");
+    }
+    
+
+}
+
+```
+
+## Events
+
+Unity’s Event System is very powerful and extremely useful for keeping your code clean. It allows for multiple classes to respond differently to a single in-game occurence. It also reduces dependency in your codebase; objects don't rely on each other as much, resulting in less "spaghetti code".
+
+I like to think of an event as a worker on a factory line shouting out a status update. It would go something like this:
+
+"Hey! I found a dead rat in this chocolate bar!"
+
+The worker just shouts this out and keeps working. It's up to his superiors what they want to do with this message.
+
+A higher-up in the factory, maybe the manager, could hear this message and decide "Right. There's a dead rat in the chocolate. I'm going to dump the whole batch."
+
+The worker is not part of the decision to dump the batch, and doesn't know what his manager did with his callout (or even that his manager listened). All he knows is that when he comes into work the next day, the chocolate is a different brand.
+
+Entities in your game are like the factory worker and the manager. Each entity should have a certain set of responsibilities that don't encroach on the responsibilities of the others. In programming terms, this is called **separation of concerns.**
+
+So, how does this work in Unity?
+
+Here is an example script showing two classes. The `FactoryWorker` class declares an event, which it calls from a function, and the `FactoryManager` class listens to that event, then reacts to it accordingly. Notice how the `FactoryWorker` doesn't have any references to the `FactoryManager`:
+
+```csharp
+using UnityEngine.EventSystem;
+
+public class FactoryWorker {
+    // Declare the event.
+    public UnityEvent OnRatFoundInChocolate = new UnityEvent();
+
+    // Call this function when you find a dead rat.
+    public void DiscoverRatInChocolate() 
+    {
+        // Hey, everyone. I found a dead rat!
+        OnRatFoundInChocolate?.Invoke();
+    }
+}
+
+public class FactoryManager() {
+    // The manager is keeping an eye on the worker.
+    private FactoryWorker factoryWorker;
+    
+    public void Start() 
+    {
+        // Set up a listener for when the worker discovers the dead rat.
+        factoryWorker.OnRatFoundInChocolate.AddListener(DumpTheBatch)
+    }
+
+    public void DumpTheBatch() 
+    {
+        // DUMP THE BATCH!
+    }
+}
+```
+
+
+## Using lists and events to manage our game state
+
+Here we will have a collaborative problem solving session, thinking about how we would go about making a sheep spawning system that keeps track of all the sheep in the game.
+
+
+
+
+<details>
+<summary>Sheep Spawner Solution</summary>
+
+Set up a Game Object `Sheep Spawner` and give it as many empty children as you want. These empty Game Objects will be used as spawn positions for the sheep.
+
+Give `Sheep Spawner` a script along these lines:
+
+
 
 ```csharp
 public bool canSpawn = true; 
@@ -22,65 +136,30 @@ public List<Transform> sheepSpawnPositions = new List<Transform>();
 public float timeBetweenSpawns; 
 
 private List<GameObject> sheepList = new List<GameObject>(); 
-```
 
-- The **canSpawn** variable will control whether the script can spawn sheep or not. 
-- The **sheepPrefab** variable is, obviously, a reference to the sheep prefab. 
-- The next variable is a List that will hold the spawn points we just created before. 
-- **timeBetweenSpawns** is the delay before a new sheep will spawn.
-- The last List will hold all the 'alive' sheep currently in the scene.
+private void Start() 
+{
+    StartCoroutine(SpawnRoutine());
+}
 
-Now add this method:
-
-```csharp
 private void SpawnSheep()
 {
     Vector3 randomPosition = sheepSpawnPositions[Random.Range(0, sheepSpawnPositions.Count)].position; 
     GameObject sheep = Instantiate(sheepPrefab, randomPosition, sheepPrefab.transform.rotation); 
-    sheepList.Add(sheep); 
-    sheep.GetComponent<Sheep>().SetSpawner(this); 
+    sheep.OnEatenHay.AddListener(HandleSheepEatenHay);
+    sheep.OnDropped.AddListener(HandleSheepDropped);
+    sheepList.Add(sheep);
 }
-```
 
-This method spawns a single sheep randomly at one of the spawn points.
-
-Let's break down the first line: this grabs one of the spawn points at random. We can rewrite that line out in longer form to see what's happening:
-
-```csharp
-int maxSpawnPoints = sheepSpawnPositions.Count;
-int randomNum = Random.Range(0, maxSpawnPoints);
-Transform randomSpawnPoint = sheepSpawnPositions[randomNum];
-Vector3 randomPosition = randomSpawnPoint.position; 
-```
-
-`Random.Range` returns a random int between the provided min and max numbers - min **inclusive** and max **exclusive**. So, here we are returning either 0, 1 or 2. We get the Transform at that index from the List, and then get the position info from that Transform.
-
-The next line instantiates a new sheep: it uses the sheepPrefab reference as its template, the randomPosition we just grabbed as its start position, and its own default rotation as its starting rotation.
-
-Then, add this newly created sheep to the **sheepList**.
-
-The final line won't compile because we are trying to set a reference to **this** spawner script *onto* the Sheep... but we haven't created the `SetSpawner();` method in the **Sheep** script yet. We'll do that now.
-
-Save the **SheepSpawner** script and open the **Sheep** script. Add this variable below the others:
-
-```csharp
-private SheepSpawner sheepSpawner;
-```
-
-Now add this method to fill in this reference:
-
-```csharp
-public void SetSpawner(SheepSpawner spawner)
-{
-    sheepSpawner = spawner;
+private void HandleSheepEatenHay(GameObject sheep) {
+    sheepList.Remove(sheep);
+    // Later we could add some points here.
 }
-```
 
-Save the **Sheep** script and switch back to the **SheepSpawner** script. We are going to add a **coroutine** to this script to handle the spawning. **Coroutines**, in Unity, are a way of implementing asynchronous behaviour (note: it isn't *true* asynchronous behaviour, but close enough for us to think of it that way now).
+private void HandleSheepDropped(GameObject sheep) {
+    sheepList.Remove(sheep);
+}
 
-Add this code below the `SpawnSheep` method:
-
-```csharp
 private IEnumerator SpawnRoutine() 
 {
     while (canSpawn) 
@@ -89,32 +168,7 @@ private IEnumerator SpawnRoutine()
         yield return new WaitForSeconds(timeBetweenSpawns); 
     }
 }
-```
 
-The first line lets this code run as long as **canSpawn** is true. Next we call the `SpawnSheep();` method to spawn a single sheep at a random point. Then we wait (or yield the execution) for **timeBetweenSpawns**. This line will pause the execution for however many seconds we want before running again - otherwise, our only option for repeatedly running this code would be to put it in the `Update` method and run it **every frame**, which is too fast.
-
-To start the coroutine, we add this code inside `Start`:
-
-```csharp
-StartCoroutine(SpawnRoutine());
-```
-
-We don't call `SpawnRoutine()` directly, but use this `StartCoroutine()` instead to launch the coroutine.
-
-Next, we want to be able to remove an individual sheep from the list of active sheep when it gets hit. Add this method below `SpawnRoutine`:
-
-```csharp
-public void RemoveSheepFromList(GameObject sheep)
-{
-    sheepList.Remove(sheep);
-}
-```
-
-This method takes a sheep as its parameter and removes the entry from the sheep list.
-
-Now add this method:
-
-```csharp
 public void DestroyAllSheep()
 {
     foreach (GameObject sheep in sheepList)
@@ -126,16 +180,4 @@ public void DestroyAllSheep()
 }
 ```
 
-This method iterates through the sheepList, destroys each sheep instance, and clears the list of references.
-
-Save the script, and reopen the **Sheep** script. Add this line to the top of the `Drop` and `HitByHay` methods:
-
-```csharp
-sheepSpawner.RemoveSheepFromList(gameObject);
-```
-
-This removes the sheep from the spawner's list when it either drops off the edge of the world, or gets hit by hay. Now save the script and return to the editor.
-
-Add a new empty Game Object to the **hierarchy**, name it **SheepSpawner** and add a **Sheep Spawner** component.
-
-To configure the spawner, start by dragging a **Sheep** from the prefabs folder onto the Sheep Prefab slot on the **Sheep Spawner**. Next, expand **Sheep Spawn Points** and drag the spawn points one-by-one to the **Sheep Spawn Positions** List. Finally, set the **Time Between Spawns** to 2 and play the scene - you should now have a fully functional game! Stop the sheep from reaching the edge of the world and falling to their doom!
+</details>
